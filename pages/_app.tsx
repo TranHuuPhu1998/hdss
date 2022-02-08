@@ -7,6 +7,8 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "setup/material-ui/createEmotionCache";
 import theme from "setup/material-ui/theme";
 import "./../styles/globals.css";
+import './../components/core/CSSBaseLine/styles.scss'
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

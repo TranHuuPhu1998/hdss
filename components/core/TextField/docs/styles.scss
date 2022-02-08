@@ -1,0 +1,16 @@
+.item {
+  margin: 20px auto;
+  padding: 0 5px;
+}
+
+.contentOfInputBasic {
+  display: flex;
+  flex-wrap: wrap;
+  > .item {
+    width: 33.3%;
+  }
+}
+
+.contentOfInputState {
+  display: flex;
+}

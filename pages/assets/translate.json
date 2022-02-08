@@ -55,6 +55,81 @@
       "contentTransferAuto": "Dịch vụ ứng trước tiền bán chứng khoán tự động cung cấp cho Quý khách để gia tăng sức mua chứng khoán ngay sau khi lệnh bán chứng khoán trước đó đã khớp lệnh thành công, đồng thời giảm thiểu thời gian thao tác cho Quý khách",
       "titleTransferBonds": "Giao dịch trái phiếu phát hành riêng lẻ",
       "contentTransferBonds": "Là Trái phiếu chưa thực hiện niêm yết trên Thị trường Chứng khoán. Trái phiếu do HDBS thực hiện tư vấn, phát hành và làm Đại lý đăng ký Lưu ký, quản lý chuyển nhượng"
+    },
+    "step1RegisterOnlinePayment": {
+      "title": "Đăng ký mở tài khoản thanh toán trực tuyến",
+      "form": {
+        "title": "Thông tin cá nhân",
+        "label": {
+          "phone": "Số điện thoại",
+          "email": "Email",
+          "ref": "Mã giới thiệu"
+        },
+        "button": {
+          "submit": "Tiếp tục"
+        },
+        "errors": {
+          "required": "Không được bỏ trống"
+        }
+      }
+    },
+    "step21VerifyID": {
+      "title": "Xác thực điện tử",
+      "desc": "Vui lòng xác nhận ảnh hai mặt CMND/CCCD của bạn",
+      "capture": "Chụp lại",
+      "continue": "Tiếp tục"
+    },
+    "step21Recapturing": {
+      "capture": "Chụp ảnh"
+    },
+    "step23ConfirmInformation": {
+      "title": "Xác nhận thông tin",
+      "desc": "Dưới đây là thông tin hệ thống tự động đọc trên Giấy tờ tuỳ thân của bạn. Vui lòng xác nhận lại thông tin hoặc chỉnh sửa (nếu cần).",
+      "fullname": "Họ và tên",
+      "dateOfBirth": "Ngày sinh",
+      "gender": "Giới tính",
+      "cmnd": "Số CMND/CCCD",
+      "dateOfCMND": "Ngày cấp",
+      "expiredDateOfCMND": "Ngày hết hạn",
+      "placeOfCMND": "Nơi cấp",
+      "oldCMND": "Số CMND cũ",
+      "address": "Địa chỉ thường trú",
+      "city": "Thành phố/Tỉnh",
+      "district": "Quận/Huyện",
+      "ward": "Phường/Xã",
+      "apartmentNumber": "Số nhà, tên đường",
+      "continue": "Tiếp tục",
+      "reset": "Thực hiện lại",
+      "additionalInfor": "Thông tin bổ sung",
+      "personalInfor": "Thông tin cá nhân",
+      "currentAddress": "Địa chỉ hiện tại",
+      "academicLevel": "Trình độ học vấn",
+      "maritalStatus": "Tình trạng hôn nhân",
+      "jobInformation": "Thông tin nghề nghiệp",
+      "job": "Nghề nghiệp",
+      "jobPosition": "Chức vụ",
+      "averageIncome": "Mức thu nhập trung bình (VND)",
+      "communications": "Thông tin liên lạc",
+      "residentialAddress": "Địa chỉ cư trú",
+      "summaryAddress": "Tỉnh thành/Quận Huyện/ Phường xã",
+      "branch": "Điểm giao dịch",
+      "policyDesc": {
+        "1": "Tôi cam kết không có",
+        "2": "Các dấu hiệu Hoa Kỳ",
+        "3": "; là người có quốc tịch Việt Nam và cư trú tại Việt Nam"
+      },
+      "policy": {
+        "title": "Các dấu hiệu Hoa Kỳ",
+        "1": "Là công dân Hoa Kỳ",
+        "2": "Là đối tượng cư trú tại Hoa Kỳ",
+        "3": "Nơi sinh tại Hoa Kỳ",
+        "4": "Có SĐT liên lạc tại Hoa Kỳ",
+        "5": "Có địa chỉ nhận thư bao gồm hộp thư bưu điện và địa chỉ thường trú tại Hoa Kỳ",
+        "6": "Hướng dẫn hiện hành để chuyển tiền vào tài khoản được duy trì ở Hoa Kỳ",
+        "7": "Giấy ủy quyền hoặc ủy quyền ký tên hiện đang có hiệu lực cấp cho người có địa chỉ ở Hoa Kỳ",
+        "8": "Địa chỉ nhận thư hộ hoặc giữ thư tại Hoa Kỳ"
+      },
+      "close": "Đóng"
     }
   },
   "en": {
@@ -113,6 +188,80 @@
       "contentTransferAuto": "Automated securities sales advance service is provided to customers to increase their purchasing power as soon as the previous order has been successfully matched, and at the same time to reduce the operation time for customers.",
       "titleTransferBonds": "Privately issued bond trading",
       "contentTransferBonds": "An unrealized bond listed on the Stock Exchange. Bonds are consulted, issued by HDBS and act as a Depository Registration Agent and transfer manager"
+    },
+    "step1RegisterOnlinePayment": {
+      "title": "Register to open an online payment account",
+      "form": {
+        "title": "Personal Information",
+        "label": {
+          "phone": "Phone number",
+          "email": "Email",
+          "ref": "Referral Code"
+        },
+        "button": {
+          "submit": "Continue"
+        },
+        "errors": {
+          "required": "Required"
+        }
+      }
+    },
+    "step21VerifyID": {
+      "title": "Electronic authentication",
+      "desc": "Please confirm your ID/CCCD double-sided photo",
+      "capture": "Capture",
+      "continue": "Continue"
+    },
+    "step21Recapturing": {
+      "capture": "Capture"
+    },
+    "step23ConfirmInformation": {
+      "title": "Confirm information",
+      "desc": "Here is the information the system automatically reads on your ID. Please confirm the information or correct it (if necessary).",
+      "fullname": "Full name",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "cmnd": "ID number/CCCD",
+      "dateOfCMND": "Date of issue",
+      "expiredDateOfCMND": "Expiration Date",
+      "placeOfCMND": "Place of issue",
+      "oldCMND": "Old ID number",
+      "address": "Residence address",
+      "city": "City/Province",
+      "district": "District/District",
+      "ward": "Ward/Commune",
+      "apartmentNumber": "House number, street name",
+      "continue": "Continue",
+      "reset": "Reset",
+      "personalInfor": "Personal Information",
+      "currentAddress": "Current address",
+      "academicLevel": "Education level",
+      "maritalStatus": "Marital Status",
+      "jobInformation": "Job Information",
+      "job": "Occupation",
+      "jobPosition": "Position",
+      "averageIncome": "Average income (VND)",
+      "communications": "Contact information",
+      "residentialAddress": "Residence address",
+      "summaryAddress": "Province/City/District/Commune",
+      "branch": "Trading Point",
+      "policyDesc": {
+        "1": "I pledge not to have",
+        "2": "American Signs",
+        "3": "; is a person with Vietnamese nationality and residing in Vietnam"
+      },
+      "policy": {
+        "title": "American Signs",
+        "1": "Be a citizen of the United States",
+        "2": "A resident of the United States",
+        "3": "Place of birth in the United States",
+        "4": "Have a US contact number",
+        "5": "Have a mailing address including a PO Box and a permanent address in the United States",
+        "6": "Current guidelines for transferring funds to accounts maintained in the United States",
+        "7": "A power of attorney or power of attorney currently in force for a person with a US address",
+        "8": "U.S. mailing or holding address"
+      },
+      "close": "Close"
     }
   }
 }

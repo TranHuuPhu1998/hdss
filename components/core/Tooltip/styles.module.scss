@@ -1,0 +1,42 @@
+@import 'styles/variables.scss';
+
+.tooltip {
+  padding: spacing(2) spacing(4);
+  border: none;
+  border-radius: $radius-regular;
+  min-width: fit-content;
+  max-width: 300px;
+  background-color: $color-grey-900;
+  color: $color-white;
+  z-index: $navbar-index;
+}
+
+.arrow,
+.arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
+
+.arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: $color-grey-900;
+}
+
+.tooltip[data-popper-placement^='top'] > .arrow {
+  bottom: -4px;
+}
+
+.tooltip[data-popper-placement^='bottom'] > .arrow {
+  top: -4px;
+}
+
+.tooltip[data-popper-placement^='left'] > .arrow {
+  right: -4px;
+}
+
+.tooltip[data-popper-placement^='right'] > .arrow {
+  left: -4px;
+}

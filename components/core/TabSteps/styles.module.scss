@@ -1,0 +1,16 @@
+@import 'styles/variables.scss';
+
+.root {
+  .item {
+    width: 4.5rem;
+    height: .8rem;
+    background-color: $color-box;
+    border-radius: $radius-bold;
+    margin-left: .8rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    &.active {
+      background-color: $color-active;
+    }
+  }
+}

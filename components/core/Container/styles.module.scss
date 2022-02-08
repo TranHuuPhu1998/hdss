@@ -1,0 +1,36 @@
+@import 'styles/variables.scss';
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@each $breakpoint, $value in $grid-breakpoints {
+  $max-width: map-get(
+    $map: $container-widths,
+    $key: $breakpoint,
+  );
+  $padding: map-get(
+    $map: $container-paddings,
+    $key: $breakpoint,
+  );
+
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .container {
+      padding-left: $padding;
+      padding-right: $padding;
+      max-width: $max-width;
+
+      &.max-#{$breakpoint} {
+        max-width: $max-width;
+      }
+    }
+  }
+}
+
+.fluid {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: unset;
+}

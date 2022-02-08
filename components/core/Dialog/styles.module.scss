@@ -1,0 +1,15 @@
+@import 'styles/variables.scss';
+
+.dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content {
+  overflow: hidden;
+  border: none;
+  border-radius: radius(2);
+  box-shadow: $box-shadow-lv-2;
+}

@@ -1,0 +1,14 @@
+@import "@hdbank/ui/styles/variables.scss";
+
+.portal {
+  height: 4.8rem;
+  background-color: $color-primary;
+  color: white;
+}
+
+.portalPlaceholder {
+  height: 4.8rem;
+  background-color: $color-secondary;
+  padding: 1.2rem;
+  color: white;
+}

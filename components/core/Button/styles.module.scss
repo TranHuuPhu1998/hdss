@@ -1,0 +1,149 @@
+@import 'styles/variables.scss';
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn {
+  outline: none;
+  box-sizing: border-box;
+  font-weight: bold;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  &.loading {
+    cursor: progress;
+    svg {
+      animation: rotating 0.75s linear infinite;
+      path:first-child {
+        fill: $color-grey-100;
+      }
+      path:last-child {
+        fill: $color-grey-500;
+      }
+    }
+  }
+}
+/*
+  values: name, font size, line height, font weight, padding.
+*/
+$text-sizes: (
+  ('xl', $font-size-body1, 1.38, $font-weight-bold, spacing(4)),
+  ('lg', $font-size-body1, 1.38, $font-weight-bold, spacing(3)),
+  ('md', $font-size-body2, 1.29, $font-weight-bold, spacing(2.5)),
+  ('sm', $font-size-body2, 1.29, $font-weight-bold, spacing(1.5)),
+  ('xs', $font-size-caption, 1.33, $font-weight-bold, spacing(0.5))
+);
+@each $name, $font-size, $line-height, $font-weight, $padding in $text-sizes {
+  :not(.use-icon).size-#{$name} {
+    padding: $padding;
+    font-size: $font-size;
+    line-height: $line-height;
+    font-weight: $font-weight;
+  }
+}
+
+/*
+  values: name, padding, icon size
+*/
+$icon-sizes: (
+  ('xl', 32px, $font-size-body1, 1.38, $font-weight-bold, spacing(2.75)),
+  ('lg', 24px, $font-size-body2, 1.38, $font-weight-bold, spacing(2.75)),
+  ('md', 24px, $font-size-body2, 1.29, $font-weight-bold, spacing(1.75)),
+  ('sm', 16px, $font-size-body2, 1.29, $font-weight-bold, spacing(1.5)),
+);
+@each $name, $size, $font-size, $line-height, $font-weight, $padding in $icon-sizes {
+  .use-icon.size-#{$name} {
+    padding: $padding;
+    .icon {
+      height: $size;
+      width: $size;
+    }
+  }
+}
+
+// name, color, background-color, background hover, background pressed, background disabled
+$variants: (
+  (
+    'primary',
+    $color-text,
+    $color-button-primary,
+    $color-button-primary,
+    $color-button-primary,
+    $color-grey-25
+  ),
+  (
+    'secondary',
+    $color-grey-700,
+    $color-grey-50,
+    $color-grey-25,
+    $color-grey-100,
+    $color-grey-25
+  ),
+  (
+    'ghost',
+    $color-grey-700,
+    $color-white,
+    $color-grey-25,
+    $color-grey-50,
+    $color-white
+  ),
+  (
+    'invert',
+    $color-grey-700,
+    $color-white,
+    $color-grey-10,
+    $color-grey-25,
+    $color-white
+  ),
+  (
+    'outlined',
+    $color-text,
+    $color-white,
+    $color-white,
+    $color-white,
+    $color-white
+  ),
+);
+@each $name, $color, $bg-color, $bg-hover, $bg-pressed,
+  $bg-disabled in $variants
+{
+  .variant-#{$name} {
+    color: $color;
+    background-color: $bg-color;
+    .icon,
+    .icon path {
+      fill: $color;
+    }
+    &.disabled {
+      pointer-events: none;
+      background-color: $bg-disabled;
+      color: $color-grey-200;
+      .icon,
+      .icon path {
+        fill: $color-grey-200;
+      }
+    }
+    &:not(.disabled):hover {
+      background-color: $bg-hover;
+    }
+    &:not(.disabled):active,
+    &:not(.disabled).activated {
+      background-color: $bg-pressed;
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.variant-outlined {
+  border-color: $color-text;
+}

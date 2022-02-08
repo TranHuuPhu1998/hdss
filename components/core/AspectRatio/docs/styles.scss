@@ -1,0 +1,12 @@
+@import 'styles/variables.scss';
+
+.box {
+  width: 200px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #efefef;
+}

@@ -1,0 +1,26 @@
+@import 'styles/variables.scss';
+
+/**
+   Sizes: name, padding.
+*/
+$sizes: (('lg', 4), ('md', 4), ('sm', 2), ('xs', 2));
+
+.listItemIcon {
+  width: 24px;
+  color: inherit;
+}
+
+@each $name, $size in $sizes {
+  .listItemIcon-size-#{$name} {
+    margin-right: spacing($size) !important;
+    margin-left: spacing($size) !important;
+  }
+}
+
+$icon-sizes: (('lg', 6), ('md', 6), ('sm', 4), ('xs', 4));
+@each $name, $icon-size in $icon-sizes {
+  .icon-size-#{$name} {
+    width: spacing($icon-size);
+    height: spacing($icon-size);
+  }
+}

@@ -94,3 +94,11 @@
 [2022-01-26T14:08:01.386] [INFO] default - 192.168.100.5 - 26/01/2022 14:08:01----content: Call api checkUserEKYC get Token---withBodyData: {"content":"Call api checkUserEKYC get Token","body":{"token":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZGJzc2VydmljZSIsImlhdCI6MTY0MzE4MDMxOCwiZXhwIjoxNjQzMTgzOTE4fQ.btqFhz6QYdri0ktyVvhwJuWmdh-2lXz6r9ZdWNBe4Wc"}}
 [2022-02-07T08:26:55.370] [INFO] default - 192.168.100.10 - 07/02/2022 8:26:55----content: Get list account api: socket hang up---withBodyData: {"requestId":"fccde952-4056-4201-a9e7-cd47bb1f4b78","data":{"clientNo":"00190484"}}
 [2022-02-07T08:27:03.709] [INFO] default - 192.168.100.10 - 07/02/2022 8:27:03----content: Get list account api: socket hang up---withBodyData: {"requestId":"ac7dbf87-69d7-49cc-91da-e7d22b9cbc76","data":{"clientNo":"00190484"}}
+[2022-02-08T14:00:11.283] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:11----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:00:11.796] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:11----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:00:12.295] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:12----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:00:12.747] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:12----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:00:13.028] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:13----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:00:27.020] [INFO] default - 10.0.112.60 - 08/02/2022 14:00:27----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:04:03.538] [INFO] default - 10.0.112.60 - 08/02/2022 14:04:03----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 
+[2022-02-08T14:07:24.683] [INFO] default - 10.0.112.60 - 08/02/2022 14:07:24----content: VerifyAllowRegisterOnlinePayment: Invalid value "undefined" for header "Authorization"---withBodyData: 

@@ -1,0 +1,33 @@
+@mixin img-square {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.root {
+  margin-bottom: 4rem;
+  .banner {
+    display: block;
+    position: relative;
+    height: 0;
+    padding-top: 100%;
+    overflow: hidden;
+    img {
+      @include img-square;
+    }
+  }
+
+  .card-box {
+    margin-top: -7.2rem;
+    position: relative;
+    z-index: 11;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+}

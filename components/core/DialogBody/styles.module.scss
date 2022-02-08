@@ -1,0 +1,12 @@
+@import 'styles/variables.scss';
+
+.dl-body {
+  padding: spacing(6) spacing(6);
+  padding-top: 0;
+  width: 100%;
+  color: $color-grey-700;
+
+  &.not-spacing-bottom {
+    padding-bottom: 0;
+  }
+}

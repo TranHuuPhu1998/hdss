@@ -1,0 +1,118 @@
+@import 'styles/variables.scss';
+
+$letter-spacing: spacing(0.15);
+
+/*
+  Variants list
+  Order values: name, font size, line height, letter-spacing
+*/
+$variants: (
+  ('title1', $color-text, $font-size-title1, 11, $letter-spacing),
+  ('title2', $color-text, $font-size-title2, 9.5, $letter-spacing),
+  ('subtitle1', $color-text, $font-size-subtitle1, 8, $letter-spacing),
+  ('subtitle2', $color-text, $font-size-subtitle2, 7, $letter-spacing),
+  ('subtitle3', $color-text, $font-size-subtitle3, 5.5, $letter-spacing),
+  ('body1', $color-text, $font-size-body1, 5.5, 0),
+  ('body2', $color-text, $font-size-body2, 4.5, 0),
+  ('caption', $color-text, $font-size-caption, 4, 0),
+  ('tiny', $color-text, $font-size-tiny, 3, 0)
+);
+
+@each $name, $color, $fontSize, $line-height, $spacing in $variants {
+  .variant-#{$name} {
+    color: $color;
+    font-size: $fontSize;
+    line-height: spacing($line-height);
+    letter-spacing: $spacing;
+  }
+}
+
+.variant-inherit {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+/*
+  Font weights list
+  Order values: name, font-weight
+*/
+$weights: (('light', $font-weight-light), ('regular', $font-weight-regular), ('bold', $font-weight-bold));
+
+@each $name, $weight in $weights {
+  .weight-#{$name} {
+    font-weight: $weight;
+  }
+}
+
+.weight-inherit {
+  font-weight: inherit;
+}
+
+/*
+  Types list
+  Order values: name, color
+*/
+$types: (
+  // ('default' $color-text),
+  ('title-default' $color-title-default),
+  ('disable' $color-disable),
+  ('error' $color-error),
+  ('invert' $color-invert),
+  ('link' $color-link),
+  ('sub' $color-sub),
+  ('title-sub' $color-title-sub),
+  ('success' $color-success),
+  ('warning' $color-warning),
+  ('inherit' inherit)
+);
+
+@each $name, $color in $types {
+  .type-#{$name} {
+    color: $color;
+  }
+}
+
+.type-strikethrough {
+  color: $color-disable;
+  text-decoration: line-through;
+}
+
+.type-inherit {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.gutter-bottom {
+  margin-bottom: 0.35em;
+}
+
+.paragraph {
+  margin-bottom: spacing(4);
+}
+
+.truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.truncate-1 {
+  -webkit-line-clamp: 1;
+}
+
+.truncate-2 {
+  -webkit-line-clamp: 2;
+}
+
+.truncate-3 {
+  -webkit-line-clamp: 3;
+}
+
+.truncate-4 {
+  -webkit-line-clamp: 4;
+}
+
+.truncate-5 {
+  -webkit-line-clamp: 5;
+}

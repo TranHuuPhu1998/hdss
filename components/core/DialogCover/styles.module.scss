@@ -1,0 +1,22 @@
+@import 'styles/variables.scss';
+
+.dl-cover {
+  display: flex;
+  justify-content: flex-end;
+  padding: spacing(6) spacing(6) spacing(46);
+  width: 100%;
+  background-size: cover;
+}
+
+.close {
+  cursor: pointer;
+  line-height: 1;
+  > svg {
+    color: $color-grey-100;
+    transition: all 0.25s ease;
+  }
+
+  &:hover > svg {
+    color: $color-grey-900;
+  }
+}

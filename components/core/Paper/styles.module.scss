@@ -1,0 +1,39 @@
+@import 'styles/variables.scss';
+
+$paper-bg-color: $color-white;
+
+.paper {
+  background-color: $paper-bg-color;
+  border-radius: $radius-regular;
+  overflow: hidden;
+}
+
+/*
+  values: name, border radius.
+*/
+$radius: (
+  ('none', 0),
+  ('light', $radius-light),
+  ('regular', $radius-regular),
+  ('bold', $radius-bold),
+  ('max', $radius-max)
+);
+@each $name, $radius-value in $radius {
+  .radius-#{$name} {
+    border-radius: $radius-value;
+  }
+}
+
+$elevation: (
+  0: none,
+  1: $box-shadow-lv-1,
+  2: $box-shadow-lv-2,
+  3: $box-shadow-lv-3,
+  4: $box-shadow-lv-4,
+);
+
+@each $i, $shadow in $elevation {
+  .elevation-#{$i} {
+    box-shadow: $shadow;
+  }
+}

@@ -1,0 +1,102 @@
+@import 'styles/variables.scss';
+
+/**
+  States: name, background-color
+*/
+$states: (
+  ('red', $color-red-400),
+  ('green', $color-green-500),
+  ('inherit', currentColor)
+);
+
+@each $name, $bgColor in $states {
+  .root.#{$name}.checked .nav {
+    background-color: $bgColor;
+  }
+}
+
+.root {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.25s ease;
+
+  &:not(.checked) {
+    .dot {
+      left: 3px;
+    }
+
+    .nav {
+      justify-content: flex-end;
+      background-color: $color-grey-200;
+    }
+  }
+
+  &.checked {
+    .dot {
+      left: 19px;
+    }
+
+    .nav {
+      justify-content: flex-start;
+      background-color: $color-red-400;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.icon {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+  height: 100%;
+  width: 36px;
+  color: inherit;
+  transition: all 0.25s ease;
+
+  .dot {
+    display: block;
+    position: absolute;
+    top: 5px;
+    height: 14px;
+    width: 14px;
+    background: $color-white;
+    border-radius: $radius-max;
+    transition: inherit;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+    border-radius: radius(5);
+    transition: inherit;
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+
+    margin: 5px;
+    width: 12px;
+    height: 12px;
+    color: $color-white;
+  }
+}
+
+.content {
+  margin-left: spacing(2);
+}
+
+.input {
+  display: none;
+}
