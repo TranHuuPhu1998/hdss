@@ -118,11 +118,24 @@ $input-transition-property: background-color, color;
   &.disabled {
     pointer-events: none;
   }
+  &.has-before {
+    padding-left: 0;
+  }
+  &.has-after {
+    padding-right: 0;
+  }
 }
 
-.has-before {
-  padding-left: 0;
+.label {
+  margin-left: spacing(4);
 }
-.has-after {
-  padding-right: 0;
+
+.label {
+  margin-bottom: spacing(2);
+}
+
+.label {
+  display: inline-flex;
+  flex: 1 1 auto;
+  justify-content: flex-start;
 }

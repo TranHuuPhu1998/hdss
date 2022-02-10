@@ -69,10 +69,10 @@ const EKYCComponent = (props: Props) => {
         const initObj = {
           BACKEND_URL: "https://api.idg.vnpt.vn/",
           TOKEN_KEY:
-            "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKbIkeVTHCWprAXlpaUJL8LOZaqZzXwLRJihiyWZ2QUgaEqbAyLAZKJWpYhD80gt+H+FBx1ku1H00iYX26Hwy4MCAwEAAQ==",
-          TOKEN_ID: "d77fdd5a-7177-47bb-e053-63199f0ae058",
+            "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMSt9PWAl5nSMTJOmgB0xNXyY3hHlqRVR+7ufuSUSw7P2CilAVD7fyVBVyQAzl1hC9oVgZWdGLZZzyPKCkS5xcMCAwEAAQ==",
+          TOKEN_ID: "d791d1e3-eda8-6ec5-e053-63199f0a7174",
           AUTHORIZION:
-            "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmQ5NjU5MC04OGM1LTExZWMtYjEzMy0zMTdkOTk1ZTU1NDEiLCJhdWQiOlsicmVzdHNlcnZpY2UiXSwidXNlcl9uYW1lIjoiZGV2YmV0Z2FtZUB5b3BtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3QiLCJuYW1lIjoiZGV2YmV0Z2FtZUB5b3BtYWlsLmNvbSIsInV1aWRfYWNjb3VudCI6ImY2ZDk2NTkwLTg4YzUtMTFlYy1iMTMzLTMxN2Q5OTVlNTU0MSIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiOTc3MGUyZjAtYjkwNS00MTU0LWFkZjQtOGEwZWFiMmFiZjAxIiwiY2xpZW50X2lkIjoiYWRtaW5hcHAifQ.2y5SCN0IQcnyvWgV3GJoinffnaKyv4j60_qpoDyb-dIB0ijwV_pkm_A2ItPno4ZlsLH2yujhQkG4JMlP1xLjd7HCNywxueEzul7idrtcVtLCIhkWzwlGqWq-Ol1v3w7M2vfM3BAi25BtharSE3B_i99iPE5FwojuLFNDBS0JvO0ct5HAP0Wwl0GgRY1N9VMFHak7sq0s17Tev905TbfdsLpzOHYp5xuPzwePEYibjqI8wannK_2JDwirKxKChhi-v7hjyvLjD9CS4laYBI-a3aXBE9yVy3R755B2_6hB9FG_ypo6_cLpIQY93fALms_BDvrCmjn53oW9pa2ByTZG3w",
+            "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzZDk2NTMyZC04OTdhLTExZWMtOWE2MS1kZjBlNDc5NWJhZmIiLCJhdWQiOlsicmVzdHNlcnZpY2UiXSwidXNlcl9uYW1lIjoidGVzdGVreWMwNUB5b3BtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiXSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3QiLCJuYW1lIjoidGVzdGVreWMwNUB5b3BtYWlsLmNvbSIsInV1aWRfYWNjb3VudCI6IjNkOTY1MzJkLTg5N2EtMTFlYy05YTYxLWRmMGU0Nzk1YmFmYiIsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiOGQzYTMyOWYtOGUyOS00Mzg1LTk4NDAtZDU3MzZmZGYxNGU5IiwiY2xpZW50X2lkIjoiYWRtaW5hcHAifQ.5xpCjUnDeRzOfhHjMlmr2awElbdH_Leu34Z6mrxuhDEdt_G-suQBpsQ_yGTqolX4P5rsQ8s4Gg4POd8lIbF_2f-loEbRdBZoNwLo4emoENnnXdvirSo5WQW0tmOEuIioCkv5n3uz5lZEqglCxlFEQI3yLvTPKswuLdO86wcqe7CMTHnto-yG2vGxQKXZ1GuV7_rw0atPblsUrpS6szytzrlFG2JsoC0sYwbBs2f-zAJBmGqxbdu52GUufm8AUW2C4wts3lOU14Qmogfww7bgpLQYxkz7gIau2r-1rZ4dRgAkZew8t08wB1PZBvvn2Nsl-O18CDb9-G2ORCov_o2GNg",
           PARRENT_ID: "ekyc_sdk_intergrated",
           FLOW_TYPE: "DOCUMENT", // DOCUMENT, FACE
           SHOW_HELP: false,
@@ -214,6 +214,8 @@ const EKYCComponent = (props: Props) => {
                 TYPE_DOCUMENT: data.type_document,
               },
               (res: any) => {
+                console.log('>>>>>> call_after_end_flow data', data); //TODO: to-remove
+                console.log('>>>>>> call_after_end_flow res', res); //TODO: to-remove
                 const result = { ...data, ...res };
                 onFinish && onFinish(result);
               }

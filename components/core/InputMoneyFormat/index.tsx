@@ -38,6 +38,7 @@ export type InputMoneyFormatType = BaseComponent<InputMoneyFormatTypeMap> & {
   displayName?: string
 }
 
+// @ts-ignore
 export const InputMoneyFormat: InputMoneyFormatType = forwardRef(
   (props: InputMoneyFormatProps, ref: any) => {
     const { component: Component, ...rest } = {
@@ -50,5 +51,4 @@ export const InputMoneyFormat: InputMoneyFormatType = forwardRef(
 )
 
 InputMoneyFormat.displayName = 'InputMoneyFormat'
-
 export default InputMoneyFormat

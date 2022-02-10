@@ -147,7 +147,7 @@ const HDBSPage = () => {
         const status = getStatusResponse(code, lang);
 
         if (status.success) {
-          if (!res.hasSendOtp) {
+          if (!res.hashdbanktp) {
             _onNextStep(STEP_KHHH.step4);
             return;
           }
@@ -187,7 +187,7 @@ const HDBSPage = () => {
     const status = getStatusResponse(code, lang);
 
     if (status.success) {
-      if (inquiryResponse.hasSendOtp) {
+      if (inquiryResponse.hashdbanktp) {
         _onCreateOTP();
         return;
       }

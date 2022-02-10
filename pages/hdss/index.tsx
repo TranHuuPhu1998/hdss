@@ -1,21 +1,33 @@
-import { checkResultEkyc, parseInfoFromEKYC } from "commons/helpers/ekyc";
+import { parseJwt } from "commons/helpers";
 import { Box } from "components/core/Box";
 import Grid from "components/core/Grid";
 import Image from "components/core/Image";
-import StepFinalRegisterSuccesss from "components/core/OnlinePayment/StepFinalRegisterSuccess";
 import Paper, { PaperRadius } from "components/core/Paper";
 import TabSteps from "components/core/TabSteps";
+import StepFinalRegisterSuccesss from "components/HDSS/StepFinalRegisterSuccess";
 import _get from "lodash/get";
+import { useRouter } from "next/router";
 import Script from "next/script";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { STEPS } from "./const";
+import Context, { IAdditionInfor, IConfirmInfor } from "./Context";
 import styles from "./styles.module.scss";
 
 function HDSSPage() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(3);
   const [success, setSuccess] = useState(false);
   const [md5, setMd5] = useState(null);
   const [ekycData, setEkycData] = useState(null);
+  const router = useRouter();
+  const query = router.query;
+  const [confirmInfor, setConfirmInfor] = useState<IConfirmInfor>(null);
+  const [additionInfor, setAdditionInfor] = useState<IAdditionInfor>(null);
+
+  useEffect(() => {
+    if (!query?.jwt) return;
+    const jwtInfo = parseJwt(query.jwt as string);
+    console.log(">>>>> jwtInfo", jwtInfo); //TODO: to-remove
+  }, []);
 
   function handleNext() {
     if (active === 0) {
@@ -39,8 +51,18 @@ function HDSSPage() {
 
   function handleCallbackAfterReEKYC(ekycData: any) {
     setEkycData(ekycData);
-    handleNext();
   }
+
+  const contextValue = {
+    confirmInfor,
+    setConfirmInfor: (value: IConfirmInfor) => {
+      setConfirmInfor(value);
+    },
+    additionInfor,
+    setAdditionInfor: (value: IAdditionInfor) => {
+      setAdditionInfor(value);
+    },
+  };
 
   const Component: any = STEPS[active].component;
   return (
@@ -103,11 +125,13 @@ function HDSSPage() {
                         </Grid>
                         {/* tabs */}
                         <Grid item>
-                          <Component
-                            onNext={handleNext}
-                            onReEKYC={handleCallbackAfterReEKYC}
-                            ekycData={ekycData}
-                          />
+                          <Context.Provider value={contextValue}>
+                            <Component
+                              onNext={handleNext}
+                              onReEKYC={handleCallbackAfterReEKYC}
+                              ekycData={ekycData}
+                            />
+                          </Context.Provider>
                         </Grid>
                       </Grid>
                     )}

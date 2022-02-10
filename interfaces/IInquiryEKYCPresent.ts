@@ -74,5 +74,5 @@ export interface InquiryEKYCPresentRequest {
 export interface InquiryEKYCPresentResponse {
   resultCode: string;
   resultMessage: string;
-  hasSendOtp: boolean;
+  hashdbanktp: boolean;
 }

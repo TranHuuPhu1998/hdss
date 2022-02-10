@@ -85,7 +85,7 @@
     "step23ConfirmInformation": {
       "title": "Xác nhận thông tin",
       "desc": "Dưới đây là thông tin hệ thống tự động đọc trên Giấy tờ tuỳ thân của bạn. Vui lòng xác nhận lại thông tin hoặc chỉnh sửa (nếu cần).",
-      "fullname": "Họ và tên",
+      "fullName": "Họ và tên",
       "dateOfBirth": "Ngày sinh",
       "gender": "Giới tính",
       "cmnd": "Số CMND/CCCD",
@@ -112,7 +112,8 @@
       "communications": "Thông tin liên lạc",
       "residentialAddress": "Địa chỉ cư trú",
       "summaryAddress": "Tỉnh thành/Quận Huyện/ Phường xã",
-      "branch": "Điểm giao dịch",
+      "tradingPoint": "Điểm giao dịch",
+      "branch": "Chi nhánh",
       "policyDesc": {
         "1": "Tôi cam kết không có",
         "2": "Các dấu hiệu Hoa Kỳ",
@@ -129,7 +130,125 @@
         "7": "Giấy ủy quyền hoặc ủy quyền ký tên hiện đang có hiệu lực cấp cho người có địa chỉ ở Hoa Kỳ",
         "8": "Địa chỉ nhận thư hộ hoặc giữ thư tại Hoa Kỳ"
       },
-      "close": "Đóng"
+      "close": "Đóng",
+      "genderValue": {
+        "M": "Nam",
+        "FM": "Nữ"
+      },
+      "academic": {
+        "highschool": "THPT",
+        "college": "Trung cấp/cao đẳng",
+        "university": "Đại học",
+        "graduateschool": "Sau Đại học"
+      },
+      "marialStatus": {
+        "other": "Khác",
+        "married": "Đã kết hôn",
+        "single": "Độc thân",
+        "separated": "Ly hôn"
+      }
+    },
+    "step33AccountInfor": {
+      "loginInfor": "Thông tin đăng nhập",
+      "desc": "Vui lòng đặt mật khẩu đăng nhập tài khoản thanh toán HD Money",
+      "password": "Mật khẩu",
+      "confirmPassword": "Nhập lại mật khẩu",
+      "placeholder": {
+        "password": "Nhập mật khẩu",
+        "confirmPassword": "Nhập lại mật khẩu"
+      },
+      "passwordRules": {
+        "title": "Quy định đặt mật khẩu",
+        "content": {
+          "1": "Mật khẩu phải có độ dài tối thiểu 06 ký tự, bao gồm các ký tự chữ và số, có chứa chữ hoa và chữ thường hoặc các ký tự đặc biệt bao gồm:  !@#$%^&*_=+-/",
+          "2": "Mật khẩu không được chứa từ password",
+          "3": "Mật khẩu có thời gian hiệu lực tối đa 12 tháng",
+          "4": "Tài khoản của khách hàng sẽ bị khóa sau 05 lần đăng nhập không thành công",
+          "5": "Mật khẩu không được sử dụng toàn bộ ký tự trùng nhau, hoặc liên tục theo thứ tự trong bảng chữ cái, chữ số"
+        }
+      },
+      "button": {
+        "finished": "Hoàn tất",
+        "close": "Đóng"
+      },
+      "policy": {
+        "ireadAndAgree": "Tôi đã đọc, hiểu và đồng ý",
+        "policyTitle": "Đề nghị kiêm hợp đồng mở và sử dụng Tài khoản thanh toán, dịch vụ ngân hàng điện tử và Điều khoản, điều kiện",
+        "title": "Đề nghị kiêm hợp đồng",
+        "desc": "Đề nghị kiêm hợp đồng mở và sử dụng Tài khoản thanh toán, dịch vụ ngân hàng điện tử và Điều khoản, điều kiện",
+        "form": {
+          "fullName": "Họ và tên",
+          "gender": "Giới tính",
+          "dateOfBirth": "Ngày sinh",
+          "idNumber": "Số CMND/CCCD",
+          "dateOfIssue": "Ngày cấp",
+          "expireOfIssue": "Ngày hết hạn",
+          "placeOfIssue": "Nơi cấp",
+          "oldIdNumber": "Số CMND cũ",
+          "nationality": "Quốc tịch",
+          "resident": "Cư trú",
+          "permanentAddress": "Địa chỉ thường trú",
+          "currentAddress": "Địa chỉ hiện tại",
+          "phoneNumber": "Số điện thoại",
+          "email": "email",
+          "career": "Nghề nghiệp",
+          "position": "Chức vụ",
+          "marial": "Hôn nhân",
+          "education": "Học vấn",
+          "income": "Mức thu nhập",
+          "branch": "Điểm giao dịch",
+          "fatca": "FATCA",
+          "nonAmericanSign": "Không có dấu hiệu Hoa kỳ"
+        }
+      }
+    },
+    "step4PhoneVerification": {
+      "title": "Xác thực số điện thoại",
+      "desc": "Vui lòng nhập mã xác thực đã được gửi đến số điện thoại của bạn",
+      "label": "Nhận mã xác nhận",
+      "cannotReceiveSMS": "Quý khách không nhận được tin nhắn",
+      "resendOTP": "Gửi lại OTP",
+      "button": {
+        "confirm": "Xác nhận",
+        "close": "Đóng"
+      },
+      "popup": {
+        "maximumGenerate": {
+          "msg1": "Quý khách đã yêu cầu vượt quá 10 lần sinh lại mật khẩu giao dịch",
+          "msg2": "Vui lòng liên hệ 1900 6060 hoặc đến quầy để thực hiện lại quy trình đăng ký"
+        },
+        "wrongTradingCode": "Mã giao dịch không đúng. Quý khách vui lòng thực hiện lại quy trình đăng ký sau 60 phút"
+      }
+    },
+    "stepFinalRegisterSuccess": {
+      "title": "Đăng ký thành công",
+      "processing": "Hệ thống đang xử lý tạo mới tài khoản thanh toàn trực tuyến. Kết quả sẽ được gửi đến Quý khách qua email và tin OTT (xem tại chức năng Thông tin HDBank)",
+      "contact": "Khách hàng vui lòng liên hệ CN/PGD HDBank gần nhất để bổ sung thông tin liên quan đến dấu hiệu Hoa Kỳ và hoàn tất hồ sơ đăng ký",
+      "field": {
+        "username": "Tên đăng nhập",
+        "email": "Email",
+        "fullname": "Họ và tên",
+        "idNumber": "Số CMND/CCCD"
+      },
+      "button": {
+        "continue": "Tiếp tục với HDSaison",
+        "downloadApp": "Tải app HDBank",
+        "guideline": "Hướng dẫn nạp tiền tài khoản thanh toán HDMoney"
+      }
+    },
+    "form": {
+      "validation": {
+        "required": "Không được bỏ trống",
+        "maxLength": "Tối đa {{length}} ký tự",
+        "minYearOld": "Tối thiểu {{num}} tuổi",
+        "mustPastDate": "Phải nhỏ hơn ngày hiện tại",
+        "mustFutureDate": "Phải lớn hơn ngày hiện tại",
+        "passwordNotMatch": "Mật khẩu không trùng khớp",
+        "passwordPattern": "Mật khẩu không hợp lệ"
+      }
+    },
+    "alert": {
+      "acceptPolicy": "Vui lòng đồng ý với Đề nghị kiêm hợp đồng mở và sử dụng Tài khoản thanh toán, dịch vụ ngân hàng điện tử và Điều khoản, điều kiện"
     }
   },
   "en": {
@@ -244,7 +363,8 @@
       "communications": "Contact information",
       "residentialAddress": "Residence address",
       "summaryAddress": "Province/City/District/Commune",
-      "branch": "Trading Point",
+      "tradingPoint": "Trading Point",
+      "branch": "Branch",
       "policyDesc": {
         "1": "I pledge not to have",
         "2": "American Signs",
@@ -261,7 +381,124 @@
         "7": "A power of attorney or power of attorney currently in force for a person with a US address",
         "8": "U.S. mailing or holding address"
       },
-      "close": "Close"
+      "close": "Close",
+      "genderValue": {
+        "M": "Male",
+        "FM": "Female"
+      },
+      "academic": {
+        "highschool": "High School",
+        "college": "College",
+        "university": "University",
+        "graduateschool": "Graduates School"
+      },
+      "marialStatus": {
+        "other": "Other",
+        "married": "Married",
+        "single": "Single",
+        "separated": "Separated"
+      }
+    },
+    "step33AccountInfor": {
+      "loginInfor": "Login Information",
+      "desc": "Please set HD Money payment account login password",
+      "password": "Password",
+      "confirmPassword": "Re-enter password",
+      "placeholder": {
+        "password": "Input password",
+        "confirmPassword": "Input confirm password"
+      },
+      "passwordRules": {
+        "title": "Password setting",
+        "content": {
+          "1": "Password must be at least 06 characters long, include alphanumeric characters, contain upper and lower case letters or special characters including: !@#$%^&* _=+-/",
+          "2": "Password cannot contain the word password",
+          "3": "Passwords are valid for up to 12 months",
+          "4": "Customer's account will be locked after 05 failed login attempts",
+          "5": "Password must not use all characters that are the same, or consecutive in alphabetical order, numbers"
+        }
+      },
+      "button": {
+        "finished": "Done",
+        "close": "Close"
+      },
+      "policy": {
+        "ireadAndAgree": "I have read, understood and agree",
+        "policyTitle": "Offer cum contract to open and use a Payment Account, e-banking service and Terms and Conditions",
+        "title": "Offer cum contract",
+        "desc": "Offer cum contract to open and use Payment Account, e-banking service and Terms and conditions",
+        "form": {
+          "fullName": "Full Name",
+          "gender": "Gender",
+          "dateOfBirth": "Date of Birth",
+          "idNumber": "ID Number/CCCD",
+          "dateOfIssue": "Date of issue",
+          "expireOfIssue": "Expiration Date",
+          "placeOfIssue": "Place of issue",
+          "oldIdNumber": "Old ID number",
+          "nationality": "Nationality",
+          "resident": "Resident",
+          "permanentAddress": "Permanent address",
+          "currentAddress": "Current address",
+          "phoneNumber": "Phone number",
+          "email": "email",
+          "career": "Career",
+          "position": "position",
+          "marial": "Marriage",
+          "education": "Education",
+          "income": "income level",
+          "branch": "Trading Point",
+          "fatca": "FATCA",
+          "nonAmericanSign": "No US Sign"
+        }
+      }
+    },
+    "step4PhoneVerification": {
+      "title": "Verify phone number",
+      "desc": "Please enter the verification code sent to your phone number",
+      "label": "Get confirmation code",
+      "cannotReceiveSMS": "You did not receive the message",
+      "resendOTP": "Resend OTP",
+      "button": {
+        "confirm": "Confirm",
+        "close": "Close"
+      },
+      "popup": {
+        "maximumGenerate": {
+          "msg1": "You have requested more than 10 transaction password re-generation",
+          "msg2": "Please contact 1900 6060 or go to the counter to go through the registration process again"
+        },
+        "wrongTradingCode": "Invalid transaction code. Please repeat the registration process after 60 minutes"
+      }
+    },
+    "stepFinalRegisterSuccess": {
+      "title": "Successful registration",
+      "processing": "The system is processing to create a new online payment account. Results will be sent to you via email and OTT message (see HDBank Information function)",
+      "contact": "Customers should contact the nearest HDBank CN/PGD to add information related to the US sign and complete the registration dossier",
+      "field": {
+        "username": "Username",
+        "email": "Email",
+        "fullname": "Full name",
+        "idNumber": "ID Number/CCCD"
+      },
+      "button": {
+        "continue": "Continue with HDSaison",
+        "downloadApp": "Download HDBank app",
+        "guideline": "Guide to top up HDMoney payment account"
+      }
+    },
+    "form": {
+      "validation": {
+        "required": "required",
+        "maxLength": "Maximum {{length}} characters",
+        "minYearOld": "Minimum {{num}} year old",
+        "mustFutureDate": "Must be less than current date",
+        "passwordNotMatch": "Confirm password not match",
+        "passwordPattern": "Password is not valid"
+      }
+    },
+    "alert": {
+      "acceptPolicy": "Please agree to the Offer cum contract to open and use a Payment Account, e-banking service and Terms and Conditions"
     }
   }
 }

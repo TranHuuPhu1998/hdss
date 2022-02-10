@@ -5,5 +5,5 @@ export interface IVerifyAllowRegisterOnlinePaymentRequest {
 export interface IVerifyAllowRegisterOnlinePaymentResponse {
   resultCode: string;
   resultMessage: string;
-  hasSendOtp: boolean;
+  hashdbanktp: boolean;
 }

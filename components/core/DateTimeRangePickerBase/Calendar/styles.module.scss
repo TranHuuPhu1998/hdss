@@ -1,0 +1,419 @@
+@import "styles/variables.scss";
+
+.calendarWrapper {
+  padding: spacing(4);
+  background: $color-white;
+  display: inline-flex;
+  flex-direction: column;
+  user-select: none;
+  font-size: 12px;
+}
+
+.dateDisplay {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateDisplayItem {
+  width: calc(50% - 0.8rem);
+  color: $color-grey-700;
+
+  > div > div {
+    background-color: $color-white !important;
+  }
+
+  &.oneField {
+    width: 100%;
+  }
+}
+
+.dateDisplayItemActive {
+  border-color: currentColor;
+  input {
+    color: #7d888d;
+  }
+}
+
+.monthAndYearWrapper {
+  box-sizing: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.monthAndYearPickers {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.monthPicker {
+  margin: 0 5px;
+
+  select {
+    text-transform: capitalize;
+  }
+}
+
+.yearPicker {
+  margin: 0 5px;
+}
+
+.months {
+  display: flex;
+  justify-content: center;
+  &.monthsVertical .month:first-child .monthName {
+    display: none;
+  }
+}
+
+.monthsVertical {
+  flex-direction: column;
+}
+
+.month {
+  width: 28rem;
+
+  &:not(:first-child) {
+    margin-left: 1.6rem;
+  }
+
+  &:last-child {
+    .monthName {
+      text-align: right;
+    }
+  }
+}
+
+.monthName {
+  padding: spacing(1) spacing(3);
+  color: $color-grey-700;
+}
+
+.weekDays {
+  display: flex;
+}
+
+.weekDay {
+  flex-basis: calc(100% / 7);
+  height: 4rem;
+  box-sizing: inherit;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  line-height: 4rem;
+  color: $color-grey-700;
+  text-transform: capitalize;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dateDisplayWrapper {
+  padding: 0 spacing(4);
+}
+
+.infiniteMonths {
+  overflow: auto;
+}
+
+.day {
+  box-sizing: inherit;
+  width: calc(100% / 7);
+  position: relative;
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  user-select: none;
+  border: 0;
+  padding: 0;
+  line-height: 4rem;
+  height: 4rem;
+  text-align: center;
+  color: $color-grey-700;
+  &:focus {
+    outline: 0;
+  }
+
+  &:not(.dayPassive) {
+    .inRange,
+    .startEdge,
+    .endEdge,
+    .selected {
+      & ~ .dayNumber {
+        span {
+          color: $color-white;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    background: $color-grey-25;
+  }
+}
+
+.dayNumber {
+  display: block;
+  position: relative;
+  outline: 0;
+  font-weight: 300;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  top: 5px;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-grey-700;
+}
+
+.dayDisabled {
+  cursor: not-allowed;
+  background-color: $color-white;
+  .dayNumber span {
+    color: $color-grey-200;
+    &:after {
+      background: $color-grey-200;
+    }
+  }
+  .inRange,
+  .startEdge,
+  .endEdge,
+  .selected,
+  .dayStartPreview,
+  .dayInPreview,
+  .dayEndPreview {
+    filter: grayscale(100%) opacity(60%);
+  }
+}
+
+.selected,
+.inRange,
+.startEdge,
+.endEdge {
+  pointer-events: none;
+  background: $color-red-500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.selected {
+  left: 2px;
+  right: 2px;
+  // border-radius: 1.042em;
+}
+
+.inRange {
+}
+
+.dayStartPreview,
+.dayInPreview,
+.dayEndPreview {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dayHovered {
+}
+
+.dayActive {
+}
+
+.dayPassive {
+  pointer-events: none;
+  .dayNumber span {
+    color: #d5dce0;
+  }
+  .inRange,
+  .startEdge,
+  .endEdge,
+  .selected,
+  .dayStartPreview,
+  .dayInPreview,
+  .dayEndPreview {
+    display: none;
+  }
+}
+
+.dayToday .dayNumber span {
+  font-weight: 500;
+  color: $color-red-500;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 1.6rem;
+    height: 0.2rem;
+    background: $color-red-500;
+  }
+}
+.dayToday.dayDisabled .dayNumber span {
+  color: $color-grey-200;
+  &:after {
+    background: $color-grey-200;
+  }
+}
+
+.dayToday:not(.dayPassive) {
+  .inRange,
+  .startEdge,
+  .endEdge,
+  .selected {
+    & ~ .dayNumber span:after {
+      background: #fff;
+    }
+
+    & ~ .dayNumber {
+      span {
+        color: $color-white;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+.dayToday:not(.dayPassive) {
+  .dayInPreview,
+  .dayEndPreview {
+    & ~ .dayNumber span:after {
+      background: #fff;
+    }
+
+    & ~ .dayNumber {
+      span {
+        color: $color-white;
+      }
+    }
+  }
+}
+
+.dayInPreview,
+.dayEndPreview {
+  background-color: $color-red-500;
+
+  & + span {
+    background: transparent;
+    color: $color-white;
+    z-index: 2;
+  }
+}
+
+.timeDisplay {
+  display: flex;
+  justify-content: center;
+}
+
+.arrowSeparateTime {
+  margin: 0 spacing(4);
+}
+
+.timeItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeInput {
+  width: 5.4rem;
+
+  input {
+    font-size: $font-size-tiny;
+    padding-left: spacing(2);
+  }
+}
+
+.timeInputIcon {
+  padding-left: 0;
+  padding-right: spacing(1);
+}
+
+.timeSeparate {
+  margin: 0 spacing(2);
+}
+
+.confirmDate {
+  border-top: solid 0.1rem $color-grey-50;
+  align-items: center;
+}
+
+.dateRangeResult {
+  color: $color-grey-700;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-caption;
+  margin-left: spacing(4);
+}
+
+.btnConfirm {
+  width: 10.4rem;
+  margin-left: spacing(2);
+}
+
+.hourSelect {
+  width: 4.8rem;
+}
+
+.monthAndYearSelect {
+  align-items: center;
+  border: none;
+  background-color: transparent !important;
+  width: 11rem;
+  text-align: right;
+
+  div {
+    span {
+      font-weight: $font-weight-bold;
+      color: $color-grey-700 !important;
+    }
+  }
+}
+
+.monthAndYearSelectMenu {
+  width: 13rem !important;
+
+  ul {
+    max-height: 30rem;
+    overflow: auto;
+    flex-direction: row;
+
+    li {
+      width: 100%;
+    }
+  }
+}
+
+.hourAndMinuteSelectMenu {
+  width: 5.6rem !important;
+
+  ul {
+    max-height: 18rem;
+    overflow: auto;
+    flex-direction: row;
+
+    li {
+      width: 100%;
+    }
+  }
+}
+
+.btnReset {
+  width: 3.2rem;
+}

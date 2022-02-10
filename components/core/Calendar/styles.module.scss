@@ -1,0 +1,16 @@
+@import "styles/variables.scss";
+
+$icon-sizes: (('lg', 6), ('md', 6), ('sm', 4), ('xs', 3));
+
+.icon {
+  fill: $color-grey-500;
+}
+
+@each $name, $icon-size in $icon-sizes {
+  .addon-size-#{$name} {
+    .icon {
+      width: spacing($icon-size);
+      height: spacing($icon-size);
+    }
+  }
+}

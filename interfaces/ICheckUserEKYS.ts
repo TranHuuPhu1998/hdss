@@ -14,5 +14,5 @@ export interface CheckUserENCYRequest {
 export interface CheckUserEKYCResponse {
   resultCode: string;
   resultMessage: string;
-  hasSendOtp: boolean;
+  hashdbanktp: boolean;
 }

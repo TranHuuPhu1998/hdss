@@ -7,7 +7,7 @@ import { BaseComponent, OverrideProps } from '../BaseComponent'
 import styles from './styles.module.scss'
 
 function memoize (fn: (arg: any) => any): any {
-  const cache = {}
+  const cache: any = {}
 
   return (arg: any) => {
     if (cache[arg] === undefined) {

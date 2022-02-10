@@ -93,6 +93,7 @@ class SingleOtpInput extends PureComponent {
             index === 0 ? 'Please enter verification code. ' : ''
           }${isInputNum ? 'Digit' : 'Character'} ${index + 1}`}
           autoComplete="off"
+          autoFocus={index === 0}
           style={Object.assign(
             { textAlign: 'center' },
             isStyleObject(inputStyle) && inputStyle,

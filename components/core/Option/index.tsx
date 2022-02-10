@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 
-// import CheckMark from '@hdbank/icons/components/CheckMark'
-
 import { BaseComponent, OverrideProps } from '../BaseComponent';
 import { InputSizes } from '../Input';
 import ListItemText from '../ListItemText';
 import ListItemIcon from './../ListItemIcon';
 import MenuItem, { MenuItemComponent } from '../MenuItem';
 import SelectContext from '../Select/select-context';
+import CheckMark from 'icons/CheckMark';
 
 interface OptionTypeMap<
   P = {},
@@ -67,8 +66,7 @@ export const Option: OptionComponent = (props: OptionProps) => {
       <ListItemText size={rest.size}>{children}</ListItemText>
       {activated && (
         <ListItemIcon
-          // icon={CheckMark}
-          icon={null}
+          icon={CheckMark}
           size={rest.size}
         />
       )}

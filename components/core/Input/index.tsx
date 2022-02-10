@@ -1,46 +1,45 @@
-import React, { forwardRef, MutableRefObject } from 'react'
-import cx from '../../../utils/classnames'
-import { getArrayOf } from '../../../utils/getArrayOf'
+import React, { forwardRef, MutableRefObject } from 'react';
+import cx from '../../../utils/classnames';
+import { getArrayOf } from '../../../utils/getArrayOf';
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import InputBase, { InputBaseType } from '../InputBase';
+import styles from './styles.module.scss';
+import { InputSizes, InputStatuses } from './types';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import InputBase, { InputBaseType } from '../InputBase'
-import { InputSizes, InputStatuses } from './types'
-
-import styles from './styles.module.scss'
-
-export * from './types'
+export * from './types';
+export { InputSizes, InputStatuses };
 
 interface InputTypeMap<P = {}, D extends React.ElementType = InputBaseType> {
   props: P & {
-    status?: InputStatuses
-    size?: InputSizes
-    beforeInput?: React.ReactNode
-    afterInput?: React.ReactNode
-    wrapperRef?: MutableRefObject<HTMLDivElement>
-  }
-  defaultComponent: D
+    status?: InputStatuses;
+    size?: InputSizes;
+    beforeInput?: React.ReactNode;
+    afterInput?: React.ReactNode;
+    wrapperRef?: MutableRefObject<HTMLDivElement>;
+  };
+  defaultComponent: D;
 }
 
 export type InputProps<
   D extends React.ElementType = InputTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<InputTypeMap<P, D>, D>
+> = OverrideProps<InputTypeMap<P, D>, D>;
 
 interface InputDefaultProps {
-  component: React.ElementType
-  status: InputStatuses
-  size: InputSizes
+  component: React.ElementType;
+  status: InputStatuses;
+  size: InputSizes;
 }
 
 const defaultProps: InputDefaultProps = {
   component: InputBase,
   size: InputSizes.lg,
   status: InputStatuses.primary,
-}
+};
 
 export type InputComponent = BaseComponent<InputTypeMap> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 // @ts-ignore
 export const Input: InputComponent = forwardRef(
@@ -56,25 +55,25 @@ export const Input: InputComponent = forwardRef(
     } = {
       ...defaultProps,
       ..._props,
-    }
+    };
 
     const classOfRoot = cx(
       styles.root,
       styles[`status-${status}`],
       className,
-      rest.disabled && styles.disabled,
-    )
+      rest.disabled && styles.disabled
+    );
 
-    const beforeInputs = getArrayOf(beforeInput)
-    const afterInputs = getArrayOf(afterInput)
+    const beforeInputs = getArrayOf(beforeInput);
+    const afterInputs = getArrayOf(afterInput);
 
     const classOfInputBase = cx(
       styles.input,
       styles[`size-${rest.size}`],
       beforeInputs.length > 0 && styles['has-before'],
       afterInputs.length > 0 && styles['has-after'],
-      rest.disabled && styles.disabled,
-    )
+      rest.disabled && styles.disabled
+    );
 
     return (
       <div className={classOfRoot} role="presentation" ref={wrapperRef}>
@@ -84,23 +83,27 @@ export const Input: InputComponent = forwardRef(
             key: index.toString(),
             disabled: rest.disabled,
             size: rest.size,
-          }),
+          })
         )}
-        <Component {...rest} ref={ref} className={classOfInputBase} />
+        <Component
+          autoComplete="off"
+          {...rest}
+          ref={ref}
+          className={classOfInputBase}
+        />
         {afterInputs.map((component, index) =>
           // @ts-ignore
           React.cloneElement(component, {
             key: index.toString(),
             disabled: rest.disabled,
             size: rest.size,
-          }),
+          })
         )}
       </div>
-    )
-  },
-)
+    );
+  }
+);
 
-Input.displayName = 'Input'
+Input.displayName = 'Input';
 
-export default Input
-export { InputSizes, InputStatuses }
+export default Input;

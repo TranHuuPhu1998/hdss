@@ -1,0 +1,48 @@
+@import 'styles/variables.scss';
+
+@mixin img-square {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.root {
+  .text-center {
+    text-align: center;
+  }
+  .identity-card {
+    display: block;
+    position: relative;
+    height: 0;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    img {
+      @include img-square;
+    }
+  }
+  .collapse-icon {
+    color: $color-icon;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .icon-close {
+    transform: rotate(180deg);
+  }
+  .btn-open-popup {
+    cursor: pointer;
+  }
+  .checkbox {
+    svg {
+      margin-top: 4px;
+    }
+  }
+}
+
+.career-select {
+  max-height: 20rem;
+  overflow: auto;
+}
