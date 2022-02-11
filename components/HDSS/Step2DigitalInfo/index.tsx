@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
 import Grid from 'components/core/Grid';
-import styles from './styles.module.scss';
+import { usePrevious } from 'hooks/usePrevious';
+import React, { useEffect, useState } from 'react';
 import Step21VerifyID from './Step21VerifyID';
 import Step23ConfirmInformation from './Step23ConfirmInformation';
 import Step24AdditionalInfor from './Step24AdditionalInfor';
+import styles from './styles.module.scss';
 
 const STEP2_VERIFY_STEPS = [
   {
@@ -28,6 +29,13 @@ const DEFAULT_CONFIRMATION_STEP = 1;
 function Step2DigitalInfo(props: Props) {
   const { onNext, ...rest } = { ...props };
   const [active, setActive] = useState(DEFAULT_CONFIRMATION_STEP);
+  const previousActive = usePrevious(active);
+
+  useEffect(() => {
+    if (previousActive !== active) {
+      window.scrollTo(0, 0);
+    }
+  }, [active, previousActive]);
 
   function handleNext() {
     if (active + 1 <= 2) {

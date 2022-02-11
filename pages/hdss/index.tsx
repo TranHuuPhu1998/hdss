@@ -5,6 +5,7 @@ import Image from 'components/core/Image';
 import Paper, { PaperRadius } from 'components/core/Paper';
 import TabSteps from 'components/core/TabSteps';
 import StepFinalRegisterSuccesss from 'components/HDSS/StepFinalRegisterSuccess';
+import { usePrevious } from 'hooks/usePrevious';
 import _get from 'lodash/get';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -25,12 +26,19 @@ function HDSSPage() {
   const query = router.query;
   const [confirmInfor, setConfirmInfor] = useState<IConfirmInfor>(null);
   const [additionInfor, setAdditionInfor] = useState<IAdditionInfor>(null);
+  const previousActive = usePrevious(active);
 
   useEffect(() => {
     if (!query?.jwt) return;
     const jwtInfo = parseJwt(query.jwt as string);
     console.log('>>>>> jwtInfo', jwtInfo); //TODO: to-remove
-  }, []);
+  }, [query.jwt]);
+
+  useEffect(() => {
+    if (previousActive !== active) {
+      window.scrollTo(0, 0);
+    }
+  }, [active, previousActive]);
 
   function handleNext() {
     if (active === 0) {
