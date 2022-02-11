@@ -24,7 +24,7 @@ interface Props {
 /**
  * Step 0: Verify CMND / CCCD
  */
-const DEFAULT_CONFIRMATION_STEP = 0;
+const DEFAULT_CONFIRMATION_STEP = 1;
 function Step2DigitalInfo(props: Props) {
   const { onNext, ...rest } = { ...props };
   const [active, setActive] = useState(DEFAULT_CONFIRMATION_STEP);

@@ -17,7 +17,7 @@ import Context, {
 import styles from './styles.module.scss';
 
 function HDSSPage() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const [success, setSuccess] = useState(false);
   const [md5, setMd5] = useState(null);
   const [ekycData, setEkycData] = useState(null);
