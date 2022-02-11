@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 // @ts-ignore
-import { Box, MenuItem, Select, Theme } from '@mui/material';
+import { Box, MenuItem, Select, Theme, SelectProps } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import cn from 'classnames';
 import { OptionSelectType } from 'commons/constants/types';
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: 14,
   },
 }));
+// @ts-ignore
 interface Props<T> extends SelectProps {
   options: T[];
   renderLabel?(prop: T): string | JSX.Element;
@@ -46,6 +47,7 @@ const SelectCustom = React.forwardRef(
     ref: React.Ref<HTMLInputElement>
   ) => {
     const {
+      // @ts-ignore
       disabled,
       options,
       loading,
