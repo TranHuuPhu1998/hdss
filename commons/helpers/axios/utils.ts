@@ -1,6 +1,6 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
 
-import { Interceptor } from "./types";
+import { Interceptor } from './types';
 
 export function applyInterceptors(
   ins: AxiosInstance,

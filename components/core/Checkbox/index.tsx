@@ -59,7 +59,7 @@ interface CheckboxTypeMap<P = {}, D extends React.ElementType = 'label'> {
 
 export type CheckboxProps<
   D extends React.ElementType = CheckboxTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<CheckboxTypeMap<P, D>, D>;
 
 interface CheckboxDefaultProps {
@@ -100,7 +100,7 @@ export const Checkbox: CheckboxComponent = forwardRef(
     const isChecked = checkIsBoolean
       ? checked
       : (context.selected || []).includes(value);
-      
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const onChangeComposed = useCallback(compose(onChange, context.onChange), [
       onChange,
@@ -119,7 +119,7 @@ export const Checkbox: CheckboxComponent = forwardRef(
 
     const _children = useMemo(
       () => children && <span className={styles.content}>{children}</span>,
-      [children],
+      [children]
     );
 
     return (
@@ -146,7 +146,7 @@ export const Checkbox: CheckboxComponent = forwardRef(
         />
       </Component>
     );
-  },
+  }
 );
 
 Checkbox.displayName = 'Checkbox';

@@ -1,35 +1,35 @@
-import addMonths from "date-fns/addMonths";
-import addYears from "date-fns/addYears";
-import differenceInCalendarMonths from "date-fns/differenceInCalendarMonths";
-import differenceInDays from "date-fns/differenceInDays";
-import format from "date-fns/format";
-import getHours from "date-fns/getHours";
-import getMinutes from "date-fns/getMinutes";
-import isSameDay from "date-fns/isSameDay";
-import isSameMonth from "date-fns/isSameMonth";
-import isValid from "date-fns/isValid";
-import defaultLocale from "date-fns/locale/vi";
-import max from "date-fns/max";
-import min from "date-fns/min";
-import setHours from "date-fns/setHours";
-import setMinutes from "date-fns/setMinutes";
-import setMonth from "date-fns/setMonth";
-import setYear from "date-fns/setYear";
-import subMonths from "date-fns/subMonths";
-import ArrowRight from "icons/ArrowRight";
-import ChevronLeft from "icons/ChevronLeft";
-import ChevronRight from "icons/ChevronRight";
-import RotateCcw from "icons/RotateCcw";
-import React, { PureComponent } from "react";
-import cx from "../../../../utils/classnames";
-import Button, { ButtonSizes, ButtonVariants } from "../../Button";
-import Grid from "../../Grid";
-import { InputSizes } from "../../Input";
-import Option from "../../Option";
-import Select from "../../Select";
-import Month from "../Month";
-import { calcFocusDate, getMonthDisplayRange } from "../utils";
-import styles from "./styles.module.scss";
+import addMonths from 'date-fns/addMonths';
+import addYears from 'date-fns/addYears';
+import differenceInCalendarMonths from 'date-fns/differenceInCalendarMonths';
+import differenceInDays from 'date-fns/differenceInDays';
+import format from 'date-fns/format';
+import getHours from 'date-fns/getHours';
+import getMinutes from 'date-fns/getMinutes';
+import isSameDay from 'date-fns/isSameDay';
+import isSameMonth from 'date-fns/isSameMonth';
+import isValid from 'date-fns/isValid';
+import defaultLocale from 'date-fns/locale/vi';
+import max from 'date-fns/max';
+import min from 'date-fns/min';
+import setHours from 'date-fns/setHours';
+import setMinutes from 'date-fns/setMinutes';
+import setMonth from 'date-fns/setMonth';
+import setYear from 'date-fns/setYear';
+import subMonths from 'date-fns/subMonths';
+import ArrowRight from 'icons/ArrowRight';
+import ChevronLeft from 'icons/ChevronLeft';
+import ChevronRight from 'icons/ChevronRight';
+import RotateCcw from 'icons/RotateCcw';
+import React, { PureComponent } from 'react';
+import cx from '../../../../utils/classnames';
+import Button, { ButtonSizes, ButtonVariants } from '../../Button';
+import Grid from '../../Grid';
+import { InputSizes } from '../../Input';
+import Option from '../../Option';
+import Select from '../../Select';
+import Month from '../Month';
+import { calcFocusDate, getMonthDisplayRange } from '../utils';
+import styles from './styles.module.scss';
 
 class Calendar extends PureComponent<any, any> {
   dateOptions = {};
@@ -45,20 +45,20 @@ class Calendar extends PureComponent<any, any> {
     locale: defaultLocale,
     ranges: [],
     focusedRange: [0, 0],
-    dateDisplayFormat: "dd/MM/yyyy - HH:mm",
-    monthDisplayFormat: "M, yyyy",
+    dateDisplayFormat: 'dd/MM/yyyy - HH:mm',
+    monthDisplayFormat: 'M, yyyy',
     showDateDisplay: true,
     showPreview: true,
-    displayMode: "date",
+    displayMode: 'date',
     months: 1,
-    color: "#3d91ff",
+    color: '#3d91ff',
     scroll: {
       enabled: false,
     },
-    direction: "horizontal",
+    direction: 'horizontal',
     maxDate: addYears(new Date(), 20),
     minDate: addYears(new Date(), -100),
-    rangeColors: ["#3d91ff", "#3ecf8e", "#fed14c"],
+    rangeColors: ['#3d91ff', '#3ecf8e', '#fed14c'],
     dragSelectionEnabled: true,
   };
 
@@ -99,12 +99,12 @@ class Calendar extends PureComponent<any, any> {
     if (!scroll.enabled) return { enabled: false };
 
     const longMonthHeight = scroll.longMonthHeight || scroll.monthHeight;
-    if (direction === "vertical") {
+    if (direction === 'vertical') {
       return {
         enabled: true,
         monthHeight: scroll.monthHeight || 220,
         longMonthHeight: longMonthHeight || 260,
-        calendarWidth: "auto",
+        calendarWidth: 'auto',
         calendarHeight:
           (scroll.calendarHeight || longMonthHeight || 240) * months,
       };
@@ -167,8 +167,8 @@ class Calendar extends PureComponent<any, any> {
   // eslint-disable-next-line react/no-deprecated
   UNSAFE_componentWillReceiveProps(nextProps) {
     const propMapper = {
-      dateRange: "ranges",
-      date: "date",
+      dateRange: 'ranges',
+      date: 'date',
     };
     const targetProp = propMapper[nextProps.displayMode];
     if (this.props.locale !== nextProps.locale) {
@@ -184,7 +184,7 @@ class Calendar extends PureComponent<any, any> {
     }
   }
 
-  changeShownDate(value, mode = "set") {
+  changeShownDate(value, mode = 'set') {
     const { focusedDate } = this.state;
     const { onShownDateChange, minDate, maxDate } = this.props;
     const modeMapper = {
@@ -196,13 +196,13 @@ class Calendar extends PureComponent<any, any> {
     const newDate = min([max([modeMapper[mode](), minDate]), maxDate]);
     this.focusToDate(newDate, this.props, false);
 
-    if (typeof onShownDateChange === "function") {
+    if (typeof onShownDateChange === 'function') {
       onShownDateChange(newDate);
     }
   }
 
   handleRangeFocusChange(rangesIndex, rangeItemIndex) {
-    if (typeof this.props.onRangeFocusChange === "function") {
+    if (typeof this.props.onRangeFocusChange === 'function') {
       this.props.onRangeFocusChange([rangesIndex, rangeItemIndex]);
     }
   }
@@ -220,7 +220,7 @@ class Calendar extends PureComponent<any, any> {
     if (isFocusedToDifferent) {
       this.setState({ focusedDate: visibleMonth });
 
-      if (typeof onShownDateChange === "function") {
+      if (typeof onShownDateChange === 'function') {
         onShownDateChange(visibleMonth);
       }
     }
@@ -255,13 +255,13 @@ class Calendar extends PureComponent<any, any> {
               variant={ButtonVariants.secondary}
               size={ButtonSizes.sm}
               icon={ChevronLeft}
-              onClick={() => changeShownDate(-1, "monthOffset")}
+              onClick={() => changeShownDate(-1, 'monthOffset')}
             />
           )}
 
           <Select
             value={focusedDate.getMonth()}
-            onChange={(value) => changeShownDate(value, "setMonth")}
+            onChange={(value) => changeShownDate(value, 'setMonth')}
             size={InputSizes.sm}
             className={styles.monthAndYearSelect}
             menuClassName={styles.monthAndYearSelectMenu}
@@ -287,7 +287,7 @@ class Calendar extends PureComponent<any, any> {
         >
           <Select
             value={focusedDate.getFullYear()}
-            onChange={(value) => changeShownDate(value, "setYear")}
+            onChange={(value) => changeShownDate(value, 'setYear')}
             size={InputSizes.sm}
             className={styles.monthAndYearSelect}
             menuClassName={styles.monthAndYearSelectMenu}
@@ -309,7 +309,7 @@ class Calendar extends PureComponent<any, any> {
               variant={ButtonVariants.secondary}
               size={ButtonSizes.sm}
               icon={ChevronRight}
-              onClick={() => changeShownDate(+1, "monthOffset")}
+              onClick={() => changeShownDate(+1, 'monthOffset')}
             />
           )}
         </Grid>
@@ -329,7 +329,7 @@ class Calendar extends PureComponent<any, any> {
         },
       });
     } else {
-      if (typeof onChange === "function") {
+      if (typeof onChange === 'function') {
         onChange(date);
       }
     }
@@ -341,8 +341,8 @@ class Calendar extends PureComponent<any, any> {
 
     if (!dragSelectionEnabled) return;
 
-    if (displayMode === "date" || !this.state.drag.status) {
-      if (typeof onChange === "function") {
+    if (displayMode === 'date' || !this.state.drag.status) {
+      if (typeof onChange === 'function') {
         onChange(date);
       }
       return;
@@ -351,15 +351,15 @@ class Calendar extends PureComponent<any, any> {
       startDate: this.state.drag.range.startDate,
       endDate: date,
     };
-    if (displayMode !== "dateRange" || isSameDay(newRange.startDate, date)) {
+    if (displayMode !== 'dateRange' || isSameDay(newRange.startDate, date)) {
       this.setState({ drag: { status: false, range: {} } }, () => {
-        if (typeof onChange === "function") {
+        if (typeof onChange === 'function') {
           onChange(date);
         }
       });
     } else {
       this.setState({ drag: { status: false, range: {} } }, () => {
-        if (typeof updateRange === "function") {
+        if (typeof updateRange === 'function') {
           updateRange(newRange);
         }
       });
@@ -385,14 +385,14 @@ class Calendar extends PureComponent<any, any> {
       this.listSizeCache = cache;
       if (cache[index]) return cache[index];
     }
-    if (direction === "horizontal") return scrollArea.monthWidth;
+    if (direction === 'horizontal') return scrollArea.monthWidth;
     const monthStep = addMonths(minDate, index);
     const { start, end } = getMonthDisplayRange(monthStep, this.dateOptions);
     const isLongMonth = differenceInDays(end, start) + 1 > 7 * 5;
     return isLongMonth ? scrollArea.longMonthHeight : scrollArea.monthHeight;
   }
 
-  formatDateDisplay(date, defaultText, dateFormat = "dd/MM/yyyy") {
+  formatDateDisplay(date, defaultText, dateFormat = 'dd/MM/yyyy') {
     if (!isValid(date)) return defaultText;
     return format(date, dateFormat, this.dateOptions);
   }
@@ -402,7 +402,7 @@ class Calendar extends PureComponent<any, any> {
       return 0;
     }
 
-    if (type === "hour") {
+    if (type === 'hour') {
       return getHours(date);
     } else {
       return getMinutes(date);
@@ -412,11 +412,11 @@ class Calendar extends PureComponent<any, any> {
   renderHour(type) {
     const { ranges } = this.props;
     const dateSelected =
-      type === "startHour" ? ranges[0].startDate : ranges[0].endDate;
+      type === 'startHour' ? ranges[0].startDate : ranges[0].endDate;
     const isDisabled =
-      (type === "startHour" && !ranges[0].startDate) ||
-      (type === "endHour" && !ranges[0].endDate);
-    const hourFormatted = this.getTimeFromDate("hour", dateSelected);
+      (type === 'startHour' && !ranges[0].startDate) ||
+      (type === 'endHour' && !ranges[0].endDate);
+    const hourFormatted = this.getTimeFromDate('hour', dateSelected);
 
     return (
       <Select
@@ -444,11 +444,11 @@ class Calendar extends PureComponent<any, any> {
   renderMinute(type) {
     const { ranges } = this.props;
     const dateSelected =
-      type === "startMinute" ? ranges[0].startDate : ranges[0].endDate;
+      type === 'startMinute' ? ranges[0].startDate : ranges[0].endDate;
     const isDisabled =
-      (type === "startMinute" && !ranges[0].startDate) ||
-      (type === "endMinute" && !ranges[0].endDate);
-    const minuteFormatted = this.getTimeFromDate("minute", dateSelected);
+      (type === 'startMinute' && !ranges[0].startDate) ||
+      (type === 'endMinute' && !ranges[0].endDate);
+    const minuteFormatted = this.getTimeFromDate('minute', dateSelected);
 
     return (
       <Select
@@ -476,14 +476,14 @@ class Calendar extends PureComponent<any, any> {
   onChangeTime(type, time) {
     const { ranges, onSetTime } = this.props;
 
-    if (type === "startHour") {
-      onSetTime(setHours(ranges[0].startDate, time), "startTime");
-    } else if (type === "endHour") {
-      onSetTime(setHours(ranges[0].endDate, time), "endTime");
-    } else if (type === "startMinute") {
-      onSetTime(setMinutes(ranges[0].startDate, time), "startTime");
-    } else if (type === "endMinute") {
-      onSetTime(setMinutes(ranges[0].endDate, time), "endTime");
+    if (type === 'startHour') {
+      onSetTime(setHours(ranges[0].startDate, time), 'startTime');
+    } else if (type === 'endHour') {
+      onSetTime(setHours(ranges[0].endDate, time), 'endTime');
+    } else if (type === 'startMinute') {
+      onSetTime(setMinutes(ranges[0].startDate, time), 'startTime');
+    } else if (type === 'endMinute') {
+      onSetTime(setMinutes(ranges[0].endDate, time), 'endTime');
     }
   }
 
@@ -509,7 +509,7 @@ class Calendar extends PureComponent<any, any> {
       onConfirm,
       rangeSelected,
     } = this.props;
-    const formatPattern = hasTime ? dateDisplayFormat : "dd/MM/yyyy";
+    const formatPattern = hasTime ? dateDisplayFormat : 'dd/MM/yyyy';
     const isRangeNotNull =
       ranges.length > 0 &&
       (isValid(ranges[0].startDate) || isValid(ranges[0].endDate));
@@ -519,21 +519,21 @@ class Calendar extends PureComponent<any, any> {
         isValid(ranges[0].endDate)) ||
       isValid(date);
 
-    let timeFormatted = "";
+    let timeFormatted = '';
     if (isRangeNotNull) {
       const startTimeFormatted = this.formatDateDisplay(
         ranges[0].startDate,
-        "",
+        '',
         formatPattern
       );
       const endTimeFormatted = this.formatDateDisplay(
         ranges[0].endDate,
-        "",
+        '',
         formatPattern
       );
       timeFormatted = isRangeNotNull
         ? `${startTimeFormatted as string} - ${endTimeFormatted as string}`
-        : "";
+        : '';
     }
 
     const handleCancel = () => {
@@ -608,7 +608,7 @@ class Calendar extends PureComponent<any, any> {
       months,
     } = this.props;
     const { focusedDate } = this.state;
-    const isVertical = direction === "vertical";
+    const isVertical = direction === 'vertical';
     const navigatorRenderer =
       this.props.navigatorRenderer || this.renderMonthAndYear;
 
@@ -671,18 +671,18 @@ class Calendar extends PureComponent<any, any> {
           {this.props.hasTime && (
             <Grid item className={styles.timeDisplay}>
               <div className={styles.timeItem}>
-                {this.renderHour("startHour")}
+                {this.renderHour('startHour')}
                 <span className={styles.timeSeparate}>:</span>
-                {this.renderMinute("startMinute")}
+                {this.renderMinute('startMinute')}
               </div>
               <ArrowRight
                 // @ts-ignore
                 className={styles.arrowSeparateTime}
               />
               <div className={styles.timeItem}>
-                {this.renderHour("endHour")}
+                {this.renderHour('endHour')}
                 <span className={styles.timeSeparate}>:</span>
-                {this.renderMinute("endMinute")}
+                {this.renderMinute('endMinute')}
               </div>
             </Grid>
           )}

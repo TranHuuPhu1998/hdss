@@ -17,7 +17,7 @@ interface ImageTypeMap<P = {}, D extends React.ElementType = ImageBaseType> {
 
 type ImageProps<
   D extends React.ElementType = ImageTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<ImageTypeMap<P, D>, D>;
 
 export const Image: BaseComponent<ImageTypeMap> & {
@@ -38,7 +38,7 @@ export const Image: BaseComponent<ImageTypeMap> & {
 
   const handleOnError = compose<EventHandler<SyntheticEvent>>(
     onFallback,
-    onError,
+    onError
   );
 
   return (

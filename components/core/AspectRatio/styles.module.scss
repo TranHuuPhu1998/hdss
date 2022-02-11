@@ -3,12 +3,7 @@
 /*
   values: name, padding-bottom.
 */
-$ratios: (
-  ('circle', 100%),
-  ('1x1', 100%),
-  ('16x9', 56.25%), 
-  ('4x3', 75%), 
-);
+$ratios: (('circle', 100%), ('1x1', 100%), ('16x9', 56.25%), ('4x3', 75%));
 
 .aspectRatio {
   position: relative;

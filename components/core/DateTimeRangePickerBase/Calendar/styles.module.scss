@@ -1,4 +1,4 @@
-@import "styles/variables.scss";
+@import 'styles/variables.scss';
 
 .calendarWrapper {
   padding: spacing(4);
@@ -256,7 +256,7 @@
   font-weight: 500;
   color: $color-red-500;
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 4px;
     left: 50%;

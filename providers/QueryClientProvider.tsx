@@ -1,9 +1,9 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
 import {
   QueryClientProvider as RqQueryClientProvider,
   QueryClient,
-} from "react-query";
+} from 'react-query';
 
 const queryClient = new QueryClient();
 function QueryClientProvider({ children }: PropsWithChildren<{}>) {

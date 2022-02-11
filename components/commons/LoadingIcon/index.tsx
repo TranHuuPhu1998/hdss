@@ -1,6 +1,6 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import styles from "./styles.module.css";
+import React from 'react';
+import { makeStyles } from '@mui/styles';
+import styles from './styles.module.css';
 
 // const useStyles = makeStyles(() => ({
 //   root: {
@@ -31,6 +31,6 @@ import styles from "./styles.module.css";
 
 const LoadingIcon = () => {
   // const classes = useStyles();
-  return <div className={styles["lds-dual-ring"]}></div>;
+  return <div className={styles['lds-dual-ring']}></div>;
 };
 export default LoadingIcon;

@@ -1,43 +1,47 @@
-import React, { forwardRef } from 'react'
-import cx from '../../../utils/classnames'
+import React, { forwardRef } from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import styles from './styles.module.scss'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import styles from './styles.module.scss';
 
 export interface ButtonBaseTypeMap<
   P = {},
   D extends React.ElementType = 'div'
 > {
-  props: P & {}
-  defaultComponent: D
+  props: P & {};
+  defaultComponent: D;
 }
 
 type ButtonBaseProps<
   D extends React.ElementType = ButtonBaseTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<ButtonBaseTypeMap<P, D>, D>
+> = OverrideProps<ButtonBaseTypeMap<P, D>, D>;
 
 interface ButtonBaseDefaultProps {
-  component: React.ElementType
+  component: React.ElementType;
 }
 
 const defaultProps: ButtonBaseDefaultProps = {
   component: 'button',
-}
+};
 
 export const ButtonBase: BaseComponent<ButtonBaseTypeMap> & {
-  displayName?: string
+  displayName?: string;
 } = forwardRef((_props: ButtonBaseProps, ref) => {
-  const { component: Component, className, ...rest } = {
+  const {
+    component: Component,
+    className,
+    ...rest
+  } = {
     ...defaultProps,
     ..._props,
-  }
+  };
 
-  const classOfComponent = cx(styles.btn, className)
+  const classOfComponent = cx(styles.btn, className);
 
-  return <Component {...rest} ref={ref} className={classOfComponent} />
-})
+  return <Component {...rest} ref={ref} className={classOfComponent} />;
+});
 
-ButtonBase.displayName = 'ButtonBase'
+ButtonBase.displayName = 'ButtonBase';
 
-export default ButtonBase
+export default ButtonBase;

@@ -1,37 +1,37 @@
-import csstype from 'csstype'
-import React, { forwardRef } from 'react'
-import cx from '../../../utils/classnames'
+import csstype from 'csstype';
+import React, { forwardRef } from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import { GridBreakpoint } from './types'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import { GridBreakpoint } from './types';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-export * from './types'
+export * from './types';
 
 interface GridTypeMap<P = {}, D extends React.ElementType = 'div'> {
   props: P & {
-    container?: boolean
-    spacing?: number
-    item?: boolean
-    nowrap?: boolean
-    direction?: csstype.FlexDirectionProperty
-    justifyContent?: csstype.JustifyContentProperty
-    alignItem?: csstype.AlignItemsProperty
-  } & Partial<GridBreakpoint>
-  defaultComponent: D
+    container?: boolean;
+    spacing?: number;
+    item?: boolean;
+    nowrap?: boolean;
+    direction?: csstype.FlexDirectionProperty;
+    justifyContent?: csstype.JustifyContentProperty;
+    alignItem?: csstype.AlignItemsProperty;
+  } & Partial<GridBreakpoint>;
+  defaultComponent: D;
 }
 
 export type GridProps<
   D extends React.ElementType = GridTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<GridTypeMap<P, D>, D>
+> = OverrideProps<GridTypeMap<P, D>, D>;
 
 interface GridDefaultProps {
-  component: React.ElementType
-  container: boolean
-  item: boolean
-  nowrap: boolean
+  component: React.ElementType;
+  container: boolean;
+  item: boolean;
+  nowrap: boolean;
 }
 
 const defaultProps: GridDefaultProps = {
@@ -39,10 +39,10 @@ const defaultProps: GridDefaultProps = {
   container: false,
   item: false,
   nowrap: false,
-}
+};
 
 export const Grid: BaseComponent<GridTypeMap> & {
-  displayName?: string
+  displayName?: string;
 } = forwardRef((props: GridProps, ref: any) => {
   const {
     component: Component,
@@ -60,7 +60,7 @@ export const Grid: BaseComponent<GridTypeMap> & {
     sm,
     spacing,
     ...rest
-  } = { ...defaultProps, ...props }
+  } = { ...defaultProps, ...props };
   const classOfComponent = cx(className, {
     [styles.grid]: container,
     [styles.item]: item,
@@ -74,11 +74,11 @@ export const Grid: BaseComponent<GridTypeMap> & {
     [styles[`md-${md as string}`]]: md !== undefined,
     [styles[`lg-${lg as string}`]]: lg !== undefined,
     [styles[`xl-${xl as string}`]]: xl !== undefined,
-  })
+  });
 
-  return <Component className={classOfComponent} {...rest} ref={ref} />
-})
+  return <Component className={classOfComponent} {...rest} ref={ref} />;
+});
 
-Grid.displayName = 'Grid'
+Grid.displayName = 'Grid';
 
-export default Grid
+export default Grid;

@@ -56,9 +56,11 @@ $icon-sizes: (
   ('xl', 32px, $font-size-body1, 1.38, $font-weight-bold, spacing(2.75)),
   ('lg', 24px, $font-size-body2, 1.38, $font-weight-bold, spacing(2.75)),
   ('md', 24px, $font-size-body2, 1.29, $font-weight-bold, spacing(1.75)),
-  ('sm', 16px, $font-size-body2, 1.29, $font-weight-bold, spacing(1.5)),
+  ('sm', 16px, $font-size-body2, 1.29, $font-weight-bold, spacing(1.5))
 );
-@each $name, $size, $font-size, $line-height, $font-weight, $padding in $icon-sizes {
+@each $name, $size, $font-size, $line-height, $font-weight,
+  $padding in $icon-sizes
+{
   .use-icon.size-#{$name} {
     padding: $padding;
     .icon {
@@ -109,7 +111,7 @@ $variants: (
     $color-white,
     $color-white,
     $color-white
-  ),
+  )
 );
 @each $name, $color, $bg-color, $bg-hover, $bg-pressed,
   $bg-disabled in $variants

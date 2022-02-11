@@ -1,9 +1,9 @@
-import React from "react";
-import Button, { ButtonProps } from "@mui/material/Button";
-import { makeStyles } from "@mui/styles";
-import cn from "classnames";
-import { Theme } from "@mui/material/styles";
-import LoadingIcon from "../LoadingIcon";
+import React from 'react';
+import Button, { ButtonProps } from '@mui/material/Button';
+import { makeStyles } from '@mui/styles';
+import cn from 'classnames';
+import { Theme } from '@mui/material/styles';
+import LoadingIcon from '../LoadingIcon';
 export interface Props extends ButtonProps {
   loading?: boolean;
   className?: string;
@@ -11,13 +11,13 @@ export interface Props extends ButtonProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    borderRadius: "10px !important",
-    boxShadow: "none !important",
-    height: "50px !important",
-    textTransform: "inherit",
+    borderRadius: '10px !important',
+    boxShadow: 'none !important',
+    height: '50px !important',
+    textTransform: 'inherit',
     fontSize: theme.typography.button.fontSize,
-    paddingLeft: "30px !important",
-    paddingRight: "30px !important",
+    paddingLeft: '30px !important',
+    paddingRight: '30px !important',
   },
 }));
 

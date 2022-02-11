@@ -1,52 +1,52 @@
-import React from 'react'
-import cx from '../../../utils/classnames'
-import { transformChildrenProps } from '../../../utils/handlePropsOfChildren'
+import React from 'react';
+import cx from '../../../utils/classnames';
+import { transformChildrenProps } from '../../../utils/handlePropsOfChildren';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import Button, { ButtonSizes, ButtonVariants } from '../Button'
-import ButtonBase from '../ButtonBase'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import Button, { ButtonSizes, ButtonVariants } from '../Button';
+import ButtonBase from '../ButtonBase';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 interface ButtonGroupTypeMap<P = {}, D extends React.ElementType = 'div'> {
   props: P & {
     /**
      * Pass `variant`  props to `Button` component
      */
-    variant?: ButtonVariants
+    variant?: ButtonVariants;
     /**
      * Pass `size`  props to `Button` component
      */
-    size?: ButtonSizes
+    size?: ButtonSizes;
     /**
      * Pass `disabled`  props to `Button` component
      */
-    disabled?: boolean
-  }
-  defaultComponent: D
+    disabled?: boolean;
+  };
+  defaultComponent: D;
 }
 
 type ButtonGroupProps<
   D extends React.ElementType = ButtonGroupTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<ButtonGroupTypeMap<P, D>, D>
+> = OverrideProps<ButtonGroupTypeMap<P, D>, D>;
 
 interface ButtonGroupDefaultProps {
-  component: React.ElementType
-  variant?: ButtonVariants
-  size?: ButtonSizes
+  component: React.ElementType;
+  variant?: ButtonVariants;
+  size?: ButtonSizes;
 }
 
 const defaultProps: ButtonGroupDefaultProps = {
   component: 'div',
   variant: ButtonVariants.primary,
   size: ButtonSizes.md,
-}
+};
 
-const componentsAllowHandle = [Button, ButtonBase]
+const componentsAllowHandle = [Button, ButtonBase];
 
 export const ButtonGroup: BaseComponent<ButtonGroupTypeMap> & {
-  displayName: string
+  displayName: string;
 } = (props: ButtonGroupProps) => {
   const {
     component: Component,
@@ -59,9 +59,9 @@ export const ButtonGroup: BaseComponent<ButtonGroupTypeMap> & {
   } = {
     ...defaultProps,
     ...props,
-  }
+  };
 
-  const classOfComponent = cx(styles.btnGroup, className)
+  const classOfComponent = cx(styles.btnGroup, className);
 
   const transformProps = (child: any): any => ({
     variant,
@@ -69,21 +69,21 @@ export const ButtonGroup: BaseComponent<ButtonGroupTypeMap> & {
     disabled,
     ...child.props,
     className: cx(child.props.className, styles.item),
-  })
+  });
 
   const childrenOfComponent = transformChildrenProps(
     children,
     transformProps,
-    componentsAllowHandle,
-  )
+    componentsAllowHandle
+  );
 
   return (
     <Component {...rest} className={classOfComponent}>
       {childrenOfComponent}
     </Component>
-  )
-}
+  );
+};
 
-ButtonGroup.displayName = 'ButtonGroup'
+ButtonGroup.displayName = 'ButtonGroup';
 
-export default ButtonGroup
+export default ButtonGroup;

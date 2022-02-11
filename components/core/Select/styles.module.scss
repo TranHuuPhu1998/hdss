@@ -1,9 +1,9 @@
-@import "styles/variables.scss";
+@import 'styles/variables.scss';
 
 /**
    Sizes: name, padding-vertical, padding-horizontal.
 */
-$sizes: (("lg", 3, 4), ("md", 2, 4), ("sm", 2, 2), ("xs", 1.5, 2));
+$sizes: (('lg', 3, 4), ('md', 2, 4), ('sm', 2, 2), ('xs', 1.5, 2));
 
 .select {
   line-height: spacing(4.5);
@@ -37,7 +37,7 @@ $sizes: (("lg", 3, 4), ("md", 2, 4), ("sm", 2, 2), ("xs", 1.5, 2));
 /**
   States: name, icon size.
 */
-$icon-sizes: (("lg", 6), ("md", 6), ("sm", 4), ("xs", 3));
+$icon-sizes: (('lg', 6), ('md', 6), ('sm', 4), ('xs', 3));
 @each $name, $icon-size in $icon-sizes {
   .addon-size-#{$name} {
     .icon {
@@ -48,10 +48,10 @@ $icon-sizes: (("lg", 6), ("md", 6), ("sm", 4), ("xs", 3));
 }
 
 $label-sizes: (
-  ("lg", $font-size-body2, spacing(6)),
-  ("md", $font-size-body2, spacing(6)),
-  ("sm", $font-size-body2, spacing(4)),
-  ("xs", $font-size-tiny, spacing(3))
+  ('lg', $font-size-body2, spacing(6)),
+  ('md', $font-size-body2, spacing(6)),
+  ('sm', $font-size-body2, spacing(4)),
+  ('xs', $font-size-tiny, spacing(3))
 );
 @each $name, $size, $line-height in $label-sizes {
   .label-size-#{$name} {

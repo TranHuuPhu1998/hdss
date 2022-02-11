@@ -1,19 +1,19 @@
-import { KeyboardEvent, useCallback } from 'react'
+import { KeyboardEvent, useCallback } from 'react';
 
-type Fn = (event: KeyboardEvent) => void
+type Fn = (event: KeyboardEvent) => void;
 
-function useEnterOnKeydown (fn: Fn) {
+function useEnterOnKeydown(fn: Fn) {
   const handle = useCallback(
     (e: KeyboardEvent) => {
-      const isEnter = (e.which || e.keyCode) === 13
+      const isEnter = (e.which || e.keyCode) === 13;
       if (isEnter) {
-        fn(e)
+        fn(e);
       }
     },
-    [fn],
-  )
+    [fn]
+  );
 
-  return handle
+  return handle;
 }
 
-export default useEnterOnKeydown
+export default useEnterOnKeydown;

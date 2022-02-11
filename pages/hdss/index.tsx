@@ -1,17 +1,20 @@
-import { parseJwt } from "commons/helpers";
-import { Box } from "components/core/Box";
-import Grid from "components/core/Grid";
-import Image from "components/core/Image";
-import Paper, { PaperRadius } from "components/core/Paper";
-import TabSteps from "components/core/TabSteps";
-import StepFinalRegisterSuccesss from "components/HDSS/StepFinalRegisterSuccess";
-import _get from "lodash/get";
-import { useRouter } from "next/router";
-import Script from "next/script";
-import React, { useEffect, useState } from "react";
-import { STEPS } from "../../components/HDSS/const";
-import Context, { IAdditionInfor, IConfirmInfor } from "../../components/HDSS/Context";
-import styles from "./styles.module.scss";
+import { parseJwt } from 'commons/helpers';
+import { Box } from 'components/core/Box';
+import Grid from 'components/core/Grid';
+import Image from 'components/core/Image';
+import Paper, { PaperRadius } from 'components/core/Paper';
+import TabSteps from 'components/core/TabSteps';
+import StepFinalRegisterSuccesss from 'components/HDSS/StepFinalRegisterSuccess';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
+import React, { useEffect, useState } from 'react';
+import { STEPS } from '../../components/HDSS/const';
+import Context, {
+  IAdditionInfor,
+  IConfirmInfor,
+} from '../../components/HDSS/Context';
+import styles from './styles.module.scss';
 
 function HDSSPage() {
   const [active, setActive] = useState(0);
@@ -26,7 +29,7 @@ function HDSSPage() {
   useEffect(() => {
     if (!query?.jwt) return;
     const jwtInfo = parseJwt(query.jwt as string);
-    console.log(">>>>> jwtInfo", jwtInfo); //TODO: to-remove
+    console.log('>>>>> jwtInfo', jwtInfo); //TODO: to-remove
   }, []);
 
   function handleNext() {
@@ -74,11 +77,11 @@ function HDSSPage() {
         id="md5-id"
         src="/asset/js/md5.min.js"
         onLoad={() => {
-          const md5 = _get(window, "md5");
+          const md5 = _get(window, 'md5');
           setMd5(md5);
         }}
       />
-      <Grid container spacing={2} className={styles["root"]}>
+      <Grid container spacing={2} className={styles['root']}>
         <Grid item>
           {/* @ts-ignore */}
           <Box px={4}>
@@ -86,7 +89,7 @@ function HDSSPage() {
           </Box>
         </Grid>
         <Grid item>
-          <div className={styles["banner"]}>
+          <div className={styles['banner']}>
             <Image src="/asset/images/homepage/banner.png" />
           </div>
         </Grid>
@@ -97,7 +100,7 @@ function HDSSPage() {
               <Box px={4} py={0}>
                 <Paper
                   radius={PaperRadius.max}
-                  className={styles["card-box"]}
+                  className={styles['card-box']}
                   // @ts-ignore
                   elevation="1"
                 >
@@ -126,9 +129,7 @@ function HDSSPage() {
                         {/* tabs */}
                         <Grid item>
                           <Context.Provider value={contextValue}>
-                            <Component
-                              onNext={handleNext}
-                            />
+                            <Component onNext={handleNext} />
                           </Context.Provider>
                         </Grid>
                       </Grid>

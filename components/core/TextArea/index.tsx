@@ -1,37 +1,37 @@
-import React from 'react'
+import React from 'react';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
 
-import Input, { InputProps, InputSizes } from '../Input'
+import Input, { InputProps, InputSizes } from '../Input';
 
-import { useAutoHeight } from './hook'
-import { getBoxSize, getLineHeight } from './utils'
+import { useAutoHeight } from './hook';
+import { getBoxSize, getLineHeight } from './utils';
 
 interface TextAreaTypeMap<P = {}, D extends React.ElementType = 'textarea'> {
   props: P &
-  InputProps & {
-    /**
+    InputProps & {
+      /**
        * Max rows number of textarea component, default is: `Infinity`
        */
-    maxRows?: number
-    /**
+      maxRows?: number;
+      /**
        * Min rows number of textarea component, default is: `1`
        */
-    minRows?: number
-  }
-  defaultComponent: D
+      minRows?: number;
+    };
+  defaultComponent: D;
 }
 
 type TextAreaProps<
   D extends React.ElementType = TextAreaTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<TextAreaTypeMap<P, D>, D>
+> = OverrideProps<TextAreaTypeMap<P, D>, D>;
 
 interface TextAreaDefaultProps {
-  component: React.ElementType
-  maxRows: number
-  minRows: number
-  size: InputSizes
+  component: React.ElementType;
+  maxRows: number;
+  minRows: number;
+  size: InputSizes;
 }
 
 const defaultProps: TextAreaDefaultProps = {
@@ -39,28 +39,28 @@ const defaultProps: TextAreaDefaultProps = {
   minRows: 1,
   maxRows: Infinity,
   size: InputSizes.lg,
-}
+};
 
 export type TextAreaComponent = BaseComponent<TextAreaTypeMap> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 export const TextArea: TextAreaComponent = (_props: TextAreaProps) => {
   const { minRows, maxRows, ...rest } = {
     ...defaultProps,
     ..._props,
-  }
+  };
 
-  const [otherInput, detailsOfSize] = useAutoHeight({ refInput: rest.ref })
+  const [otherInput, detailsOfSize] = useAutoHeight({ refInput: rest.ref });
 
-  const elementOfInput = rest.ref && (rest.ref as any).current
-  const lineHeight = getLineHeight(elementOfInput)
-  const minHeight = lineHeight + getBoxSize(elementOfInput)
+  const elementOfInput = rest.ref && (rest.ref as any).current;
+  const lineHeight = getLineHeight(elementOfInput);
+  const minHeight = lineHeight + getBoxSize(elementOfInput);
 
   const rowsOfInput = Math.min(
     Math.max(detailsOfSize.linesNumber, minRows),
-    maxRows,
-  )
+    maxRows
+  );
 
   return (
     <>
@@ -75,9 +75,9 @@ export const TextArea: TextAreaComponent = (_props: TextAreaProps) => {
       />
       {otherInput}
     </>
-  )
-}
+  );
+};
 
-TextArea.displayName = 'TextArea'
+TextArea.displayName = 'TextArea';
 
-export default TextArea
+export default TextArea;

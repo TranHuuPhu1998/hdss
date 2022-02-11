@@ -1,18 +1,18 @@
-import React, { forwardRef } from 'react'
-import cx from '../../../utils/classnames'
+import React, { forwardRef } from 'react';
+import cx from '../../../utils/classnames';
 
 // import UploadingQuarterDuotoneActive from '@hdbank/icons/components/UploadingQuarterDuotoneActive'
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import ButtonBase from '../ButtonBase'
-import Icon from '../Icon'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import ButtonBase from '../ButtonBase';
+import Icon from '../Icon';
 
-import { ButtonSizes, ButtonVariants } from './types'
+import { ButtonSizes, ButtonVariants } from './types';
 
-import styles from './styles.module.scss'
-import Spinner from 'icons/Spinner'
+import styles from './styles.module.scss';
+import Spinner from 'icons/Spinner';
 
-export * from './types'
+export * from './types';
 
 interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
   props: P & {
@@ -20,58 +20,58 @@ interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
      * Variant of button
      * Enum: `primary`, `secondary`, `ghost`.
      */
-    variant?: ButtonVariants
+    variant?: ButtonVariants;
     /**
      * Size of button
      * For text: `xl`, `lg`, `md`, `sm`, `xs`.
      * For icon: `xl`, `lg`, `md`.
      */
-    size?: ButtonSizes
+    size?: ButtonSizes;
     /**
      * Disabled attribute
      */
-    disabled?: boolean
+    disabled?: boolean;
     /**
      * Use full width, default is `true`
      */
-    fullWidth?: boolean
+    fullWidth?: boolean;
     /**
      * Type attribute
      */
-    type?: string
+    type?: string;
     /**
      * Handle event on click button
      */
-    onClick?: (event: React.SyntheticEvent) => void
+    onClick?: (event: React.SyntheticEvent) => void;
     /**
      * Use button icon, pass value to `Icon` component.
      * Note: if set `icon`, children of component will not display!
      */
-    icon?: React.ElementType<unknown>
+    icon?: React.ElementType<unknown>;
     /**
      * Set component is `activated`
      */
-    activated?: boolean
+    activated?: boolean;
     /**
      * Set component is `loading`
      */
-    loading?: boolean
-  }
-  defaultComponent: D
+    loading?: boolean;
+  };
+  defaultComponent: D;
 }
 
 type ButtonProps<
   D extends React.ElementType = ButtonTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<ButtonTypeMap<P, D>, D>
+> = OverrideProps<ButtonTypeMap<P, D>, D>;
 
 interface ButtonDefaultProps {
-  component: React.ElementType
-  disabled: boolean
-  fullWidth: boolean
-  loading: boolean
-  variant: ButtonVariants
-  size: ButtonSizes
+  component: React.ElementType;
+  disabled: boolean;
+  fullWidth: boolean;
+  loading: boolean;
+  variant: ButtonVariants;
+  size: ButtonSizes;
 }
 
 const defaultProps: ButtonDefaultProps = {
@@ -81,11 +81,11 @@ const defaultProps: ButtonDefaultProps = {
   loading: false,
   variant: ButtonVariants.primary,
   size: ButtonSizes.lg,
-}
+};
 
 export type ButtonComponent = BaseComponent<ButtonTypeMap> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 // @ts-ignore
 export const Button: ButtonComponent = forwardRef((props: ButtonProps, ref) => {
@@ -101,9 +101,9 @@ export const Button: ButtonComponent = forwardRef((props: ButtonProps, ref) => {
     loading,
     icon,
     ...rest
-  } = { ...defaultProps, ...props }
+  } = { ...defaultProps, ...props };
 
-  const shouldUseIcon = !!icon || !!loading
+  const shouldUseIcon = !!icon || !!loading;
 
   const classOfComponent = cx(
     styles.btn,
@@ -116,17 +116,14 @@ export const Button: ButtonComponent = forwardRef((props: ButtonProps, ref) => {
       [styles.loading]: loading,
       [styles['full-width']]: fullWidth,
       [styles['use-icon']]: shouldUseIcon,
-    },
-  )
+    }
+  );
 
   const contentOfButton = shouldUseIcon ? (
-    <Icon
-      className={styles.icon}
-      component={loading ? Spinner : icon}
-    />
+    <Icon className={styles.icon} component={loading ? Spinner : icon} />
   ) : (
     children
-  )
+  );
 
   return (
     <ButtonBase
@@ -138,9 +135,9 @@ export const Button: ButtonComponent = forwardRef((props: ButtonProps, ref) => {
     >
       {contentOfButton}
     </ButtonBase>
-  )
-})
+  );
+});
 
-Button.displayName = 'Button'
+Button.displayName = 'Button';
 
-export default Button
+export default Button;

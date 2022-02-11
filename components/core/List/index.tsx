@@ -1,47 +1,52 @@
-import csstype from 'csstype'
-import React from 'react'
+import csstype from 'csstype';
+import React from 'react';
 
-import cx from '../../../utils/classnames'
-import { BaseComponent, OverrideProps } from '../BaseComponent'
+import cx from '../../../utils/classnames';
+import { BaseComponent, OverrideProps } from '../BaseComponent';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 interface ListTypeMap<P = {}, D extends React.ElementType = 'ul'> {
   props: P & {
-    direction?: csstype.FlexDirectionProperty
-  }
-  defaultComponent: D
+    direction?: csstype.FlexDirectionProperty;
+  };
+  defaultComponent: D;
 }
 
 type ListProps<
   D extends React.ElementType = ListTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<ListTypeMap<P, D>, D>
+> = OverrideProps<ListTypeMap<P, D>, D>;
 
 interface ListDefaultProps {
-  component: React.ElementType
-  direction: csstype.FlexDirectionProperty
+  component: React.ElementType;
+  direction: csstype.FlexDirectionProperty;
 }
 
-const defaultProps: ListDefaultProps = { component: 'ul', direction: 'column' }
+const defaultProps: ListDefaultProps = { component: 'ul', direction: 'column' };
 
 export const List: BaseComponent<ListTypeMap> & {
-  displayName: string
+  displayName: string;
 } = (_props: ListProps) => {
-  const { component: Component, className, direction, ...rest } = {
+  const {
+    component: Component,
+    className,
+    direction,
+    ...rest
+  } = {
     ...defaultProps,
     ..._props,
-  }
+  };
 
   const classOfComponent = cx(
     styles.list,
     className,
-    styles[`direction-${direction}`],
-  )
+    styles[`direction-${direction}`]
+  );
 
-  return <Component {...rest} className={classOfComponent} />
-}
+  return <Component {...rest} className={classOfComponent} />;
+};
 
-List.displayName = 'List'
+List.displayName = 'List';
 
-export default List
+export default List;

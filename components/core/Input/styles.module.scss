@@ -4,13 +4,7 @@
   States: name, border-color, background-color, color, hover-border-color.
 */
 $root-statuses: (
-  (
-    'primary',
-    $color-white,
-    $color-bg-input,
-    $color-text,
-    transparent
-  ),
+  ('primary', $color-white, $color-bg-input, $color-text, transparent),
   (
     'success',
     $color-green-300,
@@ -25,18 +19,12 @@ $root-statuses: (
     $color-orange-700,
     $color-orange-400
   ),
-  (
-    'error', 
-    $color-red-300, 
-    $color-red-50, 
-    $color-red-700, 
-    $color-red-400
-  ),
+  ('error', $color-red-300, $color-red-50, $color-red-700, $color-red-400),
   // (
-  //   'light', 
-  //   $color-grey-100, 
-  //   $color-white, 
-  //   $color-grey-700, 
+  //   'light',
+  //   $color-grey-100,
+  //   $color-white,
+  //   $color-grey-700,
   //   $color-grey-400
   // )
 );
@@ -77,7 +65,9 @@ $input-transition-property: background-color, color;
   }
 }
 
-@each $name, $line-height, $padding-vertical, $padding-horizontal, $font-size in $sizes {
+@each $name, $line-height, $padding-vertical, $padding-horizontal,
+  $font-size in $sizes
+{
   .size-#{$name} {
     padding: $padding-vertical $padding-horizontal;
     line-height: $line-height;
@@ -85,7 +75,9 @@ $input-transition-property: background-color, color;
   }
 }
 
-@each $name, $br-color, $bg-color, $text-color, $hover-br-color in $root-statuses {
+@each $name, $br-color, $bg-color, $text-color,
+  $hover-br-color in $root-statuses
+{
   .status-#{$name}:not(.disabled) {
     background-color: $bg-color;
     color: $text-color;

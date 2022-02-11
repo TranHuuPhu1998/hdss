@@ -1,13 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import axiosWrapper from "commons/helpers/axios/axios-instance";
-import { AxiosResponse } from "axios";
-import { API_DOMAIN } from "commons/constants";
-import { GetAccessTokenResponse } from "interfaces/IGetAccessToken";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import axiosWrapper from 'commons/helpers/axios/axios-instance';
+import { AxiosResponse } from 'axios';
+import { API_DOMAIN } from 'commons/constants';
+import { GetAccessTokenResponse } from 'interfaces/IGetAccessToken';
 
 const MOCK_DATA = {
-  resultCode: "00",
-  resultMessage: "Successfully",
-  accessToken: "Access token",
+  resultCode: '00',
+  resultMessage: 'Successfully',
+  accessToken: 'Access token',
   expiryIn: 300,
 };
 

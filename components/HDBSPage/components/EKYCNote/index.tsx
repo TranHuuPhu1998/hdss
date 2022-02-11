@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { makeStyles } from "@mui/styles";
-import { Grid, Box } from "@mui/material";
-import cn from "classnames";
-import { ButtonCustom } from "components/commons";
+import { makeStyles } from '@mui/styles';
+import { Grid, Box } from '@mui/material';
+import cn from 'classnames';
+import { ButtonCustom } from 'components/commons';
 
 const useStyles = makeStyles(() => ({
   root: {
-    background: "#F2F2F4",
-    height: "100vh",
+    background: '#F2F2F4',
+    height: '100vh',
   },
   title: {
     fontSize: 16,
@@ -19,10 +19,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: 400,
   },
   textCenter: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   borderBottom: {
-    borderBottom: "1px solid",
+    borderBottom: '1px solid',
   },
 }));
 

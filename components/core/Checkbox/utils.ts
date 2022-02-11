@@ -14,7 +14,7 @@ export const getIconByStatus = (status: CheckboxStatuses) => mapOfIcons[status];
 
 export const getStatusOfCheckbox = (
   isChecked: boolean,
-  isIntermediate: boolean,
+  isIntermediate: boolean
 ) =>
   (!isChecked && CheckboxStatuses.unchecked) ||
   (isIntermediate ? CheckboxStatuses.intermediate : CheckboxStatuses.checked);

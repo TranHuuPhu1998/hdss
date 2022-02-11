@@ -10,7 +10,7 @@ import CheckMark from 'icons/CheckMark';
 
 interface OptionTypeMap<
   P = {},
-  D extends React.ElementType = MenuItemComponent,
+  D extends React.ElementType = MenuItemComponent
 > {
   props: P & {
     value: any;
@@ -21,7 +21,7 @@ interface OptionTypeMap<
 
 export type OptionProps<
   D extends React.ElementType = OptionTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<OptionTypeMap<P, D>, D>;
 
 interface OptionDefaultProps {
@@ -64,12 +64,7 @@ export const Option: OptionComponent = (props: OptionProps) => {
       size={rest.size}
     >
       <ListItemText size={rest.size}>{children}</ListItemText>
-      {activated && (
-        <ListItemIcon
-          icon={CheckMark}
-          size={rest.size}
-        />
-      )}
+      {activated && <ListItemIcon icon={CheckMark} size={rest.size} />}
     </Component>
   );
 };

@@ -1,5 +1,5 @@
-import _add from "date-fns/add";
-import _format from "date-fns/format";
+import _add from 'date-fns/add';
+import _format from 'date-fns/format';
 
 export function addHourFromNow(hoursNumber: number, format?: string): string {
   const date = _add(new Date(), {
@@ -39,7 +39,7 @@ export function formatDate(date: Date, format?: string): string {
       date.getMinutes(),
       date.getSeconds()
     ),
-    format || "dd/MM/yyyy H:mm:ss"
+    format || 'dd/MM/yyyy H:mm:ss'
   );
 }
 

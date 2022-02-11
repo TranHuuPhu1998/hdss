@@ -1,5 +1,5 @@
-import { createPopper } from '@popperjs/core'
-import useForkRef from '@rooks/use-fork-ref'
+import { createPopper } from '@popperjs/core';
+import useForkRef from '@rooks/use-fork-ref';
 import React, {
   FC,
   forwardRef,
@@ -8,22 +8,22 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-} from 'react'
-import useEnhancedEffect from '../../../hooks/useEnhancedEffect'
-import setRef from '../../../utils/setRef'
+} from 'react';
+import useEnhancedEffect from '../../../hooks/useEnhancedEffect';
+import setRef from '../../../utils/setRef';
 
-import Portal, { PortalIds } from '../Portal'
+import Portal, { PortalIds } from '../Portal';
 
-export * from './types'
+export * from './types';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function getAnchorEl (anchorEl: any) {
-  return typeof anchorEl === 'function' ? anchorEl() : anchorEl
+function getAnchorEl(anchorEl: any) {
+  return typeof anchorEl === 'function' ? anchorEl() : anchorEl;
 }
 
-type PopperProps =any
+type PopperProps = any;
 
-export type PopperComponent = FC<PopperProps>
+export type PopperComponent = FC<PopperProps>;
 
 export const Popper = forwardRef((props: PopperProps, ref: Ref<any>) => {
   const {
@@ -33,72 +33,72 @@ export const Popper = forwardRef((props: PopperProps, ref: Ref<any>) => {
     popperOptions,
     popperRef: popperRefProp,
     ...rest
-  } = props
-  const tooltipRef = useRef<HTMLElement>(null)
+  } = props;
+  const tooltipRef = useRef<HTMLElement>(null);
   // @ts-ignore
-  const ownRef = useForkRef(tooltipRef, ref)
-  const popperRef = useRef(null)
+  const ownRef = useForkRef(tooltipRef, ref);
+  const popperRef = useRef(null);
   const handlePopperRef = useForkRef(
     // @ts-ignore
     popperRef,
-    popperRefProp,
-  ) as any
-  const handlePopperRefRef = useRef(handlePopperRef)
+    popperRefProp
+  ) as any;
+  const handlePopperRefRef = useRef(handlePopperRef);
   useEnhancedEffect(() => {
-    handlePopperRefRef.current = handlePopperRef
-  }, [handlePopperRef])
-  useImperativeHandle(popperRefProp, () => popperRef.current, [])
+    handlePopperRefRef.current = handlePopperRef;
+  }, [handlePopperRef]);
+  useImperativeHandle(popperRefProp, () => popperRef.current, []);
 
   useEffect(() => {
     if (popperRef.current) {
-      popperRef.current.update()
+      popperRef.current.update();
     }
-  })
+  });
 
   const handleOpen = useCallback(() => {
     if (!tooltipRef.current || !anchorEl) {
-      return
+      return;
     }
 
     if (popperRef.current) {
-      popperRef.current.destroy()
-      handlePopperRefRef.current(null)
+      popperRef.current.destroy();
+      handlePopperRefRef.current(null);
     }
 
     const popper = createPopper(
       getAnchorEl(anchorEl),
       tooltipRef.current,
-      popperOptions,
-    )
-    handlePopperRefRef.current(popper)
-  }, [anchorEl, popperOptions])
+      popperOptions
+    );
+    handlePopperRefRef.current(popper);
+  }, [anchorEl, popperOptions]);
 
   const handleRef = useCallback(
     (node) => {
-      setRef(ownRef, node)
-      handleOpen()
+      setRef(ownRef, node);
+      handleOpen();
     },
-    [ownRef, handleOpen],
-  )
+    [ownRef, handleOpen]
+  );
 
-  const handleClose = ()=> {
+  const handleClose = () => {
     if (!popperRef.current) {
-      return
+      return;
     }
 
-    popperRef.current.destroy()
-    handlePopperRefRef.current(null)
-  }
+    popperRef.current.destroy();
+    handlePopperRefRef.current(null);
+  };
 
   useEffect(() => {
-    handleOpen()
-  }, [handleOpen])
+    handleOpen();
+  }, [handleOpen]);
 
   useEffect(() => {
     return () => {
-      handleClose()
-    }
-  }, [])
+      handleClose();
+    };
+  }, []);
 
   return (
     <Portal id={PortalIds.tooltip}>
@@ -106,9 +106,9 @@ export const Popper = forwardRef((props: PopperProps, ref: Ref<any>) => {
         {children}
       </div>
     </Portal>
-  )
-})
+  );
+});
 
-Popper.displayName = 'Popper'
+Popper.displayName = 'Popper';
 
-export default Popper
+export default Popper;

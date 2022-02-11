@@ -1,3 +1,3 @@
-import _merge from 'lodash/merge'
+import _merge from 'lodash/merge';
 
-export default _merge
+export default _merge;

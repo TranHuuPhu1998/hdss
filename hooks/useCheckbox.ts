@@ -1,25 +1,25 @@
-import { SyntheticEvent, useCallback, useState } from 'react'
+import { SyntheticEvent, useCallback, useState } from 'react';
 
-export default function useCheckbox (defaultValue, valuesOfOptions?: string[]) {
-  const [selected, updateSelected] = useState<string[]>(defaultValue || [])
+export default function useCheckbox(defaultValue, valuesOfOptions?: string[]) {
+  const [selected, updateSelected] = useState<string[]>(defaultValue || []);
 
   const onChange = useCallback(
     (event: SyntheticEvent) => {
-      const { value } = event.target || ({} as any)
-      const isExisted = selected.includes(value)
+      const { value } = event.target || ({} as any);
+      const isExisted = selected.includes(value);
       const result = isExisted
         ? selected.filter((v) => v !== value)
-        : [...selected, value]
-      updateSelected(result)
+        : [...selected, value];
+      updateSelected(result);
     },
-    [selected, updateSelected],
-  )
-  const selectAll = useCallback(() => updateSelected(valuesOfOptions), [
-    valuesOfOptions,
-    updateSelected,
-  ])
-  const unselectAll = useCallback(() => updateSelected([]), [updateSelected])
-  const isIntermediate = selected.length < valuesOfOptions.length
+    [selected, updateSelected]
+  );
+  const selectAll = useCallback(
+    () => updateSelected(valuesOfOptions),
+    [valuesOfOptions, updateSelected]
+  );
+  const unselectAll = useCallback(() => updateSelected([]), [updateSelected]);
+  const isIntermediate = selected.length < valuesOfOptions.length;
 
   return {
     selected,
@@ -27,5 +27,5 @@ export default function useCheckbox (defaultValue, valuesOfOptions?: string[]) {
     isIntermediate,
     selectAll,
     unselectAll,
-  }
+  };
 }

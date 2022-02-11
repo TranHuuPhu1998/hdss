@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 
 interface SelectInputTypeMap<
   P = {},
-  D extends React.ElementType = InputComponent,
+  D extends React.ElementType = InputComponent
 > {
   props: P & {
     display: React.ReactNode;
@@ -17,7 +17,7 @@ interface SelectInputTypeMap<
 
 export type SelectInputProps<
   D extends React.ElementType = SelectInputTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<SelectInputTypeMap<P, D>, D>;
 
 interface SelectDefaultProps {
@@ -57,7 +57,7 @@ const SelectInput: SelectInputComponent = React.forwardRef(
             {
               [styles.disabled]: rest.disabled,
               [styles.placeholder]: isDisplayPlaceholder,
-            },
+            }
           )}
           ref={ref}
           onClick={onClick}
@@ -68,7 +68,7 @@ const SelectInput: SelectInputComponent = React.forwardRef(
               type={TypoTypes.inherit}
               className={cx(
                 styles['label-text'],
-                styles[`label-size-${rest.size}`],
+                styles[`label-size-${rest.size}`]
               )}
             >
               {placeholder}
@@ -79,7 +79,7 @@ const SelectInput: SelectInputComponent = React.forwardRef(
               type={TypoTypes.inherit}
               className={cx(
                 styles['label-text'],
-                styles[`label-size-${rest.size}`],
+                styles[`label-size-${rest.size}`]
               )}
             >
               {display}
@@ -89,7 +89,7 @@ const SelectInput: SelectInputComponent = React.forwardRef(
         <Component {...rest} type="hidden" />
       </Fragment>
     );
-  },
+  }
 );
 
 SelectInput.displayName = 'SelectInput';

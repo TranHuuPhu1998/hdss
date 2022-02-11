@@ -28,7 +28,7 @@ interface ListItemTypeMap<P = {}, D extends React.ElementType = 'li'> {
 
 type GridProps<
   D extends React.ElementType = ListItemTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<ListItemTypeMap<P, D>, D>;
 
 interface ListItemDefaultProps {
@@ -76,7 +76,7 @@ export const ListItem: BaseComponent<ListItemTypeMap> & {
     },
     {
       [classes.content]: !!classes.content,
-    },
+    }
   );
 
   const openIsBool = open === undefined || typeof open === 'boolean';
@@ -94,7 +94,7 @@ export const ListItem: BaseComponent<ListItemTypeMap> & {
         rest.onClick(event);
       }
     },
-    [disabled, rest],
+    [disabled, rest]
   );
 
   return (

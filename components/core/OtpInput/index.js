@@ -99,7 +99,7 @@ class SingleOtpInput extends PureComponent {
             isStyleObject(inputStyle) && inputStyle,
             focus && isStyleObject(focusStyle) && focusStyle,
             isDisabled && isStyleObject(disabledStyle) && disabledStyle,
-            hasErrored && isStyleObject(errorStyle) && errorStyle,
+            hasErrored && isStyleObject(errorStyle) && errorStyle
           )}
           placeholder={placeholder}
           className={this.getClasses(
@@ -107,7 +107,7 @@ class SingleOtpInput extends PureComponent {
             focus && focusStyle,
             isDisabled && disabledStyle,
             hasErrored && errorStyle,
-            styles['input'],
+            styles['input']
           )}
           type={this.getType()}
           maxLength="1"
@@ -150,7 +150,7 @@ class OtpInput extends Component {
 
       if (placeholder.length > 0) {
         console.error(
-          'Length of the placeholder should be equal to the number of inputs.',
+          'Length of the placeholder should be equal to the number of inputs.'
         );
       }
     }
@@ -344,7 +344,7 @@ class OtpInput extends Component {
           className={className}
           data-cy={dataCy && `${dataCy}-${i}`}
           data-testid={dataTestId && `${dataTestId}-${i}`}
-        />,
+        />
       );
     }
 
@@ -358,7 +358,7 @@ class OtpInput extends Component {
       <div
         style={Object.assign(
           { display: 'flex' },
-          isStyleObject(containerStyle) && containerStyle,
+          isStyleObject(containerStyle) && containerStyle
         )}
         className={!isStyleObject(containerStyle) ? containerStyle : ''}
       >

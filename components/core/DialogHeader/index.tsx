@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from '../../../utils/classnames';
 
-import Times from 'icons/Times'
+import Times from 'icons/Times';
 
 import { BaseComponent, OverrideProps } from '../BaseComponent';
 import Icon from '../Icon';
@@ -17,7 +17,7 @@ interface DialogHeaderTypeMap<P = {}, D extends React.ElementType = 'div'> {
 
 type DialogHeaderProps<
   D extends React.ElementType = DialogHeaderTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<DialogHeaderTypeMap<P, D>, D>;
 
 interface DialogHeaderDefaultProps {
@@ -45,12 +45,7 @@ export const DialogHeader: BaseComponent<DialogHeaderTypeMap> & {
   const contentOfClose = onClose && (
     <span className={styles.close} onClick={onClose} role="presentation">
       {/* @ts-ignore */}
-      <Icon
-        component={Times}
-        color="#BCC0CC"
-        width={16}
-        height={16}
-      />
+      <Icon component={Times} color="#BCC0CC" width={16} height={16} />
     </span>
   );
 

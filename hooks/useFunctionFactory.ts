@@ -1,13 +1,13 @@
-import { useCallback } from 'react'
+import { useCallback } from 'react';
 
-export type Fn = (...args: any[]) => any
+export type Fn = (...args: any[]) => any;
 
-const noop = () => {}
+const noop = () => {};
 
-export default function useFunctionFactory<T extends Fn> (
+export default function useFunctionFactory<T extends Fn>(
   condition: boolean,
   callback: T,
-  dependencies: any[],
+  dependencies: any[]
 ): any {
-  return useCallback(condition ? callback : noop, dependencies)
+  return useCallback(condition ? callback : noop, dependencies);
 }

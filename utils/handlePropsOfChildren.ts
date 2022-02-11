@@ -15,7 +15,7 @@ export const transformChildrenProps = <T extends {}>(
   children: ElementType | ReactNode,
   transformProps: (child: ReactElement<T>, index: number) => T,
   listComponentExtends?: ElementType[],
-  nested = 1,
+  nested = 1
 ): any => {
   // @ts-ignore
   const content = Children.map(children, (child: ReactElement<any>, index) => {
@@ -38,7 +38,7 @@ export const transformChildrenProps = <T extends {}>(
         child.props.children,
         transformProps,
         listComponentExtends,
-        nested - 1,
+        nested - 1
       );
     }
 
@@ -57,19 +57,19 @@ export const extendChildrenProps = <T extends {}>(
   children: ElementType | ReactNode,
   extendProps: T,
   listComponentExtends?: ElementType[],
-  nested?: number,
+  nested?: number
 ): any =>
   transformChildrenProps<T>(
     children,
     (child) => ({ ...child.props, ...extendProps }),
     listComponentExtends,
-    nested,
+    nested
   );
 
 export const extendEventsChildProps = <T extends {}>(
   children: ElementType | ReactNode,
   events: DOMAttributes<T>,
-  nested?: number,
+  nested?: number
 ): any =>
   transformChildrenProps<T>(
     children,
@@ -81,11 +81,11 @@ export const extendEventsChildProps = <T extends {}>(
           // @ts-ignore
           [type]: compose(props[type], events[type]),
         }),
-        { ...child.props },
+        { ...child.props }
       );
 
       return mergedProps;
     },
     undefined,
-    nested,
+    nested
   );

@@ -1,16 +1,16 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react';
 
-type OnChangeEvent = (selected: any) => void
+type OnChangeEvent = (selected: any) => void;
 
-export default function useTab (defaultValue): [any, OnChangeEvent] {
-  const [selected, updateSelected] = useState(defaultValue)
+export default function useTab(defaultValue): [any, OnChangeEvent] {
+  const [selected, updateSelected] = useState(defaultValue);
 
   const handleOnChange = useCallback(
     (value) => {
-      updateSelected(value)
+      updateSelected(value);
     },
-    [updateSelected],
-  )
+    [updateSelected]
+  );
 
-  return [selected, handleOnChange]
+  return [selected, handleOnChange];
 }

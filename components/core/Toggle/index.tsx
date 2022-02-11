@@ -46,7 +46,7 @@ interface ToggleTypeMap<P = {}, D extends React.ElementType = 'label'> {
 
 export type ToggleProps<
   D extends React.ElementType = ToggleTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<ToggleTypeMap<P, D>, D>;
 
 interface ToggleDefaultProps {
@@ -90,7 +90,7 @@ export const Toggle: ToggleComponent = forwardRef((props: ToggleProps, ref) => {
 
   const _children = useMemo(
     () => children && <span className={styles.content}>{children}</span>,
-    [children],
+    [children]
   );
 
   // const _mark = useMemo(() => (checked ? CheckMark : Times), [checked])

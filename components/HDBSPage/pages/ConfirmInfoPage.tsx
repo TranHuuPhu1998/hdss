@@ -1,35 +1,35 @@
-import React, { ChangeEvent, useState, useContext } from "react";
-import { useRouter } from "next/router";
-import { Grid, Box, Theme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { useForm, Controller } from "react-hook-form";
+import React, { ChangeEvent, useState, useContext } from 'react';
+import { useRouter } from 'next/router';
+import { Grid, Box, Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { useForm, Controller } from 'react-hook-form';
 
-import { ButtonCustom, CheckboxCustom, InputCustom } from "components/commons";
-import { parseInfoFromEKYC, checkResultEkyc } from "commons/helpers/ekyc";
-import { FormDataFinal, FormDataStep3, TypeCustomer } from "../interfaces";
-import TKCKContext from "components/HDBSPage/contexts/TKCKContextValue";
+import { ButtonCustom, CheckboxCustom, InputCustom } from 'components/commons';
+import { parseInfoFromEKYC, checkResultEkyc } from 'commons/helpers/ekyc';
+import { FormDataFinal, FormDataStep3, TypeCustomer } from '../interfaces';
+import TKCKContext from 'components/HDBSPage/contexts/TKCKContextValue';
 
-import { LANGUAGE } from "commons/constants";
-import resources from "pages/assets/translate.json";
+import { LANGUAGE } from 'commons/constants';
+import resources from 'pages/assets/translate.json';
 
-import _get from "lodash/get";
-import { MOCK_DATA } from "../consts";
-import { getLanguage } from "commons/helpers";
+import _get from 'lodash/get';
+import { MOCK_DATA } from '../consts';
+import { getLanguage } from 'commons/helpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   rootError: {
-    padding: "10px",
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    padding: '10px',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   root: {
-    padding: "5px",
+    padding: '5px',
   },
   content: {
-    paddingLeft: "18px",
-    paddingRight: "18px",
+    paddingLeft: '18px',
+    paddingRight: '18px',
   },
   textTermAndCondition: {
     color: theme.palette.error.main,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 600,
   },
   h100: {
-    height: "100%",
+    height: '100%',
   },
 }));
 
@@ -59,10 +59,10 @@ type FormValues = {
 
 const ERROR_FORM = {
   [LANGUAGE.EN]: {
-    required: "This field is required",
+    required: 'This field is required',
   },
   [LANGUAGE.VI]: {
-    required: "Trường này là bắt buộc",
+    required: 'Trường này là bắt buộc',
   },
 };
 
@@ -71,8 +71,8 @@ const ConfirmInfoPage = (props: Props) => {
   const { data, onSubmit, typeCustomer, redoEKYC } = props;
   const [isAceptCondition, setIsAceptCondition] = useState(true);
 
-  const info = parseInfoFromEKYC(_get(data, "ekycData"));
-  const resultEKYC = checkResultEkyc(_get(data, "ekycData"));
+  const info = parseInfoFromEKYC(_get(data, 'ekycData'));
+  const resultEKYC = checkResultEkyc(_get(data, 'ekycData'));
   // const info = parseInfoFromEKYC(MOCK_DATA);
   // const resultEKYC = checkResultEkyc(MOCK_DATA);
   const { loadingBtnSubmit } = useContext(TKCKContext);
@@ -92,7 +92,7 @@ const ConfirmInfoPage = (props: Props) => {
   });
   const router = useRouter();
   const lang = getLanguage(router);
-  const t = _get(resources, [lang, "confirmInfoPage"]);
+  const t = _get(resources, [lang, 'confirmInfoPage']);
 
   const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsAceptCondition(event.target.checked);
@@ -140,7 +140,7 @@ const ConfirmInfoPage = (props: Props) => {
                           <InputCustom
                             errorMsg={
                               errors.fullName &&
-                              _get(ERROR_FORM, [lang, "required"])
+                              _get(ERROR_FORM, [lang, 'required'])
                             }
                             fullWidth
                             {...field}
@@ -153,7 +153,7 @@ const ConfirmInfoPage = (props: Props) => {
                 <Grid item>
                   <Grid container spacing={1} direction="column">
                     <Grid item>
-                      {t?.gender}: <b>{info?.gender === "M" ? "Nam" : "Nữ"}</b>
+                      {t?.gender}: <b>{info?.gender === 'M' ? 'Nam' : 'Nữ'}</b>
                     </Grid>
                     <Grid item></Grid>
                   </Grid>
@@ -255,7 +255,7 @@ const ConfirmInfoPage = (props: Props) => {
                     . {t?.termCondition3}
                     <span className={classes.textTermAndCondition}>
                       {t?.termCondition4}
-                    </span>{" "}
+                    </span>{' '}
                     {t?.termCondition5}
                   </div>
                 }

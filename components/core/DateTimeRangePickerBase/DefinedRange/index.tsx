@@ -1,8 +1,8 @@
-import cx from 'classnames'
-import React, { Component } from 'react'
-import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges'
+import cx from 'classnames';
+import React, { Component } from 'react';
+import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 class DefinedRanges extends Component<any, any> {
   static defaultProps = {
@@ -11,39 +11,39 @@ class DefinedRanges extends Component<any, any> {
     ranges: [],
     rangeColors: ['#3d91ff', '#3ecf8e', '#fed14c'],
     focusedRange: [0, 0],
-  }
+  };
 
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       rangeOffset: 0,
       focusedInput: -1,
-    }
-    this.handleRangeChange = this.handleRangeChange.bind(this)
+    };
+    this.handleRangeChange = this.handleRangeChange.bind(this);
   }
 
-  handleRangeChange (range): void {
-    const { onChange, ranges, focusedRange } = this.props
-    const selectedRange = ranges[focusedRange[0]]
-    if (!onChange || !selectedRange) return
+  handleRangeChange(range): void {
+    const { onChange, ranges, focusedRange } = this.props;
+    const selectedRange = ranges[focusedRange[0]];
+    if (!onChange || !selectedRange) return;
     onChange({
-      [selectedRange.key || `range${focusedRange[0] as number + 1}`]: {
+      [selectedRange.key || `range${(focusedRange[0] as number) + 1}`]: {
         ...selectedRange,
         ...range,
       },
-    })
+    });
   }
 
-  getSelectedRange (ranges, staticRange) {
+  getSelectedRange(ranges, staticRange) {
     const focusedRangeIndex = ranges.findIndex((range) => {
-      if (!range.startDate || !range.endDate || range.disabled) return false
-      return staticRange.isSelected(range)
-    })
-    const selectedRange = ranges[focusedRangeIndex]
-    return { selectedRange, focusedRangeIndex }
+      if (!range.startDate || !range.endDate || range.disabled) return false;
+      return staticRange.isSelected(range);
+    });
+    const selectedRange = ranges[focusedRangeIndex];
+    return { selectedRange, focusedRangeIndex };
   }
 
-  render () {
+  render() {
     const {
       onPreviewChange,
       ranges,
@@ -52,7 +52,7 @@ class DefinedRanges extends Component<any, any> {
       className,
       minDate,
       maxDate,
-    } = this.props
+    } = this.props;
 
     return (
       <div className={cx(styles.definedRangesWrapper, className)}>
@@ -61,16 +61,16 @@ class DefinedRanges extends Component<any, any> {
           {this.props.staticRanges.map((staticRange, i) => {
             const { selectedRange, focusedRangeIndex } = this.getSelectedRange(
               ranges,
-              staticRange,
-            )
-            const isDisabled = staticRange.isDisabled(minDate, maxDate)
+              staticRange
+            );
+            const isDisabled = staticRange.isDisabled(minDate, maxDate);
 
-            let labelContent
+            let labelContent;
 
             if (staticRange.hasCustomRendering) {
-              labelContent = renderStaticRangeLabel(staticRange)
+              labelContent = renderStaticRangeLabel(staticRange);
             } else {
-              labelContent = staticRange.label
+              labelContent = staticRange.label;
             }
 
             return (
@@ -89,15 +89,13 @@ class DefinedRanges extends Component<any, any> {
                 onClick={() =>
                   this.handleRangeChange(staticRange.range(this.props))
                 }
-                onFocus={() =>
-                  onPreviewChange?.(staticRange.range(this.props))
-                }
+                onFocus={() => onPreviewChange?.(staticRange.range(this.props))}
                 onMouseOver={() =>
                   onPreviewChange?.(staticRange.range(this.props))
                 }
                 onMouseLeave={() => {
                   if (typeof this.props.onPreviewChange === 'function') {
-                    this.props.onPreviewChange()
+                    this.props.onPreviewChange();
                   }
                 }}
               >
@@ -105,13 +103,13 @@ class DefinedRanges extends Component<any, any> {
                   {labelContent}
                 </span>
               </button>
-            )
+            );
           })}
         </div>
 
         <div className={styles.inputRanges}>
           {this.props.inputRanges.map((rangeOption, i) => {
-            const isDisabled = rangeOption.isDisabled(minDate, maxDate)
+            const isDisabled = rangeOption.isDisabled(minDate, maxDate);
 
             return (
               <div className={styles.inputRange} key={i}>
@@ -123,20 +121,22 @@ class DefinedRanges extends Component<any, any> {
                   onBlur={() => this.setState({ rangeOffset: 0 })}
                   placeholder={'-'}
                   onChange={(e) => {
-                    let value = parseInt(e.target.value, 10)
+                    let value = parseInt(e.target.value, 10);
                     value = isNaN(value)
                       ? null
-                      : Math.max(Math.min(99999, value), 0)
+                      : Math.max(Math.min(99999, value), 0);
 
-                    this.handleRangeChange(rangeOption.range(value, this.props))
+                    this.handleRangeChange(
+                      rangeOption.range(value, this.props)
+                    );
                   }}
                   min={0}
                   max={99999}
                   value={
                     rangeOption.getCurrentValue
                       ? rangeOption.getCurrentValue(
-                        ranges[this.props.focusedRange[0]] || {},
-                      )
+                          ranges[this.props.focusedRange[0]] || {}
+                        )
                       : ''
                   }
                   disabled={isDisabled}
@@ -145,13 +145,13 @@ class DefinedRanges extends Component<any, any> {
                   {rangeOption.label}
                 </span>
               </div>
-            )
+            );
           })}
         </div>
         {this.props.footerContent}
       </div>
-    )
+    );
   }
 }
 
-export default DefinedRanges
+export default DefinedRanges;

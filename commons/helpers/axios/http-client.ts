@@ -1,16 +1,16 @@
-import axios, { AxiosResponse } from "axios";
-import queryString from "query-string";
+import axios, { AxiosResponse } from 'axios';
+import queryString from 'query-string';
 
 import {
   GetQueryClientParams,
   HttpClientOptions,
   RequestConfigs,
-} from "./types";
-import { applyInterceptors } from "./utils";
-const https = require("https");
+} from './types';
+import { applyInterceptors } from './utils';
+const https = require('https');
 
 interface HttpClientAdaptor {
-  get<T>(url: string, configs?: Omit<RequestConfigs, "data">): Promise<T>;
+  get<T>(url: string, configs?: Omit<RequestConfigs, 'data'>): Promise<T>;
   post<T, K>(url: string, body: K, configs?: RequestConfigs): Promise<T>;
   put<T, K>(url: string, body: K, configs?: RequestConfigs): Promise<T>;
   delete<T>(url: string, configs?: RequestConfigs): Promise<T>;
@@ -27,7 +27,7 @@ export class HttpClient {
     this.delete = this.delete.bind(this);
   }
 
-  get<T>(url: string, configs?: Omit<RequestConfigs, "body">): Promise<T> {
+  get<T>(url: string, configs?: Omit<RequestConfigs, 'body'>): Promise<T> {
     return this.client.get<T>(url, configs);
   }
 

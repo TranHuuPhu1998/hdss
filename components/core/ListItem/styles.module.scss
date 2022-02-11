@@ -1,4 +1,4 @@
-@import "styles/variables.scss";
+@import 'styles/variables.scss';
 
 .item {
   display: flex;
@@ -42,10 +42,10 @@
    Sizes: name, padding-vertical, padding-horizontal, line-height.
 */
 $sizes: (
-  ("lg", 3, 4, 2.4rem),
-  ("md", 3, 4, 2.4rem),
-  ("sm", 1.5, 2, 2.4rem),
-  ("xs", 1.5, 2, 1.8rem)
+  ('lg', 3, 4, 2.4rem),
+  ('md', 3, 4, 2.4rem),
+  ('sm', 1.5, 2, 2.4rem),
+  ('xs', 1.5, 2, 1.8rem)
 );
 @each $name, $vertical, $horizontal, $line-height in $sizes {
   .content-size-#{$name} {

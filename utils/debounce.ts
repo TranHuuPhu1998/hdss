@@ -5,19 +5,22 @@
  * @param func {Function} Handler
  * @param wait {Number} Wait time
  */
-export default function debounce (func: (...args: any[]) => any, wait = 166): any {
-  let timeout: NodeJS.Timeout
-  function _debounce (...args: any[]): void {
+export default function debounce(
+  func: (...args: any[]) => any,
+  wait = 166
+): any {
+  let timeout: NodeJS.Timeout;
+  function _debounce(...args: any[]): void {
     const later = (): void => {
-      func.apply(this, args)
-    }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+      func.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
   }
 
   _debounce.clear = () => {
-    clearTimeout(timeout)
-  }
+    clearTimeout(timeout);
+  };
 
-  return _debounce
+  return _debounce;
 }

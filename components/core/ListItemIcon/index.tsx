@@ -1,49 +1,55 @@
-import React, { useMemo } from 'react'
-import cx from '../../../utils/classnames'
+import React, { useMemo } from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import Icon from '../Icon'
-import { InputSizes } from '../Input'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import Icon from '../Icon';
+import { InputSizes } from '../Input';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 interface ListItemTypeMap<P = {}, D extends React.ElementType = 'div'> {
   props: P & {
     /**
      * Set icon for item
      */
-    icon?: React.ElementType
-    size?: InputSizes
-  }
-  defaultComponent: D
+    icon?: React.ElementType;
+    size?: InputSizes;
+  };
+  defaultComponent: D;
 }
 
 type ListItemProps<
   D extends React.ElementType = ListItemTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<ListItemTypeMap<P, D>, D>
+> = OverrideProps<ListItemTypeMap<P, D>, D>;
 
 interface ListItemDefaultProps {
-  component: React.ElementType
+  component: React.ElementType;
 }
 
 const defaultProps: ListItemDefaultProps = {
   component: 'div',
-}
+};
 
 export const ListItemIcon: BaseComponent<ListItemTypeMap> & {
-  displayName?: string
+  displayName?: string;
 } = (props: ListItemProps) => {
-  const { component: Component, className, children, icon, ...rest } = {
+  const {
+    component: Component,
+    className,
+    children,
+    icon,
+    ...rest
+  } = {
     ...defaultProps,
     ...props,
-  }
+  };
 
   const classOfComponent = cx(
     styles.listItemIcon,
     styles[`listItemIcon-size-${rest.size}`],
-    className,
-  )
+    className
+  );
   const contentOfChildren = useMemo(
     () =>
       !icon ? (
@@ -51,16 +57,16 @@ export const ListItemIcon: BaseComponent<ListItemTypeMap> & {
       ) : (
         <Icon className={styles[`icon-size-${rest.size}`]} component={icon} />
       ),
-    [icon, children],
-  )
+    [icon, children]
+  );
 
   return (
     <Component {...rest} className={classOfComponent}>
       {contentOfChildren}
     </Component>
-  )
-}
+  );
+};
 
-ListItemIcon.displayName = 'ListItemIcon'
+ListItemIcon.displayName = 'ListItemIcon';
 
-export default ListItemIcon
+export default ListItemIcon;

@@ -1,4 +1,4 @@
-import createHttpClient, { HttpClient } from "./http-client";
+import createHttpClient, { HttpClient } from './http-client';
 
 const httpClient = createHttpClient(
   {

@@ -1,3 +1,3 @@
-import { PopperPlacements } from '../Popper'
+import { PopperPlacements } from '../Popper';
 
-export const TooltipPlacements = PopperPlacements
+export const TooltipPlacements = PopperPlacements;

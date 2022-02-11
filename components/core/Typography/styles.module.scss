@@ -37,7 +37,11 @@ $variants: (
   Font weights list
   Order values: name, font-weight
 */
-$weights: (('light', $font-weight-light), ('regular', $font-weight-regular), ('bold', $font-weight-bold));
+$weights: (
+  ('light', $font-weight-light),
+  ('regular', $font-weight-regular),
+  ('bold', $font-weight-bold)
+);
 
 @each $name, $weight in $weights {
   .weight-#{$name} {

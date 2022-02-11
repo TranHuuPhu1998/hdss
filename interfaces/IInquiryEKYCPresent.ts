@@ -1,4 +1,4 @@
-import { Gender, EkycType } from "./ICommon";
+import { Gender, EkycType } from './ICommon';
 
 export interface InquiryEKYCPresentRequest {
   requestId?: string;

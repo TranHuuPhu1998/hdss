@@ -1,14 +1,14 @@
-import { SyntheticEvent, useCallback, useState } from 'react'
+import { SyntheticEvent, useCallback, useState } from 'react';
 
-export default function useRadio (defaultValue) {
-  const [selected, updateSelected] = useState(defaultValue)
+export default function useRadio(defaultValue) {
+  const [selected, updateSelected] = useState(defaultValue);
 
   const onChange = useCallback(
     (event: SyntheticEvent) => {
-      updateSelected((event.target || ({} as any)).value)
+      updateSelected((event.target || ({} as any)).value);
     },
-    [updateSelected],
-  )
+    [updateSelected]
+  );
 
-  return { selected, onChange }
+  return { selected, onChange };
 }

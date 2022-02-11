@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 interface MenuContextValue {
-  close: () => void
+  close: () => void;
 }
 
-const MenuContext = React.createContext<MenuContextValue>(null)
-export default MenuContext
+const MenuContext = React.createContext<MenuContextValue>(null);
+export default MenuContext;

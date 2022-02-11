@@ -1,6 +1,6 @@
-import { ColorScheme } from "setup/material-ui/types";
+import { ColorScheme } from 'setup/material-ui/types';
 
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
   export interface SimplePaletteColorOptions {
     border?: string;
     background?: string;

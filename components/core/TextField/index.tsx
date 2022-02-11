@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 
 interface TextFieldTypeMap<
   P = {},
-  D extends React.ElementType = InputComponent,
+  D extends React.ElementType = InputComponent
 > {
   props: P & {
     label: string;
@@ -22,7 +22,7 @@ interface TextFieldTypeMap<
 
 type TextFieldProps<
   D extends React.ElementType = TextFieldTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<TextFieldTypeMap<P, D>, D>;
 
 interface TextFieldDefaultProps {
@@ -51,7 +51,7 @@ export const TextField: BaseComponent<TextFieldTypeMap> & {
     styles['text-field'],
     styles[`variant-${rest.status}`],
     styles[`status-${rest.status}`],
-    className,
+    className
   );
 
   const keyOfField = fieldId || `field-${rest.name}`;

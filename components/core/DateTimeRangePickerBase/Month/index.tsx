@@ -1,23 +1,23 @@
 /* eslint-disable no-fallthrough */
-import eachDayOfInterval from 'date-fns/eachDayOfInterval'
-import endOfDay from 'date-fns/endOfDay'
-import endOfWeek from 'date-fns/endOfWeek'
-import format from 'date-fns/format'
-import isAfter from 'date-fns/isAfter'
-import isBefore from 'date-fns/isBefore'
-import isSameDay from 'date-fns/isSameDay'
-import isWeekend from 'date-fns/isWeekend'
-import isWithinInterval from 'date-fns/isWithinInterval'
-import startOfDay from 'date-fns/startOfDay'
-import startOfWeek from 'date-fns/startOfWeek'
+import eachDayOfInterval from 'date-fns/eachDayOfInterval';
+import endOfDay from 'date-fns/endOfDay';
+import endOfWeek from 'date-fns/endOfWeek';
+import format from 'date-fns/format';
+import isAfter from 'date-fns/isAfter';
+import isBefore from 'date-fns/isBefore';
+import isSameDay from 'date-fns/isSameDay';
+import isWeekend from 'date-fns/isWeekend';
+import isWithinInterval from 'date-fns/isWithinInterval';
+import startOfDay from 'date-fns/startOfDay';
+import startOfWeek from 'date-fns/startOfWeek';
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
-import DayCell from '../DayCell'
-import { getMonthDisplayRange } from '../utils'
+import DayCell from '../DayCell';
+import { getMonthDisplayRange } from '../utils';
 
-function renderWeekdays (styles, dateOptions) {
-  const now = new Date()
+function renderWeekdays(styles, dateOptions) {
+  const now = new Date();
   return (
     <div className={styles.weekDays}>
       {eachDayOfInterval({
@@ -29,38 +29,33 @@ function renderWeekdays (styles, dateOptions) {
         </span>
       ))}
     </div>
-  )
+  );
 }
 
 class Month extends PureComponent<any, any> {
-  render () {
-    const now = new Date()
-    const {
-      displayMode,
-      focusedRange,
-      drag,
-      styles,
-      disabledDates,
-    } = this.props
-    const minDate = this.props.minDate && startOfDay(this.props.minDate)
-    const maxDate = this.props.maxDate && endOfDay(this.props.maxDate)
+  render() {
+    const now = new Date();
+    const { displayMode, focusedRange, drag, styles, disabledDates } =
+      this.props;
+    const minDate = this.props.minDate && startOfDay(this.props.minDate);
+    const maxDate = this.props.maxDate && endOfDay(this.props.maxDate);
     const monthDisplay = getMonthDisplayRange(
       this.props.month,
-      this.props.dateOptions,
-    )
-    let ranges = this.props.ranges
+      this.props.dateOptions
+    );
+    let ranges = this.props.ranges;
     if (displayMode === 'dateRange' && drag.status) {
-      const { startDate, endDate } = drag.range
+      const { startDate, endDate } = drag.range;
       ranges = ranges.map((range, i) => {
-        if (i !== focusedRange[0]) return range
+        if (i !== focusedRange[0]) return range;
         return {
           ...range,
           startDate,
           endDate,
-        }
-      })
+        };
+      });
     }
-    const showPreview = this.props.showPreview && !drag.disablePreview
+    const showPreview = this.props.showPreview && !drag.disablePreview;
     return (
       <div className={styles.month} style={this.props.style}>
         {this.props.showMonthName ? (
@@ -75,14 +70,17 @@ class Month extends PureComponent<any, any> {
             start: monthDisplay.start,
             end: monthDisplay.end,
           }).map((day, index) => {
-            const isStartOfMonth = isSameDay(day, monthDisplay.startDateOfMonth)
-            const ihdbankfMonth = isSameDay(day, monthDisplay.endDateOfMonth)
+            const isStartOfMonth = isSameDay(
+              day,
+              monthDisplay.startDateOfMonth
+            );
+            const ihdbankfMonth = isSameDay(day, monthDisplay.endDateOfMonth);
             const isOutsideMinMax =
               (minDate && isBefore(day, minDate)) ||
-              (maxDate && isAfter(day, maxDate))
+              (maxDate && isAfter(day, maxDate));
             const isDisabledSpecifically = disabledDates.some((disabledDate) =>
-              isSameDay(disabledDate, day),
-            )
+              isSameDay(disabledDate, day)
+            );
             return (
               <DayCell
                 {...this.props}
@@ -95,11 +93,11 @@ class Month extends PureComponent<any, any> {
                 isToday={isSameDay(day, now)}
                 isStartOfWeek={isSameDay(
                   day,
-                  startOfWeek(day, this.props.dateOptions),
+                  startOfWeek(day, this.props.dateOptions)
                 )}
                 ihdbankfWeek={isSameDay(
                   day,
-                  endOfWeek(day, this.props.dateOptions),
+                  endOfWeek(day, this.props.dateOptions)
                 )}
                 isStartOfMonth={isStartOfMonth}
                 ihdbankfMonth={ihdbankfMonth}
@@ -118,12 +116,12 @@ class Month extends PureComponent<any, any> {
                 dragRange={drag.range}
                 drag={drag.status}
               />
-            )
+            );
           })}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Month
+export default Month;

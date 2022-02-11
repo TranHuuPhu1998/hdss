@@ -3,10 +3,10 @@
 .root {
   .item {
     width: 4.5rem;
-    height: .8rem;
+    height: 0.8rem;
     background-color: $color-box;
     border-radius: $radius-bold;
-    margin-left: .8rem;
+    margin-left: 0.8rem;
     cursor: pointer;
     transition: all 0.1s ease;
     &.active {

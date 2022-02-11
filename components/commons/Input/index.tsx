@@ -1,17 +1,17 @@
-import React from "react";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { makeStyles } from "@mui/styles";
-import { Grid, Theme, Box } from "@mui/material";
+import React from 'react';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { makeStyles } from '@mui/styles';
+import { Grid, Theme, Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: "100%",
+    width: '100%',
     borderRadius: 40,
-    "&  > div": {
-      borderRadius: "inherit",
+    '&  > div': {
+      borderRadius: 'inherit',
       height: 58,
     },
-    "& input": {
+    '& input': {
       marginLeft: 10,
     },
   },

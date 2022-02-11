@@ -1,31 +1,31 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import cx from '../../../../utils/classnames'
-import DateRange from '../DateRange'
-import DefinedRange from '../DefinedRange'
-import { findNextRangeIndex } from '../utils'
-import styles from './styles.module.scss'
+import cx from '../../../../utils/classnames';
+import DateRange from '../DateRange';
+import DefinedRange from '../DefinedRange';
+import { findNextRangeIndex } from '../utils';
+import styles from './styles.module.scss';
 
 class DateRangePicker extends Component<any, any> {
-  dateRange
+  dateRange;
 
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       focusedRange: [findNextRangeIndex(props.ranges), 0],
-    }
+    };
   }
 
   resetFocusRange = () => {
-    this.setState({ focusedRange: [0, 0] })
-  }
+    this.setState({ focusedRange: [0, 0] });
+  };
 
   handleChangeRangeFocus = (focusedRange) => {
-    this.setState({ focusedRange })
-  }
+    this.setState({ focusedRange });
+  };
 
-  render () {
-    const { focusedRange } = this.state
+  render() {
+    const { focusedRange } = this.state;
     return (
       <div className={cx(styles.dateRangePickerWrapper, this.props.className)}>
         {this.props.showStaticRange && (
@@ -46,8 +46,8 @@ class DateRangePicker extends Component<any, any> {
           className={undefined}
         />
       </div>
-    )
+    );
   }
 }
 
-export default DateRangePicker
+export default DateRangePicker;

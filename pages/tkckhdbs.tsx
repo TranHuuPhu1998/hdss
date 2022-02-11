@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Script from "next/script";
-import { useRouter } from "next/router";
+import React, { useState, useEffect } from 'react';
+import Script from 'next/script';
+import { useRouter } from 'next/router';
 
-import { makeStyles } from "@mui/styles";
-import { Dialog, Box } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+import { Dialog, Box } from '@mui/material';
 
 import {
   FormTKCKPage,
@@ -12,49 +12,49 @@ import {
   RegisterSuccessPage,
   HomePage,
   VerifyOTP,
-} from "components/HDBSPage";
-import TKCKContext from "components/HDBSPage/contexts/TKCKContextValue";
+} from 'components/HDBSPage';
+import TKCKContext from 'components/HDBSPage/contexts/TKCKContextValue';
 import {
   FormDataStep1,
   TypeCustomer,
   FormDataStep3,
-} from "components/HDBSPage/interfaces";
-import { PopupNotify } from "components/commons";
+} from 'components/HDBSPage/interfaces';
+import { PopupNotify } from 'components/commons';
 
-import { MerchantNameItem, TerminalNameItem } from "interfaces/IGetMerchant";
-import { AccountItem } from "interfaces/IListAccount";
+import { MerchantNameItem, TerminalNameItem } from 'interfaces/IGetMerchant';
+import { AccountItem } from 'interfaces/IListAccount';
 
-import { ERROR_CODE, getStatusResponse } from "commons/helpers/error";
-import { getLanguage, parseJwt } from "commons/helpers/helper";
+import { ERROR_CODE, getStatusResponse } from 'commons/helpers/error';
+import { getLanguage, parseJwt } from 'commons/helpers/helper';
 
-import * as hdbsServices from "services/hdbsService";
-import _get from "lodash/get";
-import { LANGUAGE } from "commons/constants";
+import * as hdbsServices from 'services/hdbsService';
+import _get from 'lodash/get';
+import { LANGUAGE } from 'commons/constants';
 
 const useStyles = makeStyles(() => ({
   root: {
-    background: "#F2F2F4",
-    minHeight: "100vh",
+    background: '#F2F2F4',
+    minHeight: '100vh',
   },
   dialogCustom: {
-    "& .MuiPaper-root": {
+    '& .MuiPaper-root': {
       margin: 0,
     },
   },
   otpContainer: {
-    background: "#FAFAFA",
+    background: '#FAFAFA',
   },
   h100: {
-    height: "100%",
+    height: '100%',
   },
 }));
 
 export const STEP_KHHH = {
-  stepHome: "Step home page",
-  step1: "Step enter TKCK",
-  step2: "Step eKYC verify",
-  step3: "Step confirm info register TKCK",
-  step4: "Step register success",
+  stepHome: 'Step home page',
+  step1: 'Step enter TKCK',
+  step2: 'Step eKYC verify',
+  step3: 'Step confirm info register TKCK',
+  step4: 'Step register success',
 };
 
 const HDBSPage = () => {
@@ -68,7 +68,7 @@ const HDBSPage = () => {
 
   const [popupNotify, setPopupNotify] = useState({
     open: false,
-    desc: "",
+    desc: '',
   });
 
   const [listMerchant, setListMerchant] = useState<MerchantNameItem[]>([]);
@@ -83,10 +83,10 @@ const HDBSPage = () => {
   });
 
   const [dataForm, setDataForm] = useState({
-    accountNo: "",
-    accountType: "",
-    merchantId: "",
-    terminalId: "",
+    accountNo: '',
+    accountType: '',
+    merchantId: '',
+    terminalId: '',
     isTranInternet: true,
     isUttb: true,
     isBond: true,
@@ -98,9 +98,9 @@ const HDBSPage = () => {
     const jwtInfo = parseJwt(query.jwt as string);
     hdbsServices.getAccessToken().then((res) => {
       hdbsServices.updateMasterData({
-        userId: _get(jwtInfo, "userName"),
-        clientNo: _get(jwtInfo, "clientNo"),
-        language: "vi",
+        userId: _get(jwtInfo, 'userName'),
+        clientNo: _get(jwtInfo, 'clientNo'),
+        language: 'vi',
         // userId: "anhdtp",
         // clientNo: "00013695",
       });
@@ -110,7 +110,7 @@ const HDBSPage = () => {
       });
 
       hdbsServices.getListAccountApi().then((res) => {
-        const listAccount = _get(res, "data.data", []);
+        const listAccount = _get(res, 'data.data', []);
         setListAccount(listAccount);
       });
     });
@@ -132,7 +132,7 @@ const HDBSPage = () => {
   };
 
   const _handleSubmitStep1 = (data: FormDataStep1) => {
-    _toggleLoading("loadingBtnSubmit", true);
+    _toggleLoading('loadingBtnSubmit', true);
     const finalData = {
       ...dataForm,
       ...data,
@@ -142,8 +142,8 @@ const HDBSPage = () => {
     hdbsServices
       .checkUserEKYC(finalData.merchantId, finalData.terminalId)
       .then((res) => {
-        _toggleLoading("loadingBtnSubmit", false);
-        const code = _get(res, "resultCode");
+        _toggleLoading('loadingBtnSubmit', false);
+        const code = _get(res, 'resultCode');
         const status = getStatusResponse(code, lang);
 
         if (status.success) {
@@ -175,15 +175,15 @@ const HDBSPage = () => {
   };
 
   const _handleSubmitStep3 = async (data: FormDataStep3) => {
-    _toggleLoading("loadingBtnSubmit", true);
+    _toggleLoading('loadingBtnSubmit', true);
     const finalData = {
       ...dataForm,
       ...data,
     };
     setDataForm(finalData);
     const inquiryResponse = await hdbsServices.inquiryENCYPresent(finalData);
-    _toggleLoading("loadingBtnSubmit", false);
-    const code = _get(inquiryResponse, "resultCode");
+    _toggleLoading('loadingBtnSubmit', false);
+    const code = _get(inquiryResponse, 'resultCode');
     const status = getStatusResponse(code, lang);
 
     if (status.success) {
@@ -194,50 +194,50 @@ const HDBSPage = () => {
       _onNextStep(STEP_KHHH.step4);
       return;
     }
-    _toggleLoading("loadingBtnSubmit", false);
+    _toggleLoading('loadingBtnSubmit', false);
     toggleNotify(status.msg);
   };
 
   const _handleVerifyOtp = (accountOtp: string) => {
-    _toggleLoading("loadingBtnConfirmOTP", true);
+    _toggleLoading('loadingBtnConfirmOTP', true);
     hdbsServices
       .verifyOTPApi(accountOtp)
       .then((res) => {
-        _toggleLoading("loadingBtnConfirmOTP", false);
-        if (_get(res, "data.data.userId")) {
+        _toggleLoading('loadingBtnConfirmOTP', false);
+        if (_get(res, 'data.data.userId')) {
           _onConfirmEKYC();
           return;
         }
-        toggleNotify("Invalid OTP");
+        toggleNotify('Invalid OTP');
       })
       .catch((err) => {
-        _toggleLoading("loadingBtnConfirmOTP", false);
+        _toggleLoading('loadingBtnConfirmOTP', false);
       });
   };
 
   const _onCreateOTP = () => {
-    _toggleLoading("loadingBtnSubmit", true);
+    _toggleLoading('loadingBtnSubmit', true);
     hdbsServices
       .createOTPApi()
       .then((res) => {
-        _toggleLoading("loadingBtnSubmit", false);
-        if (_get(res, "data.data.userId")) {
+        _toggleLoading('loadingBtnSubmit', false);
+        if (_get(res, 'data.data.userId')) {
           _toggleModalVerifyOTP();
         }
       })
       .catch((err) => {
-        _toggleLoading("loadingBtnSubmit", false);
+        _toggleLoading('loadingBtnSubmit', false);
       });
   };
 
   const _onConfirmEKYC = () => {
-    _toggleLoading("loadingBtnConfirmOTP", true);
+    _toggleLoading('loadingBtnConfirmOTP', true);
     hdbsServices
       .confirmEKYCPresent(dataForm)
       .then((res) => {
-        const code = _get(res, "resultCode");
+        const code = _get(res, 'resultCode');
         const status = getStatusResponse(code, lang);
-        _toggleLoading("loadingBtnConfirmOTP", false);
+        _toggleLoading('loadingBtnConfirmOTP', false);
 
         if (status.success) {
           _toggleModalVerifyOTP();
@@ -247,7 +247,7 @@ const HDBSPage = () => {
         toggleNotify(status.msg);
       })
       .catch((err) => {
-        _toggleLoading("loadingBtnConfirmOTP", false);
+        _toggleLoading('loadingBtnConfirmOTP', false);
       });
   };
 
@@ -268,7 +268,7 @@ const HDBSPage = () => {
       }
       return {
         open: false,
-        desc: "",
+        desc: '',
       };
     });
   }
@@ -282,7 +282,7 @@ const HDBSPage = () => {
         id="md5-id"
         src="/asset/js/md5.min.js"
         onLoad={() => {
-          const md5 = _get(window, "md5");
+          const md5 = _get(window, 'md5');
           setMd5(md5);
         }}
       />

@@ -1,4 +1,3 @@
-
 // TODO: mock data - Remove this
 export const EXAMPLE_OCR_DATA = {
   address: '730/1/9 H. Lộ 2\nBình Trị Đông A, Bình Tân, TP. Hồ Chí Minh',

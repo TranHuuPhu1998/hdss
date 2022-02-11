@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Card, Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import InputOTP from "components/commons/InputOTP";
-import ButtonCustom from "components/commons/Button";
-import TKCKContext from "components/HDBSPage/contexts/TKCKContextValue";
+import React, { useState, useContext } from 'react';
+import { Card, Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import InputOTP from 'components/commons/InputOTP';
+import ButtonCustom from 'components/commons/Button';
+import TKCKContext from 'components/HDBSPage/contexts/TKCKContextValue';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: 300,
   },
   borderBottom: {
-    borderBottom: "1px solid",
+    borderBottom: '1px solid',
   },
 }));
 
@@ -34,7 +34,7 @@ interface Props {
 const VerifyOTP = (props: Props) => {
   const { onSubmit, loading } = props;
   const classes = useStyles();
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
 
   return (
     <div className={classes.root}>

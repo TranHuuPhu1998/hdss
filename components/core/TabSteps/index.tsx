@@ -29,7 +29,7 @@ const TabSteps = (props: Props) => {
               [styles['active']]: active >= i,
             })}
             onClick={() => onItemClick(i)}
-          />,
+          />
         );
       }
     }

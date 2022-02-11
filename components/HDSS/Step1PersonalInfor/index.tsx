@@ -1,20 +1,20 @@
-import { getLanguage, getStatusResponse } from "commons/helpers";
-import Box from "components/core/Box";
-import Button from "components/core/Button";
-import Grid from "components/core/Grid";
-import TextField from "components/core/TextField";
+import { getLanguage, getStatusResponse } from 'commons/helpers';
+import Box from 'components/core/Box';
+import Button from 'components/core/Button';
+import Grid from 'components/core/Grid';
+import TextField from 'components/core/TextField';
 import Typography, {
   TypoTypes,
   TypoVariants,
-  TypoWeights
-} from "components/core/Typography";
-import _get from "lodash/get";
-import { useRouter } from "next/router";
-import resources from "pages/assets/translate.json";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as hdssServices from "services/hdssService";
-import styles from "./styles.module.scss";
+  TypoWeights,
+} from 'components/core/Typography';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
+import resources from 'pages/assets/translate.json';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as hdssServices from 'services/hdssService';
+import styles from './styles.module.scss';
 
 interface Props {
   onNext: () => void;
@@ -31,7 +31,7 @@ function Step1PersonalInfor(props: Props) {
   const router = useRouter();
   const lang = getLanguage(router);
   const [loading, setLoading] = useState(false);
-  const t = _get(resources, [lang, "step1RegisterOnlinePayment"]);
+  const t = _get(resources, [lang, 'step1RegisterOnlinePayment']);
 
   const {
     handleSubmit,
@@ -42,9 +42,9 @@ function Step1PersonalInfor(props: Props) {
     register,
   } = useForm<FormValues>({
     defaultValues: {
-      phoneNumber: "123456789",
-      email: "nghiepuit@gmail.com",
-      ref: "123123",
+      phoneNumber: '123456789',
+      email: 'nghiepuit@gmail.com',
+      ref: '123123',
     },
   });
 
@@ -58,7 +58,7 @@ function Step1PersonalInfor(props: Props) {
     hdssServices
       .verifyAllowRegisterOnlinePayment()
       .then((res) => {
-        const code = _get(res, "resultCode");
+        const code = _get(res, 'resultCode');
         const status = getStatusResponse(code, lang);
         if (status.success) {
           onNext();
@@ -84,7 +84,7 @@ function Step1PersonalInfor(props: Props) {
                 <Typography
                   variant={TypoVariants.subtitle2}
                   weight={TypoWeights.bold}
-                  className={styles["text-center"]}
+                  className={styles['text-center']}
                   component="div"
                 >
                   {t.title}
@@ -113,9 +113,9 @@ function Step1PersonalInfor(props: Props) {
                 <TextField
                   label={`${t.form.label.phone} *`}
                   placeholder="XXX - XXXX - XXXX"
-                  {...register("phoneNumber", { required: true })}
+                  {...register('phoneNumber', { required: true })}
                 />
-                {errors?.phoneNumber?.type === "required" && (
+                {errors?.phoneNumber?.type === 'required' && (
                   // @ts-ignore
                   <Box pt={1}>
                     <Typography
@@ -131,9 +131,9 @@ function Step1PersonalInfor(props: Props) {
                 <TextField
                   label={`${t.form.label.email} *`}
                   placeholder="XXXXXXXXXX"
-                  {...register("email", { required: true })}
+                  {...register('email', { required: true })}
                 />
-                {errors?.email?.type === "required" && (
+                {errors?.email?.type === 'required' && (
                   // @ts-ignore
                   <Box pt={1}>
                     <Typography
@@ -146,10 +146,7 @@ function Step1PersonalInfor(props: Props) {
                 )}
               </Grid>
               <Grid item>
-                <TextField
-                  label={`${t.form.label.ref}`}
-                  {...register("ref")}
-                />
+                <TextField label={`${t.form.label.ref}`} {...register('ref')} />
               </Grid>
             </Grid>
           </Box>

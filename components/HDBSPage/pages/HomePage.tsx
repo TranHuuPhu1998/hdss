@@ -1,13 +1,13 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { useRouter } from "next/router";
+import React from 'react';
+import { Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { useRouter } from 'next/router';
 
-import { LANGUAGE } from "commons/constants";
-import { getLanguage } from "commons/helpers";
+import { LANGUAGE } from 'commons/constants';
+import { getLanguage } from 'commons/helpers';
 
-import resources from "pages/assets/translate.json";
-import _get from "lodash/get";
+import resources from 'pages/assets/translate.json';
+import _get from 'lodash/get';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,14 +17,14 @@ const useStyles = makeStyles(() => ({
     paddingRight: 10,
   },
   item: {
-    borderStyle: "dotted",
-    borderColor: "red",
-    background: "white",
-    textAlign: "center",
+    borderStyle: 'dotted',
+    borderColor: 'red',
+    background: 'white',
+    textAlign: 'center',
     paddingTop: 40,
     paddingBottom: 40,
     borderRadius: 15,
-    cursor: "pointer",
+    cursor: 'pointer',
   },
 }));
 
@@ -38,7 +38,7 @@ const HomePage = (props: Props) => {
 
   const router = useRouter();
   const lang = getLanguage(router);
-  const t = _get(resources, [lang, "homePage"]);
+  const t = _get(resources, [lang, 'homePage']);
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>

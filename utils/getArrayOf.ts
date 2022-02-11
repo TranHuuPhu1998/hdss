@@ -1,9 +1,9 @@
-export function getArrayOf<T> (data: T | T[]): T[] {
+export function getArrayOf<T>(data: T | T[]): T[] {
   if (!data) {
-    return []
+    return [];
   }
   if (Array.isArray(data)) {
-    return data
+    return data;
   }
-  return [data]
+  return [data];
 }

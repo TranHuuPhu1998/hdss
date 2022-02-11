@@ -1,42 +1,46 @@
-import React from 'react'
-import cx from '../../../utils/classnames'
+import React from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import styles from './styles.module.scss'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import styles from './styles.module.scss';
 
 interface IconTypeMap<P = {}, D extends React.ElementType = 'span'> {
   props: P & {
-    width?: string | number
-    height?: string | number
-  }
-  defaultComponent: D
+    width?: string | number;
+    height?: string | number;
+  };
+  defaultComponent: D;
 }
 
 export type IconProps<
   D extends React.ElementType = IconTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<IconTypeMap<P, D>, D>
+> = OverrideProps<IconTypeMap<P, D>, D>;
 
 interface IconDefaultProps {
-  component: React.ElementType
-  width?: number
-  height?: number
+  component: React.ElementType;
+  width?: number;
+  height?: number;
 }
 
 const defaultProps: IconDefaultProps = {
   component: 'svg',
   width: 24,
   height: 24,
-}
+};
 
 export const Icon: BaseComponent<IconTypeMap> & {
-  displayName: string
+  displayName: string;
 } = (_props: IconProps) => {
-  const { component: Component, className, ...rest } = {
+  const {
+    component: Component,
+    className,
+    ...rest
+  } = {
     ...defaultProps,
     ..._props,
-  }
-  const classOfComponent = cx(styles.icon, className)
+  };
+  const classOfComponent = cx(styles.icon, className);
 
   return (
     <Component
@@ -46,9 +50,9 @@ export const Icon: BaseComponent<IconTypeMap> & {
       {...rest}
       className={classOfComponent}
     />
-  )
-}
+  );
+};
 
-Icon.displayName = 'Icon'
+Icon.displayName = 'Icon';
 
-export default Icon
+export default Icon;

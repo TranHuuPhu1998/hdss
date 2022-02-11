@@ -18,7 +18,7 @@ interface DialogCoverTypeMap<P = {}, D extends React.ElementType = 'div'> {
 
 type DialogCoverProps<
   D extends React.ElementType = DialogCoverTypeMap['defaultComponent'],
-  P = {},
+  P = {}
 > = OverrideProps<DialogCoverTypeMap<P, D>, D>;
 
 interface DialogFooterDefaultProps {
@@ -59,7 +59,7 @@ export const DialogCover: BaseComponent<DialogCoverTypeMap> & {
 
   const styleOfRoot = useMemo(
     () => ({ ...style, backgroundImage: `url('${image}')` }),
-    [image, style],
+    [image, style]
   );
 
   return (

@@ -109,7 +109,7 @@ const AcceptPolicyPopup = (props: Props) => {
                     {/* @ts-ignore */}
                     <Box mt={6}>
                       <Button fullWidth onClick={handleToggle}>
-                      {t.step33AccountInfor.button.close}
+                        {t.step33AccountInfor.button.close}
                       </Button>
                     </Box>
                   </Grid>

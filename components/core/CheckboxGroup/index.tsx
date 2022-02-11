@@ -1,50 +1,50 @@
-import React, { forwardRef } from 'react'
-import cx from '../../../utils/classnames'
+import React, { forwardRef } from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import { CheckboxProps } from '../Checkbox'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import { CheckboxProps } from '../Checkbox';
 
-import Context from './Context'
-import styles from './styles.module.scss'
+import Context from './Context';
+import styles from './styles.module.scss';
 
-export { default as Context } from './Context'
+export { default as Context } from './Context';
 
 interface CheckboxGroupTypeMap<P = {}, D extends React.ElementType = 'div'> {
   props: P & {
     /**
      * Selected value of radio group
      */
-    selected: string[]
+    selected: string[];
     /**
      * Callback fired on change, pass to `CheckboxGroup` components
      */
-    onChange: CheckboxProps['onChange']
+    onChange: CheckboxProps['onChange'];
     /**
      * Pass `disabled` props to `CheckboxGroup` components
      */
-    disabled?: CheckboxProps['disabled']
-  }
-  defaultComponent: D
+    disabled?: CheckboxProps['disabled'];
+  };
+  defaultComponent: D;
 }
 
 type CheckboxGroupProps<
   D extends React.ElementType = CheckboxGroupTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<CheckboxGroupTypeMap<P, D>, D>
+> = OverrideProps<CheckboxGroupTypeMap<P, D>, D>;
 
 interface CheckboxGroupDefaultProps {
-  component: React.ElementType
-  disabled: boolean
+  component: React.ElementType;
+  disabled: boolean;
 }
 
 const defaultProps: CheckboxGroupDefaultProps = {
   component: 'div',
   disabled: false,
-}
+};
 
 export type CheckboxGroupComponent = BaseComponent<CheckboxGroupTypeMap> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 // @ts-ignore
 export const CheckboxGroup: CheckboxGroupComponent = forwardRef(
@@ -60,29 +60,31 @@ export const CheckboxGroup: CheckboxGroupComponent = forwardRef(
     } = {
       ...defaultProps,
       ...props,
-    }
+    };
 
     const classOfComponent = cx(styles.root, className, {
       [styles.disabled]: disabled,
-    })
+    });
 
     const context = {
       disabled,
       selected,
       onChange,
-    }
+    };
 
     return (
       <Component {...rest} ref={ref} className={classOfComponent}>
-        <Context.Provider 
+        <Context.Provider
           // @ts-ignore
           value={context}
-        >{children}</Context.Provider>
+        >
+          {children}
+        </Context.Provider>
       </Component>
-    )
-  },
-)
+    );
+  }
+);
 
-CheckboxGroup.displayName = 'CheckboxGroup'
+CheckboxGroup.displayName = 'CheckboxGroup';
 
-export default CheckboxGroup
+export default CheckboxGroup;

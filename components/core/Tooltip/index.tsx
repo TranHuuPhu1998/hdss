@@ -1,4 +1,4 @@
-import useForkRef from '@rooks/use-fork-ref'
+import useForkRef from '@rooks/use-fork-ref';
 import React, {
   cloneElement,
   ElementType,
@@ -9,35 +9,35 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react'
+} from 'react';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import Popper, { PopperComponent, PopperPlacements } from '../Popper'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import Popper, { PopperComponent, PopperPlacements } from '../Popper';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-export * from './types'
+export * from './types';
 
 interface TooltipTypeMap<P = {}, D extends ElementType = PopperComponent> {
   props: P & {
-    content: ReactNode
-    enterDelay?: number
-    leaveDelay?: number
-    placement?: PopperPlacements
-  }
-  defaultComponent: D
+    content: ReactNode;
+    enterDelay?: number;
+    leaveDelay?: number;
+    placement?: PopperPlacements;
+  };
+  defaultComponent: D;
 }
 
 export type TooltipProps<
   D extends ElementType = TooltipTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<TooltipTypeMap<P, D>, D>
+> = OverrideProps<TooltipTypeMap<P, D>, D>;
 
 interface TooltipDefaultProps {
-  component: ElementType
-  enterDelay: number
-  leaveDelay: number
-  placement: PopperPlacements
+  component: ElementType;
+  enterDelay: number;
+  leaveDelay: number;
+  placement: PopperPlacements;
 }
 
 const defaultProps: TooltipDefaultProps = {
@@ -45,7 +45,7 @@ const defaultProps: TooltipDefaultProps = {
   enterDelay: 0,
   leaveDelay: 0,
   placement: PopperPlacements.top,
-}
+};
 
 const defaultPopperOptions = {
   modifiers: [
@@ -63,13 +63,13 @@ const defaultPopperOptions = {
       },
     },
   ],
-}
+};
 
-let hystersisOpen = false
-let hystersisTimer = null
+let hystersisOpen = false;
+let hystersisTimer = null;
 
 export const Tooltip: BaseComponent<TooltipTypeMap> & {
-  displayName?: string
+  displayName?: string;
 } = forwardRef((_props: TooltipProps, ref) => {
   const {
     component: Component,
@@ -82,89 +82,89 @@ export const Tooltip: BaseComponent<TooltipTypeMap> & {
   } = {
     ...defaultProps,
     ..._props,
-  }
+  };
 
-  const [anchorEl, setAnchorEl] = useState()
+  const [anchorEl, setAnchorEl] = useState();
   // @ts-ignore
-  const ownerRef = useForkRef(setAnchorEl, ref)
-  const hasChildRef = !children && children.ref
+  const ownerRef = useForkRef(setAnchorEl, ref);
+  const hasChildRef = !children && children.ref;
   // @ts-ignore
   // eslint-disable-next-line
-  const handleRef = hasChildRef ? useForkRef(children.ref, ownerRef) : ownerRef
+  const handleRef = hasChildRef ? useForkRef(children.ref, ownerRef) : ownerRef;
 
-  const closeTimer = useRef<NodeJS.Timeout>()
-  const enterTimer = useRef<NodeJS.Timeout>()
-  const leaveTimer = useRef<NodeJS.Timeout>()
-  const touchTimer = useRef<NodeJS.Timeout>()
-  const [open, setOpenState] = useState(false)
+  const closeTimer = useRef<NodeJS.Timeout>();
+  const enterTimer = useRef<NodeJS.Timeout>();
+  const leaveTimer = useRef<NodeJS.Timeout>();
+  const touchTimer = useRef<NodeJS.Timeout>();
+  const [open, setOpenState] = useState(false);
 
   useEffect(() => {
     return () => {
-      clearTimeout(closeTimer.current)
-      clearTimeout(enterTimer.current)
-      clearTimeout(leaveTimer.current)
-      clearTimeout(touchTimer.current)
-    }
-  }, [])
+      clearTimeout(closeTimer.current);
+      clearTimeout(enterTimer.current);
+      clearTimeout(leaveTimer.current);
+      clearTimeout(touchTimer.current);
+    };
+  }, []);
   const handleOpen = (event) => {
-    clearTimeout(hystersisTimer)
-    hystersisOpen = true
+    clearTimeout(hystersisTimer);
+    hystersisOpen = true;
 
-    setOpenState(true)
-  }
+    setOpenState(true);
+  };
 
   const handleEnter = (event) => {
-    const _childrenProps = children.props
+    const _childrenProps = children.props;
 
     if (
       event.type === 'mouseover' &&
       _childrenProps.onMouseOver &&
       event.currentTarget === anchorEl
     ) {
-      _childrenProps.onMouseOver(event)
+      _childrenProps.onMouseOver(event);
     }
 
-    clearTimeout(enterTimer.current)
-    clearTimeout(leaveTimer.current)
+    clearTimeout(enterTimer.current);
+    clearTimeout(leaveTimer.current);
     if (enterDelay && !hystersisOpen) {
-      event.persist()
+      event.persist();
       enterTimer.current = setTimeout(() => {
-        handleOpen(event)
-      }, enterDelay)
+        handleOpen(event);
+      }, enterDelay);
     } else {
-      handleOpen(event)
+      handleOpen(event);
     }
-  }
+  };
 
   const handleClose = (event) => {
-    clearTimeout(hystersisTimer)
+    clearTimeout(hystersisTimer);
     hystersisTimer = setTimeout(() => {
-      hystersisOpen = false
-    }, 500)
-    setOpenState(false)
-  }
+      hystersisOpen = false;
+    }, 500);
+    setOpenState(false);
+  };
 
   const handleLeave = (event) => {
-    clearTimeout(enterTimer.current)
-    clearTimeout(leaveTimer.current)
-    event.persist()
+    clearTimeout(enterTimer.current);
+    clearTimeout(leaveTimer.current);
+    event.persist();
     leaveTimer.current = setTimeout(() => {
-      handleClose(event)
-    }, leaveDelay)
-  }
+      handleClose(event);
+    }, leaveDelay);
+  };
 
   const childrenProps = {
     onMouseOver: handleEnter,
     onMouseLeave: handleLeave,
-  }
+  };
 
   const popperOptions = useMemo(
     () => ({
       ...defaultPopperOptions,
       placement,
     }),
-    [placement],
-  )
+    [placement]
+  );
 
   return (
     <Fragment>
@@ -184,9 +184,9 @@ export const Tooltip: BaseComponent<TooltipTypeMap> & {
         </Component>
       )}
     </Fragment>
-  )
-})
+  );
+});
 
-Tooltip.displayName = 'Tooltip'
+Tooltip.displayName = 'Tooltip';
 
-export default Tooltip
+export default Tooltip;

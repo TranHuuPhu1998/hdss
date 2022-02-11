@@ -1,11 +1,11 @@
-import React from "react";
-import { Theme, Select, SelectProps, Box, MenuItem } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { OptionSelectType } from "commons/constants/types";
-import cn from "classnames";
+import React from 'react';
+import { Theme, Select, SelectProps, Box, MenuItem } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { OptionSelectType } from 'commons/constants/types';
+import cn from 'classnames';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    borderRadius: "5px !important",
+    borderRadius: '5px !important',
     height: 50,
   },
   errorMsg: {
@@ -27,9 +27,9 @@ function getLabel<T extends OptionSelectType>({
   renderLabel,
 }: {
   option: T;
-  renderLabel: Props<T>["renderLabel"];
+  renderLabel: Props<T>['renderLabel'];
 }) {
-  if (typeof renderLabel === "function") {
+  if (typeof renderLabel === 'function') {
     return renderLabel(option);
   }
 
@@ -66,7 +66,7 @@ const SelectCustom = React.forwardRef(
         >
           {placeholder && (
             <MenuItem disabled value="">
-              <em>{loading ? "Loading data" : placeholder}</em>
+              <em>{loading ? 'Loading data' : placeholder}</em>
             </MenuItem>
           )}
           {options &&

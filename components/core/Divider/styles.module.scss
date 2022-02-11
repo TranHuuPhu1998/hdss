@@ -15,7 +15,7 @@ $filled-size: 8px;
   height: $line-size;
 }
 .filled:not(.vertical) {
-  height: $filled-size
+  height: $filled-size;
 }
 /* Styles applied to the root element if `absolute={true}`. */
 .absolute {
@@ -26,11 +26,11 @@ $filled-size: 8px;
 }
 /* Styles applied to the root element if `variant="inset"`. */
 .inset {
-  margin-left: 72,
+  margin-left: 72;
 }
 /* Styles applied to the root element if `light={true}`. */
 .light {
-  background-color: fade($divider-bg-color, 0.08),
+  background-color: fade($divider-bg-color, 0.08);
 }
 /* Styles applied to the root element if `variant="middle"`. */
 .middle {

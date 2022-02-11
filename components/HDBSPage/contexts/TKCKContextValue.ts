@@ -1,6 +1,6 @@
-import React from "react";
-import { MerchantNameItem, TerminalNameItem } from "interfaces/IGetMerchant";
-import { AccountItem } from "interfaces/IListAccount";
+import React from 'react';
+import { MerchantNameItem, TerminalNameItem } from 'interfaces/IGetMerchant';
+import { AccountItem } from 'interfaces/IListAccount';
 interface TKCKContextValue {
   loadingBtnSubmit?: boolean;
   loadingBtnConfirmOTP?: boolean;

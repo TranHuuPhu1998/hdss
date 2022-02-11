@@ -1,11 +1,11 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import EKYCComponent from "../components/EKYCVerify";
+import React from 'react';
+import { makeStyles } from '@mui/styles';
+import EKYCComponent from '../components/EKYCVerify';
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));
 

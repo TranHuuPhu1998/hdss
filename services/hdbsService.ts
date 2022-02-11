@@ -1,32 +1,32 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 import {
   ListAccountResponse,
   ListAccountRequest,
-} from "interfaces/IListAccount";
+} from 'interfaces/IListAccount';
 import {
   GetMerchantRequest,
   GetMerchantResponse,
-} from "interfaces/IGetMerchant";
+} from 'interfaces/IGetMerchant';
 import {
   CheckUserENCYRequest,
   CheckUserEKYCResponse,
-} from "interfaces/ICheckUserEKYS";
+} from 'interfaces/ICheckUserEKYS';
 import {
   InquiryEKYCPresentRequest,
   InquiryEKYCPresentResponse,
-} from "interfaces/IInquiryEKYCPresent";
+} from 'interfaces/IInquiryEKYCPresent';
 import {
   ConfirmEKYCRequest,
   ConfirmEKYCResponse,
-} from "interfaces/IConfirmEKYCPresent";
+} from 'interfaces/IConfirmEKYCPresent';
 import {
   GetAccessTokenRequest,
   GetAccessTokenResponse,
-} from "interfaces/IGetAccessToken";
+} from 'interfaces/IGetAccessToken';
 
-import { v4 as uuidv4 } from "uuid";
-import { FormDataFinal, MasterData } from "components/HDBSPage/interfaces";
-import { addMinuteFromNow, getTodayWithFormat } from "commons/helpers/date";
+import { v4 as uuidv4 } from 'uuid';
+import { FormDataFinal, MasterData } from 'components/HDBSPage/interfaces';
+import { addMinuteFromNow, getTodayWithFormat } from 'commons/helpers/date';
 import {
   CHANNEL_HDBS,
   IS_REQ_CHAL_CODE_HDBS,
@@ -37,19 +37,19 @@ import {
   SERVICE_CODE_HDBS,
   TOKEN_USERNAME,
   TOKEN_PASSWORD,
-} from "commons/constants";
-import { CreateOTPRequest, CreateOTPResponse } from "interfaces/ICreateOTP";
-import { VerifyOTPRequest, VerifyOTPResponse } from "interfaces/IVerifyOTP";
+} from 'commons/constants';
+import { CreateOTPRequest, CreateOTPResponse } from 'interfaces/ICreateOTP';
+import { VerifyOTPRequest, VerifyOTPResponse } from 'interfaces/IVerifyOTP';
 
-import * as Cookies from "commons/helpers/cookies";
-import axiosWrapper from "commons/helpers/axios/axios-instance";
+import * as Cookies from 'commons/helpers/cookies';
+import axiosWrapper from 'commons/helpers/axios/axios-instance';
 
-import _omit from "lodash/omit";
-import _get from "lodash/get";
+import _omit from 'lodash/omit';
+import _get from 'lodash/get';
 
 let userId: string;
 let clientNo: string;
-let language: string = "VI";
+let language: string = 'VI';
 let tokenExpired: string;
 
 // let userId: string = "0915423641";
@@ -60,11 +60,11 @@ let tokenExpired: string;
 export function updateMasterData(data: MasterData) {
   userId = data.userId;
   clientNo = data.clientNo;
-  language = "VI";
+  language = 'VI';
 }
 
 function updateTokenExpired(expireIn: number) {
-  tokenExpired = addMinuteFromNow(expireIn / 60 - 5, "MM/dd/yyyy H:mm:ss");
+  tokenExpired = addMinuteFromNow(expireIn / 60 - 5, 'MM/dd/yyyy H:mm:ss');
 }
 
 function generateCommonBodyRequest() {
@@ -88,8 +88,8 @@ const refreshAccessToken = async () => {
 };
 
 function generateCheckSum(object: Record<string, string>): string {
-  const md5 = _get(window, "md5");
-  let str = "";
+  const md5 = _get(window, 'md5');
+  let str = '';
   const keys = Object.keys(object);
   keys.forEach((key) => {
     str += object[key];
@@ -114,11 +114,11 @@ export const getAccessToken = async () => {
     }),
   };
   const resp: AxiosResponse<GetAccessTokenResponse> = await axios.post(
-    "/api/getAccessToken",
+    '/api/getAccessToken',
     body
   );
-  const token = _get(resp, "data.accessToken");
-  const expired = _get(resp, "data.expiryIn");
+  const token = _get(resp, 'data.accessToken');
+  const expired = _get(resp, 'data.expiryIn');
   if (token) {
     Cookies.set(KEY_TOKEN, token);
   }
@@ -143,11 +143,11 @@ export const getMerchant = async () => {
     }),
   };
   const resp: AxiosResponse<GetMerchantResponse> = await axiosWrapper.post(
-    "/api/getMerchant",
+    '/api/getMerchant',
     body,
     {
       headers: {
-        Authorization: Cookies.get(KEY_TOKEN) || "",
+        Authorization: Cookies.get(KEY_TOKEN) || '',
       },
     }
   );
@@ -178,11 +178,11 @@ export const checkUserEKYC = async (merchantId: string, terminalId: string) => {
   };
 
   const resp: AxiosResponse<CheckUserEKYCResponse> = await axios.post(
-    "/api/checkUserEKYC",
+    '/api/checkUserEKYC',
     body,
     {
       headers: {
-        Authorization: Cookies.get(KEY_TOKEN) || "",
+        Authorization: Cookies.get(KEY_TOKEN) || '',
       },
     }
   );
@@ -195,23 +195,23 @@ export const inquiryENCYPresent = async (data: FormDataFinal) => {
 
   const body: InquiryEKYCPresentRequest = {
     ..._omit(data, [
-      "ekycData",
-      "merchantName",
-      "terminalName",
-      "ekycData",
-      "isBond",
-      "isTranInternet",
-      "isUttb",
+      'ekycData',
+      'merchantName',
+      'terminalName',
+      'ekycData',
+      'isBond',
+      'isTranInternet',
+      'isUttb',
     ]),
     requestId,
     channel: CHANNEL_HDBS as string,
-    ekyType: "CURRENT_CUSTOMER",
+    ekyType: 'CURRENT_CUSTOMER',
     userId,
     clientNo,
     transactionTime,
     partnerId: PARTNER_ID as string,
     language,
-    faceMatching: "Y",
+    faceMatching: 'Y',
     checksum: generateCheckSum({
       userId,
       clientNo,
@@ -220,11 +220,11 @@ export const inquiryENCYPresent = async (data: FormDataFinal) => {
     }),
   };
   const resp: AxiosResponse<InquiryEKYCPresentResponse> = await axios.post(
-    "/api/inquiryEKYCPresent",
+    '/api/inquiryEKYCPresent',
     body,
     {
       headers: {
-        Authorization: Cookies.get(KEY_TOKEN) || "",
+        Authorization: Cookies.get(KEY_TOKEN) || '',
       },
     }
   );
@@ -253,11 +253,11 @@ export const confirmEKYCPresent = async (data: FormDataFinal) => {
     }),
   };
   const resp: AxiosResponse<ConfirmEKYCResponse> = await axios.post(
-    "/api/confirmEKYCPresent",
+    '/api/confirmEKYCPresent',
     body,
     {
       headers: {
-        Authorization: Cookies.get(KEY_TOKEN) || "",
+        Authorization: Cookies.get(KEY_TOKEN) || '',
       },
     }
   );
@@ -272,7 +272,7 @@ export const getListAccountApi = async () => {
     },
   };
   const resp: AxiosResponse<ListAccountResponse> = await axios.post(
-    "/api/getAccountByCif",
+    '/api/getAccountByCif',
     body
   );
   return resp;
@@ -286,17 +286,17 @@ export const createOTPApi = async () => {
       channel: CHANNEL_HDBS as string,
       serviceCode: SERVICE_CODE_HDBS as string,
       userId,
-      serialNo: "",
+      serialNo: '',
       narrative: NARRATIVE_HDBS as string,
-      language: "vi",
-      clientImei: "",
-      partner: "",
+      language: 'vi',
+      clientImei: '',
+      partner: '',
       isReqChalCode: IS_REQ_CHAL_CODE_HDBS as string,
-      mediaType: "",
+      mediaType: '',
     },
   };
   const resp: AxiosResponse<CreateOTPResponse> = await axios.post(
-    "/api/createOTP",
+    '/api/createOTP',
     body
   );
   return resp;
@@ -309,15 +309,15 @@ export const verifyOTPApi = async (otp: string) => {
       channel: CHANNEL_HDBS as string,
       serviceCode: SERVICE_CODE_HDBS as string,
       userId,
-      serialNo: "",
+      serialNo: '',
       narrative: NARRATIVE_HDBS as string,
-      mediaType: "",
-      challengeCode: "",
+      mediaType: '',
+      challengeCode: '',
       otp,
     },
   };
   const resp: AxiosResponse<VerifyOTPResponse> = await axios.post(
-    "/api/verifyOTP",
+    '/api/verifyOTP',
     body
   );
   return resp;

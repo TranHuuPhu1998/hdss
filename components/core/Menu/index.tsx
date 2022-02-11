@@ -1,49 +1,55 @@
-import React, { MutableRefObject, useMemo } from 'react'
+import React, { MutableRefObject, useMemo } from 'react';
 
-import cx from '../../../utils/classnames'
+import cx from '../../../utils/classnames';
 
-import { BackdropVariant } from '../Backdrop'
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import MenuList from '../MenuList'
-import Popover, { PopoverComponent } from '../Popover'
-import { PopperPlacements } from '../Popper'
+import { BackdropVariant } from '../Backdrop';
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import MenuList from '../MenuList';
+import Popover, { PopoverComponent } from '../Popover';
+import { PopperPlacements } from '../Popper';
 
-import MenuContext from './menu-context'
-import styles from './styles.module.scss'
+import MenuContext from './menu-context';
+import styles from './styles.module.scss';
 
 interface MenuTypeMap<P = {}, D extends React.ElementType = PopoverComponent> {
   props: P & {
-    onClose: (e) => void
-  }
-  anchorRef: MutableRefObject<any>
-  defaultComponent: D
+    onClose: (e) => void;
+  };
+  anchorRef: MutableRefObject<any>;
+  defaultComponent: D;
 }
 
 export type MenuProps<
   D extends React.ElementType = MenuTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<MenuTypeMap<P, D>, D>
+> = OverrideProps<MenuTypeMap<P, D>, D>;
 
 interface MenuDefaultProps {
-  component: React.ElementType
-  placement: PopperPlacements
+  component: React.ElementType;
+  placement: PopperPlacements;
 }
 
 const defaultProps: MenuDefaultProps = {
   component: Popover,
   placement: PopperPlacements.bottom,
-}
+};
 
 export const Menu: BaseComponent<MenuTypeMap> & {
-  displayName: string
+  displayName: string;
 } = (props: MenuProps) => {
-  const { component: Component, className, children, onClose, ...rest } = {
+  const {
+    component: Component,
+    className,
+    children,
+    onClose,
+    ...rest
+  } = {
     ...defaultProps,
     ...props,
-  }
+  };
 
-  const classOfComponent = cx(styles.menu, className)
-  const menuContext = useMemo(() => ({ close: onClose }), [])
+  const classOfComponent = cx(styles.menu, className);
+  const menuContext = useMemo(() => ({ close: onClose }), []);
 
   return (
     <Component
@@ -56,9 +62,9 @@ export const Menu: BaseComponent<MenuTypeMap> & {
         <MenuList>{children}</MenuList>
       </MenuContext.Provider>
     </Component>
-  )
-}
+  );
+};
 
-Menu.displayName = 'Menu'
+Menu.displayName = 'Menu';
 
-export default Menu
+export default Menu;

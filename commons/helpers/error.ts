@@ -1,17 +1,17 @@
-import { ResponseData } from "interfaces/ICommon";
-import { NextRouter } from "next/router";
-import _get from "lodash/get";
-import { ERROR_CODE_WITH_MESSAGE } from "commons/constants";
+import { ResponseData } from 'interfaces/ICommon';
+import { NextRouter } from 'next/router';
+import _get from 'lodash/get';
+import { ERROR_CODE_WITH_MESSAGE } from 'commons/constants';
 export const ERROR_CODE = {
-  Success: "00",
-  Unauthorized: "01",
-  SessionExpired: "02",
-  UserNotExist: "03",
-  UserEKYCNotFound: "04",
-  FormatMessageInvalid: "05",
-  PasswordExpired: "06",
-  SystemError: "99",
-  VerifyClientFailed: "100",
+  Success: '00',
+  Unauthorized: '01',
+  SessionExpired: '02',
+  UserNotExist: '03',
+  UserEKYCNotFound: '04',
+  FormatMessageInvalid: '05',
+  PasswordExpired: '06',
+  SystemError: '99',
+  VerifyClientFailed: '100',
 };
 
 export function handleErrorWithResponse(
@@ -23,7 +23,7 @@ export function handleErrorWithResponse(
   }
 
   router.push({
-    pathname: "/error",
+    pathname: '/error',
     query: {
       code: ERROR_CODE.VerifyClientFailed,
     },
@@ -42,7 +42,7 @@ export function getStatusResponse(
     return {
       code: ERROR_CODE.Success,
       success: true,
-      msg: "Success",
+      msg: 'Success',
     };
   }
 
@@ -52,7 +52,7 @@ export function getStatusResponse(
     msg: _get(
       ERROR_CODE_WITH_MESSAGE,
       [language, code],
-      "Có lỗi xảy ra vui lòng thử lại"
+      'Có lỗi xảy ra vui lòng thử lại'
     ),
   };
 }

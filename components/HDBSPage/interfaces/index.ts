@@ -34,8 +34,8 @@ export interface FormDataFinal extends FormDataStep1, FormDataStep3 {
 }
 
 export enum TypeCustomer {
-  KHHH = "KHHH",
-  KHM = "KHM",
+  KHHH = 'KHHH',
+  KHM = 'KHM',
 }
 
 export interface MasterData {

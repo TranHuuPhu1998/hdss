@@ -2,15 +2,15 @@
 export default (isIncludeJest = false) => {
   const isRunOnNode =
     typeof process !== 'undefined' &&
-    typeof process.versions.node !== 'undefined'
-  const isRunOnBrowser = typeof window === 'object'
+    typeof process.versions.node !== 'undefined';
+  const isRunOnBrowser = typeof window === 'object';
   if (isIncludeJest) {
-    return isRunOnBrowser
+    return isRunOnBrowser;
   }
 
   if (!isIncludeJest && !isRunOnNode) {
-    return true
+    return true;
   }
 
-  return false
-}
+  return false;
+};

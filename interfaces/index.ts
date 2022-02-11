@@ -1,2 +1,2 @@
-export * from "./IListAccount";
-export * from "./ICommon";
+export * from './IListAccount';
+export * from './ICommon';

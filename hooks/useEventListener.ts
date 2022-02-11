@@ -1,29 +1,29 @@
-import { SyntheticEvent } from 'react'
-import checkFieldType from '../utils/checkFieldType'
-import getWindow from '../utils/getWindow'
-import useEnhancedEffect from './useEnhancedEffect'
-import useEventCallback from './useEventCallback'
+import { SyntheticEvent } from 'react';
+import checkFieldType from '../utils/checkFieldType';
+import getWindow from '../utils/getWindow';
+import useEnhancedEffect from './useEnhancedEffect';
+import useEventCallback from './useEventCallback';
 
-export default function useEventListener (
+export default function useEventListener(
   element: HTMLElement | Window,
   event: string,
-  fn: (event: SyntheticEvent) => void,
+  fn: (event: SyntheticEvent) => void
 ) {
-  const win = getWindow()
-  const el = element || win
+  const win = getWindow();
+  const el = element || win;
 
-  const handler = useEventCallback(fn)
+  const handler = useEventCallback(fn);
   const destroy = () =>
     checkFieldType(el, 'removeEventListener', 'function') &&
-    el.removeEventListener(event, handler as any)
+    el.removeEventListener(event, handler as any);
 
   useEnhancedEffect(() => {
     if (checkFieldType(el, 'addEventListener', 'function')) {
-      el.addEventListener(event, handler as any)
+      el.addEventListener(event, handler as any);
     }
 
-    return destroy
-  }, [])
+    return destroy;
+  }, []);
 
-  return destroy
+  return destroy;
 }

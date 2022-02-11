@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
 export type RequestTransformer = () => any;
 export type ResponseTransformer = () => any;

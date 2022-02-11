@@ -1,23 +1,23 @@
-import React, { useState, useMemo, useRef, useContext } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
+import React, { useState, useMemo, useRef, useContext } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 
-import { makeStyles } from "@mui/styles";
-import { Card, Grid, Box, Modal } from "@mui/material";
-import { ButtonCustom, CheckboxCustom, SelectCustom } from "components/commons";
+import { makeStyles } from '@mui/styles';
+import { Card, Grid, Box, Modal } from '@mui/material';
+import { ButtonCustom, CheckboxCustom, SelectCustom } from 'components/commons';
 
-import { FormDataStep1 } from "../interfaces";
-import { OptionSelectType } from "commons/constants/types";
+import { FormDataStep1 } from '../interfaces';
+import { OptionSelectType } from 'commons/constants/types';
 
-import TKCKContext from "components/HDBSPage/contexts/TKCKContextValue";
-import { Information } from "..";
+import TKCKContext from 'components/HDBSPage/contexts/TKCKContextValue';
+import { Information } from '..';
 
-import { LANGUAGE } from "commons/constants";
-import resources from "pages/assets/translate.json";
-import warningIcon from "public/asset/images/warning.png";
-import _get from "lodash/get";
+import { LANGUAGE } from 'commons/constants';
+import resources from 'pages/assets/translate.json';
+import warningIcon from 'public/asset/images/warning.png';
+import _get from 'lodash/get';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -29,9 +29,9 @@ const useStyles = makeStyles(() => ({
     fontWeight: 500,
   },
   modalInfo: {
-    top: "unset !important",
-    "& .MuiPaper-root": {
-      borderRadius: "5px 5px 0px 0px",
+    top: 'unset !important',
+    '& .MuiPaper-root': {
+      borderRadius: '5px 5px 0px 0px',
     },
   },
 }));
@@ -54,17 +54,17 @@ type FormValues = {
 };
 
 export const TYPE_MODAL_INFO = {
-  transferInternet: "transferInternet",
-  transferAuto: "transferAuto",
-  transferBonds: "transferBonds",
+  transferInternet: 'transferInternet',
+  transferAuto: 'transferAuto',
+  transferBonds: 'transferBonds',
 };
 
 const ERROR_FORM = {
   [LANGUAGE.EN]: {
-    required: "This field is required",
+    required: 'This field is required',
   },
   [LANGUAGE.VI]: {
-    required: "Trường này là bắt buộc",
+    required: 'Trường này là bắt buộc',
   },
 };
 
@@ -79,28 +79,28 @@ const FormTKCKPage = (props: Props) => {
     watch,
   } = useForm<FormValues>({
     defaultValues: {
-      accountNo: "",
-      accountType: "",
-      merchantId: "",
-      merchantName: "",
-      terminalId: "",
-      terminalName: "",
+      accountNo: '',
+      accountType: '',
+      merchantId: '',
+      merchantName: '',
+      terminalId: '',
+      terminalName: '',
       isTranInternet: true,
       isUttb: true,
       isBond: true,
     },
   });
-  const merchantIdValue = watch("merchantId");
+  const merchantIdValue = watch('merchantId');
   const { loadingBtnSubmit, listMerchant, listTerminal, listAccount } =
     useContext(TKCKContext);
 
-  const typeModal = useRef<string>("");
+  const typeModal = useRef<string>('');
   const [openModalInfo, setOpenModalInfo] = useState(false);
 
   const router = useRouter();
   const lang = LANGUAGE.VI;
   // const lang = _get(router, "query.language", LANGUAGE.VI);
-  const t = _get(resources, [lang, "formTKCKPage"]);
+  const t = _get(resources, [lang, 'formTKCKPage']);
 
   const listAccountNew = useMemo(() => {
     return (listAccount || []).map((item) => ({
@@ -140,7 +140,7 @@ const FormTKCKPage = (props: Props) => {
 
   const _toggleModalInfo = () => {
     setOpenModalInfo((prev) => {
-      if (prev) typeModal.current = "";
+      if (prev) typeModal.current = '';
       return !prev;
     });
   };
@@ -160,7 +160,7 @@ const FormTKCKPage = (props: Props) => {
               render={({ field: { onChange: _onChange, ...rest } }) => (
                 <SelectCustom
                   errorMsg={
-                    errors.accountNo && _get(ERROR_FORM, [lang, "required"])
+                    errors.accountNo && _get(ERROR_FORM, [lang, 'required'])
                   }
                   placeholder={t?.placeholderAccount}
                   options={listAccountNew}
@@ -171,7 +171,7 @@ const FormTKCKPage = (props: Props) => {
                     const itemSelected = listAccountNew.find(
                       (item) => item.id === id
                     );
-                    setValue("accountType", itemSelected?.label || "");
+                    setValue('accountType', itemSelected?.label || '');
                     _onChange(e);
                   }}
                   {...rest}
@@ -190,7 +190,7 @@ const FormTKCKPage = (props: Props) => {
               render={({ field: { onChange: _onChange, ...rest } }) => (
                 <SelectCustom
                   errorMsg={
-                    errors.merchantId && _get(ERROR_FORM, [lang, "required"])
+                    errors.merchantId && _get(ERROR_FORM, [lang, 'required'])
                   }
                   placeholder={t?.placeholderMerchant}
                   options={listMerchantNew}
@@ -201,10 +201,10 @@ const FormTKCKPage = (props: Props) => {
                     const itemSelected = listMerchantNew.find(
                       (item) => item.id === id
                     );
-                    setValue("terminalId", "");
-                    setValue("terminalName", "");
+                    setValue('terminalId', '');
+                    setValue('terminalName', '');
                     itemSelected &&
-                      setValue("merchantName", itemSelected.value);
+                      setValue('merchantName', itemSelected.value);
                     _onChange(e);
                   }}
                   {...rest}
@@ -219,7 +219,7 @@ const FormTKCKPage = (props: Props) => {
               rules={{ required: true }}
               render={({ field: { onChange: _onChange, ...rest } }) => (
                 <SelectCustom
-                  errorMsg={errors.terminalId && "This field is required"}
+                  errorMsg={errors.terminalId && 'This field is required'}
                   placeholder={t?.placeholderTerminal}
                   options={listTerminalNew}
                   loading={listMerchant.length ? false : true}
@@ -229,7 +229,7 @@ const FormTKCKPage = (props: Props) => {
                       (item) => item.id === id
                     );
                     itemSelected &&
-                      setValue("terminalName", itemSelected.value);
+                      setValue('terminalName', itemSelected.value);
                     _onChange(e);
                   }}
                   fullWidth

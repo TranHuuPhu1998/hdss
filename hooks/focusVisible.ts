@@ -1,9 +1,9 @@
-import { useCallback } from 'react'
-import { findDOMNode } from 'react-dom'
+import { useCallback } from 'react';
+import { findDOMNode } from 'react-dom';
 
-let hadKeyboardEvent = true
-let hadFocusVisibleRecently = false
-let hadFocusVisibleRecentlyTimeout = null
+let hadKeyboardEvent = true;
+let hadFocusVisibleRecently = false;
+let hadFocusVisibleRecentlyTimeout = null;
 
 const inputTypesWhitelist = {
   text: true,
@@ -19,30 +19,30 @@ const inputTypesWhitelist = {
   time: true,
   datetime: true,
   'datetime-local': true,
-}
+};
 
-function focusTriggersKeyboardModality (node) {
-  const { type, tagName } = node
+function focusTriggersKeyboardModality(node) {
+  const { type, tagName } = node;
 
   if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) {
-    return true
+    return true;
   }
 
   if (tagName === 'TEXTAREA' && !node.readOnly) {
-    return true
+    return true;
   }
 
   if (node.isContentEditable) {
-    return true
+    return true;
   }
 
-  return false
+  return false;
 }
 
-function isFocusVisible (event) {
-  const { target } = event
+function isFocusVisible(event) {
+  const { target } = event;
   try {
-    return target.matches(':focus-visible')
+    return target.matches(':focus-visible');
   } catch (error) {
     // browsers not implementing :focus-visible will throw a SyntaxError
     // we use our own heuristic for those browsers
@@ -52,18 +52,18 @@ function isFocusVisible (event) {
 
   // no need for validFocusTarget check. the user does that by attaching it to
   // focusable events only
-  return hadKeyboardEvent || focusTriggersKeyboardModality(target)
+  return hadKeyboardEvent || focusTriggersKeyboardModality(target);
 }
 
-function handleKeyDown () {
-  hadKeyboardEvent = true
+function handleKeyDown() {
+  hadKeyboardEvent = true;
 }
 
-function handlePointerDown () {
-  hadKeyboardEvent = false
+function handlePointerDown() {
+  hadKeyboardEvent = false;
 }
 
-function handleVisibilityChange () {
+function handleVisibilityChange() {
   // @ts-ignore
   if (this.visibilityState === 'hidden') {
     // If the tab becomes active again, the browser will handle calling focus
@@ -71,52 +71,52 @@ function handleVisibilityChange () {
     // If this tab change caused a blur on an element with focus-visible,
     // re-apply the class when the user switches back to the tab.
     if (hadFocusVisibleRecently) {
-      hadKeyboardEvent = true
+      hadKeyboardEvent = true;
     }
   }
 }
 
-function prepare (ownerDocument) {
-  ownerDocument.addEventListener('keydown', handleKeyDown, true)
-  ownerDocument.addEventListener('mousedown', handlePointerDown, true)
-  ownerDocument.addEventListener('pointerdown', handlePointerDown, true)
-  ownerDocument.addEventListener('touchstart', handlePointerDown, true)
+function prepare(ownerDocument) {
+  ownerDocument.addEventListener('keydown', handleKeyDown, true);
+  ownerDocument.addEventListener('mousedown', handlePointerDown, true);
+  ownerDocument.addEventListener('pointerdown', handlePointerDown, true);
+  ownerDocument.addEventListener('touchstart', handlePointerDown, true);
   ownerDocument.addEventListener(
     'visibilitychange',
     handleVisibilityChange,
-    true,
-  )
+    true
+  );
 }
 
-export function teardown (ownerDocument) {
-  ownerDocument.removeEventListener('keydown', handleKeyDown, true)
-  ownerDocument.removeEventListener('mousedown', handlePointerDown, true)
-  ownerDocument.removeEventListener('pointerdown', handlePointerDown, true)
-  ownerDocument.removeEventListener('touchstart', handlePointerDown, true)
+export function teardown(ownerDocument) {
+  ownerDocument.removeEventListener('keydown', handleKeyDown, true);
+  ownerDocument.removeEventListener('mousedown', handlePointerDown, true);
+  ownerDocument.removeEventListener('pointerdown', handlePointerDown, true);
+  ownerDocument.removeEventListener('touchstart', handlePointerDown, true);
   ownerDocument.removeEventListener(
     'visibilitychange',
     handleVisibilityChange,
-    true,
-  )
+    true
+  );
 }
 
-function handleBlurVisible () {
-  hadFocusVisibleRecently = true
-  window.clearTimeout(hadFocusVisibleRecentlyTimeout)
+function handleBlurVisible() {
+  hadFocusVisibleRecently = true;
+  window.clearTimeout(hadFocusVisibleRecentlyTimeout);
   hadFocusVisibleRecentlyTimeout = window.setTimeout(() => {
-    hadFocusVisibleRecently = false
-    window.clearTimeout(hadFocusVisibleRecentlyTimeout)
-  }, 100)
+    hadFocusVisibleRecently = false;
+    window.clearTimeout(hadFocusVisibleRecentlyTimeout);
+  }, 100);
 }
 
-export default function useIsFocusVisible () {
+export default function useIsFocusVisible() {
   const ref = useCallback((instance) => {
     // eslint-disable-next-line react/no-find-dom-node
-    const node = findDOMNode(instance)
+    const node = findDOMNode(instance);
     if (node != null) {
-      prepare(node.ownerDocument)
+      prepare(node.ownerDocument);
     }
-  }, [])
+  }, []);
 
-  return { isFocusVisible, onBlurVisible: handleBlurVisible, ref }
+  return { isFocusVisible, onBlurVisible: handleBlurVisible, ref };
 }

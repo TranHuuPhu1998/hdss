@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { writeLog } from "commons/helpers/logger";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { getTodayWithFormat } from "commons/helpers/date";
-import { LogData } from "interfaces/ICommon";
-import ip from "ip";
+import { writeLog } from 'commons/helpers/logger';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getTodayWithFormat } from 'commons/helpers/date';
+import { LogData } from 'interfaces/ICommon';
+import ip from 'ip';
 
 export default function handler(
   req: NextApiRequest,

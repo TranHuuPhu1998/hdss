@@ -1,3 +1,3 @@
-import cn from 'classnames'
+import cn from 'classnames';
 
-export default cn
+export default cn;

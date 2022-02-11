@@ -1,18 +1,18 @@
-@import "styles/variables.scss";
+@import 'styles/variables.scss';
 
 $spacings: 12;
 
 $spacing-keys: (
-  "margin",
-  "margin-top",
-  "margin-right",
-  "margin-bottom",
-  "margin-left",
-  "padding",
-  "padding-top",
-  "padding-right",
-  "padding-bottom",
-  "padding-left"
+  'margin',
+  'margin-top',
+  'margin-right',
+  'margin-bottom',
+  'margin-left',
+  'padding',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left'
 );
 
 @mixin box-spacing($breakpoint, $key, $spacing) {

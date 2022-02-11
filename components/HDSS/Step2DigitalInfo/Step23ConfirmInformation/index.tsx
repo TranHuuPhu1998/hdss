@@ -10,7 +10,7 @@ import TextField from 'components/core/TextField';
 import Typography, {
   TypoTypes,
   TypoVariants,
-  TypoWeights
+  TypoWeights,
 } from 'components/core/Typography';
 import _parse from 'date-fns/parse';
 import _get from 'lodash/get';
@@ -23,7 +23,7 @@ import {
   ALL_WARD,
   GENDER_LIST,
   GENERAL_WARNING,
-  TAMPERING
+  TAMPERING,
 } from 'components/HDSS/const';
 import Context from 'components/HDSS/Context';
 import React, { useContext, useEffect } from 'react';

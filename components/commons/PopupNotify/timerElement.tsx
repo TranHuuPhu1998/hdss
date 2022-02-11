@@ -1,13 +1,13 @@
-import { startTimer } from "commons/helpers";
-import React, { useEffect, useRef, useCallback } from "react";
-import { makeStyles } from "@mui/styles";
+import { startTimer } from 'commons/helpers';
+import React, { useEffect, useRef, useCallback } from 'react';
+import { makeStyles } from '@mui/styles';
 
 const TIME_CLOSE_POPUP = 180;
 
 const useStyles = makeStyles(() => ({
   root: {
     fontSize: 14,
-    textAlign: "center",
+    textAlign: 'center',
   },
 }));
 

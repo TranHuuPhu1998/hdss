@@ -12,5 +12,5 @@ export interface LogData {
   body?: Record<string, string>;
 }
 
-export type Gender = "M" | "F";
-export type EkycType = "NEW_CUSTOMER" | "CURRENT_CUSTOMER";
+export type Gender = 'M' | 'F';
+export type EkycType = 'NEW_CUSTOMER' | 'CURRENT_CUSTOMER';

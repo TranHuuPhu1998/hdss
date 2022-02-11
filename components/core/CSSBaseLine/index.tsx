@@ -1,11 +1,11 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import './styles.scss'
+import './styles.scss';
 
 export const CSSBaseLine: FC<{}> = (props) => {
-  return null
-}
+  return null;
+};
 
-CSSBaseLine.displayName = 'CSSBaseLine'
+CSSBaseLine.displayName = 'CSSBaseLine';
 
-export default CSSBaseLine
+export default CSSBaseLine;

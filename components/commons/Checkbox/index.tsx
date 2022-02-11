@@ -1,12 +1,12 @@
-import React from "react";
-import { Checkbox, CheckboxProps, FormControlLabel, Grid } from "@mui/material";
+import React from 'react';
+import { Checkbox, CheckboxProps, FormControlLabel, Grid } from '@mui/material';
 
-import { Theme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
+import { Theme } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    "& svg": {
+    '& svg': {
       color: theme.palette.secondary.dark,
     },
   },
@@ -29,7 +29,7 @@ const CheckboxCustom = React.forwardRef(
             ref={ref}
             className={classes.root}
             control={<Checkbox {...rest} />}
-            label={label || ""}
+            label={label || ''}
           />
         </Grid>
         {endIcon && (

@@ -1,6 +1,6 @@
-export type Diff<T, U> = T extends U ? never : T
+export type Diff<T, U> = T extends U ? never : T;
 
-export type EventOnChange<T = unknown> = (value: T) => void
+export type EventOnChange<T = unknown> = (value: T) => void;
 
 export enum Colors {
   Primary = 'primary',

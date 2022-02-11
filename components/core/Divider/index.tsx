@@ -1,45 +1,45 @@
-import React from 'react'
-import cx from '../../../utils/classnames'
+import React from 'react';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
 
-import styles from './styles.module.scss'
-import { DividerOrientation, DividerType, DividerVarients } from './types'
+import styles from './styles.module.scss';
+import { DividerOrientation, DividerType, DividerVarients } from './types';
 
-export * from './types'
+export * from './types';
 
 interface DividerTypeMap<P = {}, D extends React.ElementType = 'hr'> {
   props: P & {
     /**
      * The type to use.
      */
-    type?: DividerType
+    type?: DividerType;
     /**
      * Absolutely position the element.
      */
-    absolute?: boolean
+    absolute?: boolean;
     /**
      * If `true`, the divider will adapt to a parent flex container.
      */
-    flexItem?: boolean
+    flexItem?: boolean;
     /**
      * The divider orientation.
      */
-    orientation?: DividerOrientation
-  }
-  defaultComponent: D
+    orientation?: DividerOrientation;
+  };
+  defaultComponent: D;
 }
 
 export type DividerProps<
   D extends React.ElementType = DividerTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<DividerTypeMap<P, D>, D>
+> = OverrideProps<DividerTypeMap<P, D>, D>;
 
 interface DividerDefaultProps {
-  component: React.ElementType
-  type: DividerType
-  orientation: DividerOrientation
-  variant: DividerVarients
+  component: React.ElementType;
+  type: DividerType;
+  orientation: DividerOrientation;
+  variant: DividerVarients;
 }
 
 const defaultProps: DividerDefaultProps = {
@@ -47,11 +47,11 @@ const defaultProps: DividerDefaultProps = {
   type: DividerType.line,
   orientation: DividerOrientation.horizontal,
   variant: DividerVarients.fullWidth,
-}
+};
 
 export type DividerComponent = BaseComponent<DividerTypeMap> & {
-  displayName?: string
-}
+  displayName?: string;
+};
 
 export const Divider: DividerComponent = (props: DividerProps) => {
   const {
@@ -66,7 +66,7 @@ export const Divider: DividerComponent = (props: DividerProps) => {
   } = {
     ...defaultProps,
     ...props,
-  }
+  };
 
   const classOfComponent = cx(
     styles.divider,
@@ -77,12 +77,12 @@ export const Divider: DividerComponent = (props: DividerProps) => {
       [styles.flexItem]: !!flexItem,
       [styles.vertical]: orientation === DividerOrientation.vertical,
     },
-    className,
-  )
+    className
+  );
 
-  return <Component {...rest} className={classOfComponent} />
-}
+  return <Component {...rest} className={classOfComponent} />;
+};
 
-Divider.displayName = 'Divider'
+Divider.displayName = 'Divider';
 
-export default Divider
+export default Divider;
