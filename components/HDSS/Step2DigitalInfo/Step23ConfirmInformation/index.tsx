@@ -189,7 +189,6 @@ function Step23ConfirmInformation(props: Props) {
           // @ts-ignore
           <Calendar
             label={t.expiredDateOfCMND}
-            placeholder={t.expiredDateOfCMND}
             onChange={onChange}
             onBlur={onBlur}
             // @ts-ignore
@@ -207,7 +206,6 @@ function Step23ConfirmInformation(props: Props) {
       return (
         <TextField
           label={t.oldCMND}
-          placeholder={t.oldCMND}
           {...register('oldIdNumber')}
         />
       );
@@ -357,7 +355,6 @@ function Step23ConfirmInformation(props: Props) {
                   <Grid item>
                     <TextField
                       label={t.fullName}
-                      placeholder={t.fullName}
                       {...register('fullName', {
                         required: true,
                         maxLength: 50,
@@ -407,7 +404,6 @@ function Step23ConfirmInformation(props: Props) {
                         // @ts-ignore
                         <Calendar
                           label={t.dateOfBirth}
-                          placeholder={t.dateOfBirth}
                           onChange={onChange}
                           onBlur={onBlur}
                           // @ts-ignore
@@ -485,7 +481,6 @@ function Step23ConfirmInformation(props: Props) {
                   <Grid item>
                     <TextField
                       label={t.cmnd}
-                      placeholder={t.cmnd}
                       {...register('idNumber', { required: true })}
                       readOnly
                     />
@@ -516,7 +511,6 @@ function Step23ConfirmInformation(props: Props) {
                         // @ts-ignore
                         <Calendar
                           label={t.dateOfCMND}
-                          placeholder={t.dateOfCMND}
                           onChange={onChange}
                           onBlur={onBlur}
                           // @ts-ignore
@@ -581,7 +575,6 @@ function Step23ConfirmInformation(props: Props) {
                   <Grid item>
                     <TextField
                       label={t.placeOfCMND}
-                      placeholder={t.placeOfCMND}
                       {...register('placeOfIssue', {
                         required: true,
                         maxLength: 30,
@@ -674,7 +667,6 @@ function Step23ConfirmInformation(props: Props) {
                   <Grid item>
                     <TextField
                       label={t.apartmentNumber}
-                      placeholder={t.apartmentNumber}
                       {...register('permanentAddress.apartmentNumber', {
                         required: true,
                       })}

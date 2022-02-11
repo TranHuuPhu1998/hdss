@@ -115,6 +115,7 @@ class SingleOtpInput extends PureComponent {
           disabled={isDisabled}
           value={value ? value : ''}
           size={InputSizes.lg}
+          type="number"
           {...rest}
         />
         {!isLastChild && separator}
