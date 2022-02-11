@@ -165,6 +165,7 @@ const FormTKCKPage = (props: Props) => {
                   placeholder={t?.placeholderAccount}
                   options={listAccountNew}
                   loading={listAccountNew.length ? false : true}
+                  // @ts-ignore
                   fullWidth
                   onChange={(e) => {
                     const id = e.target.value;
@@ -194,6 +195,7 @@ const FormTKCKPage = (props: Props) => {
                   }
                   placeholder={t?.placeholderMerchant}
                   options={listMerchantNew}
+                  // @ts-ignore
                   fullWidth
                   loading={listMerchant.length ? false : true}
                   onChange={(e) => {
@@ -223,6 +225,7 @@ const FormTKCKPage = (props: Props) => {
                   placeholder={t?.placeholderTerminal}
                   options={listTerminalNew}
                   loading={listMerchant.length ? false : true}
+                  // @ts-ignore
                   onChange={(e) => {
                     const id = e.target.value;
                     const itemSelected = listTerminalNew.find(
