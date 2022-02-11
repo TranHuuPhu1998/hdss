@@ -68,7 +68,9 @@ function Step23ConfirmInformation(props: Props) {
   // TODO: get data from eKYC
   const defaultValues = {
     fullName: EXAMPLE_OCR_DATA.fullNameOcr,
-    dateOfBirth: null,
+    dateOfBirth: EXAMPLE_OCR_DATA.birthDateOcr
+      ? _parse(EXAMPLE_OCR_DATA.birthDateOcr, 'dd/MM/yyyy', new Date())
+      : null,
     gender: EXAMPLE_OCR_DATA.gender || null,
     idNumber: EXAMPLE_OCR_DATA.idNumber,
     idNumberType: EXAMPLE_OCR_DATA.idNumberType,
@@ -131,13 +133,13 @@ function Step23ConfirmInformation(props: Props) {
       setValue('permanentAddress.district', null);
       setValue('permanentAddress.ward', null);
     }
-  }, [watchState]);
+  }, [setValue, watchState]);
 
   useEffect(() => {
     if (watchDistrict) {
       setValue('permanentAddress.ward', null);
     }
-  }, [watchDistrict]);
+  }, [setValue, watchDistrict]);
 
   function calculateAge(birthday: Date) {
     const ageDifMs = Date.now() - birthday.getTime();
@@ -145,8 +147,7 @@ function Step23ConfirmInformation(props: Props) {
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
-  function handleValidateDateOfBirth(dateOfBirth: string) {
-    const date = _parse(dateOfBirth, 'dd/MM/yyyy', new Date());
+  function handleValidateDateOfBirth(date: Date) {
     const age = calculateAge(date);
     return age >= 18;
   }
@@ -266,6 +267,7 @@ function Step23ConfirmInformation(props: Props) {
       } else if (!_isEmpty(tamperingWarning)) {
         errMsg = parseEKYCErrorMessage(generalWarning, TAMPERING as any);
       }
+      result = errMsg;
     }
     return result;
   }
@@ -391,16 +393,30 @@ function Step23ConfirmInformation(props: Props) {
                   {/* row */}
                   {/* row */}
                   <Grid item>
-                    <TextField
-                      label={t.dateOfBirth}
-                      placeholder={t.dateOfBirth}
-                      {...register('dateOfBirth', {
+                    <Controller
+                      control={control}
+                      name="dateOfBirth"
+                      rules={{
                         required: true,
                         validate: {
+                          // @ts-ignore
                           minYearOld: handleValidateDateOfBirth,
                         },
-                      })}
-                      readOnly
+                      }}
+                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                        // @ts-ignore
+                        <Calendar
+                          label={t.dateOfBirth}
+                          placeholder={t.dateOfBirth}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          // @ts-ignore
+                          date={value}
+                          value={value}
+                          ref={ref}
+                          readOnly
+                        />
+                      )}
                     />
                     {errors?.dateOfBirth?.type === 'required' && (
                       // @ts-ignore
@@ -689,7 +705,7 @@ function Step23ConfirmInformation(props: Props) {
                   </Button>
                 </Grid>
               )}
-              <Grid item xs={5} md={5}>
+              <Grid item xs={6} md={6}>
                 <Button
                   fullWidth
                   variant={ButtonVariants.outlined}

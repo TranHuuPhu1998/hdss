@@ -25,6 +25,7 @@ import ChevronTop from 'icons/ChevronTop';
 import ChevronBottom from 'icons/ChevronBottom';
 import Popover from '../Popover';
 import { BackdropVariant } from '../Backdrop';
+import Typography, { TypoVariants } from '../Typography';
 
 interface CalendarTypeMap<
   P = {},
@@ -88,6 +89,7 @@ interface CalendarDefaultProps extends Partial<CalendarProps> {
   minDate: Date;
   maxDate: Date;
   component: React.ElementType;
+  label?: string;
 }
 
 const defaultProps: CalendarDefaultProps = {
@@ -120,6 +122,7 @@ export const Calendar: CalendarComponent = forwardRef(
       months,
       minDate,
       maxDate,
+      label,
       ...rest
     } = {
       ...defaultProps,
@@ -220,6 +223,15 @@ export const Calendar: CalendarComponent = forwardRef(
 
     return (
       <>
+        {label && (
+          <Typography
+            variant={TypoVariants.body2}
+            className={styles.label}
+            component="label"
+          >
+            {label}
+          </Typography>
+        )}
         <Component
           {...rest}
           value={dateValue}
