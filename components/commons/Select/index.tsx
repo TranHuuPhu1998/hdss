@@ -1,8 +1,11 @@
-import React from 'react';
-import { Theme, Select, SelectProps, Box, MenuItem } from '@mui/material';
+/* eslint-disable react/require-default-props */
+// @ts-ignore
+import { Box, MenuItem, Select, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { OptionSelectType } from 'commons/constants/types';
 import cn from 'classnames';
+import { OptionSelectType } from 'commons/constants/types';
+import React from 'react';
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderRadius: '5px !important',

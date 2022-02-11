@@ -23,8 +23,6 @@ class DateRange extends Component<any, any> {
     disabledDates: [],
   };
 
-  calendar: any;
-
   constructor(props, context) {
     super(props, context);
     this.setSelection = this.setSelection.bind(this);
@@ -40,6 +38,8 @@ class DateRange extends Component<any, any> {
       preview: null,
     };
   }
+
+  calendar: any;
 
   calcNewSelection(value, isSingleValue = true) {
     const focusedRange = this.props.focusedRange || this.state.focusedRange;

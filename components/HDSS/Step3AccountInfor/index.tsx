@@ -46,8 +46,6 @@ const Step3AccountInfor = (props: Props) => {
   const {
     handleSubmit,
     formState: { errors },
-    control,
-    setValue,
     watch,
     register,
   } = useForm<FormValues>({
@@ -58,11 +56,11 @@ const Step3AccountInfor = (props: Props) => {
   password.current = watch('password', '');
   console.log('>>>>>>> errors', errors); //TODO: to-remove
 
-  function handleAcceptPolicy(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsAccepted(!isAccepted);
-  }
+  // function handleAcceptPolicy(e: ChangeEvent<HTMLInputElement>) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   setIsAccepted(!isAccepted);
+  // }
 
   function toggleNotify(desc?: string) {
     setPopupNotify(() => {

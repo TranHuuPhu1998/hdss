@@ -112,12 +112,15 @@ export const Select: SelectComponent = forwardRef(
       [onClick, onFocus, open, rest.disabled]
     );
 
-    const handleClose = useCallback((e) => {
-      setOpen(false);
-      if (onBlur) {
-        return onBlur(e);
-      }
-    }, []);
+    const handleClose = useCallback(
+      (e) => {
+        setOpen(false);
+        if (onBlur) {
+          return onBlur(e);
+        }
+      },
+      [onBlur]
+    );
 
     const selectContext = useMemo(
       () => ({

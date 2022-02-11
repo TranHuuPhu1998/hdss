@@ -40,7 +40,7 @@ const AcceptPolicyPopup = (props: Props) => {
     } else {
       allowScroll();
     }
-  }, [open]);
+  }, [allowScroll, blockScroll, open]);
 
   return (
     <>
