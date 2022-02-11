@@ -29,6 +29,7 @@ const defineds = {
 const staticRangeHandler = {
   range: {},
   isSelected (range) {
+    // @ts-ignore
     const definedRange = this.range()
     return (
       isSameDay(range.startDate, definedRange.startDate) &&
@@ -36,6 +37,7 @@ const staticRangeHandler = {
     )
   },
   isDisabled (minDate, maxDate) {
+    // @ts-ignore
     const currentRange = this.range()
 
     return (

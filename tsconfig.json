@@ -14,10 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    // add more
+    "noImplicitThis": false,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "alwaysStrict": true,
@@ -25,6 +22,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "target": "esnext",
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "paths": {
       "@hdbank/ui/*": [
         "components/core"

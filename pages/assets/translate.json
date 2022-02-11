@@ -133,7 +133,7 @@
       "close": "Đóng",
       "genderValue": {
         "M": "Nam",
-        "FM": "Nữ"
+        "F": "Nữ"
       },
       "academic": {
         "highschool": "THPT",
@@ -245,6 +245,10 @@
         "mustFutureDate": "Phải lớn hơn ngày hiện tại",
         "passwordNotMatch": "Mật khẩu không trùng khớp",
         "passwordPattern": "Mật khẩu không hợp lệ"
+      },
+      "ekyc": {
+        "title": "Kết quả EKYC",
+        "success": "EKYC Thành công"
       }
     },
     "alert": {
@@ -384,7 +388,7 @@
       "close": "Close",
       "genderValue": {
         "M": "Male",
-        "FM": "Female"
+        "F": "Female"
       },
       "academic": {
         "highschool": "High School",
@@ -495,6 +499,10 @@
         "mustFutureDate": "Must be less than current date",
         "passwordNotMatch": "Confirm password not match",
         "passwordPattern": "Password is not valid"
+      },
+      "ekyc": {
+        "title": "EKYC Result",
+        "success": "EKYC Success"
       }
     },
     "alert": {

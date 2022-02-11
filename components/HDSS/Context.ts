@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent } from 'react';
 
 export interface IConfirmInfor {}
 export interface IAdditionInfor {}
@@ -8,6 +8,8 @@ export interface ContextValue {
   setConfirmInfor: (value: IConfirmInfor) => void;
   additionInfor: IAdditionInfor;
   setAdditionInfor: (value: IAdditionInfor) => void;
+  ekycData: any;
+  setEkycData: (value: any) => void;
 }
 
 const Context = React.createContext<ContextValue>({} as ContextValue);

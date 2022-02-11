@@ -106,15 +106,17 @@ export type CalendarComponent = BaseComponent<CalendarTypeMap> & {
   displayName?: string;
 };
 
-// @ts-ignore
 export const Calendar: CalendarComponent = forwardRef(
   (props: CalendarProps, ref: MutableRefObject<any>) => {
     const {
+      // @ts-ignore
       component: Component,
       date,
       dateDisplayFormat,
+      // @ts-ignore
       showStaticRange,
       onChange,
+      // @ts-ignore
       months,
       minDate,
       maxDate,

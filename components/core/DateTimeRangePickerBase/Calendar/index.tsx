@@ -34,6 +34,7 @@ import styles from "./styles.module.scss";
 class Calendar extends PureComponent<any, any> {
   dateOptions = {};
   listSizeCache = {};
+  // @ts-ignore
   state;
   list;
 
@@ -675,8 +676,7 @@ class Calendar extends PureComponent<any, any> {
                 {this.renderMinute("startMinute")}
               </div>
               <ArrowRight
-                width="12px"
-                height="24px"
+                // @ts-ignore
                 className={styles.arrowSeparateTime}
               />
               <div className={styles.timeItem}>

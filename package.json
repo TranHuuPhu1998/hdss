@@ -36,7 +36,8 @@
     "react-toastify": "^8.1.0",
     "sass": "^1.49.7",
     "uuid": "^8.3.2",
-    "warning": "^4.0.3"
+    "warning": "^4.0.3",
+    "csstype": "^2.6.10"
   },
   "devDependencies": {
     "@types/ip": "^1.1.0",

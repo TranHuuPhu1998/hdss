@@ -64,6 +64,7 @@ function handlePointerDown () {
 }
 
 function handleVisibilityChange () {
+  // @ts-ignore
   if (this.visibilityState === 'hidden') {
     // If the tab becomes active again, the browser will handle calling focus
     // on the element (Safari actually calls it twice).

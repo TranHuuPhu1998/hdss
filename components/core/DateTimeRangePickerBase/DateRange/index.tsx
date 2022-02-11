@@ -9,10 +9,10 @@ import min from 'date-fns/min'
 
 import React, { Component } from 'react'
 
-import cx from '../../../utils/classnames'
+import cx from '../../../../utils/classnames'
 import Calendar from '../Calendar'
 import { findNextRangeIndex } from '../utils'
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 class DateRange extends Component<any, any> {
   static defaultProps = {

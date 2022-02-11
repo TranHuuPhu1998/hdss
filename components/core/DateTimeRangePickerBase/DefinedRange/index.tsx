@@ -2,7 +2,7 @@ import cx from 'classnames'
 import React, { Component } from 'react'
 import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 class DefinedRanges extends Component<any, any> {
   static defaultProps = {

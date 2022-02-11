@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import 'styles/variables.scss';
 
 $columns: 12;
@@ -78,9 +79,9 @@ $spacings: 12;
     width: auto;
     max-width: none;
   } @else {
-    max-width: percentage($size / 12);
+    max-width: percentage(math.div($size, 12));
     flex-grow: 0;
-    flex-basis: percentage($size / 12);
+    flex-basis: percentage(math.div($size, 12));
   }
 }
 
@@ -88,17 +89,16 @@ $spacings: 12;
 @mixin grid-spacing($spacing) {
   $themeSpacing: $spacing-unit * $spacing;
   & {
-    margin: (-$themeSpacing / 2);
+    margin: math.div(-$themeSpacing, 2);
     width: calc(100% + #{$themeSpacing});
   }
-  
+
   > .item {
-    padding: $themeSpacing / 2;
+    padding: math.div($themeSpacing, 2);
   }
 }
 
 @each $breakpoint, $value in $grid-breakpoints {
-
   @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
     @for $i from 1 through $columns {
       .#{$breakpoint}-#{$i} {

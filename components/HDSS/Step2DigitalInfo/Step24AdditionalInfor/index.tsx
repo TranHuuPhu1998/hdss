@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { getLanguage } from 'commons/helpers';
 import { EKYCData } from 'commons/helpers/ekyc';
+import PopupNotify from 'components/commons/PopupNotify';
 import Box from 'components/core/Box';
 import Button from 'components/core/Button';
 import Checkbox from 'components/core/Checkbox';
@@ -19,16 +20,22 @@ import Typography, {
 } from 'components/core/Typography';
 import ChevronTop from 'icons/ChevronTop';
 import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
 import { useRouter } from 'next/router';
 import resources from 'pages/assets/translate.json';
-import React, { useContext, useEffect, useState } from 'react';
+import {
+  ALL_BRANCHES,
+  ALL_DISTRICT,
+  ALL_STATES,
+  ALL_WARD,
+  CAREER_LIST,
+  LITERACYANDMARITAL,
+} from 'components/HDSS/const';
+import Context from 'components/HDSS/Context';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import AmericanSignPopup from './AmericanSignPopup';
-import { ACADEMIC_LEVEL, CAREER_DATA, MARIAL_STATUS } from './const';
 import styles from './styles.module.scss';
-import _isEmpty from 'lodash/isEmpty';
-import Context from 'pages/hdss/Context';
-import PopupNotify from 'components/commons/PopupNotify';
 
 type FormValues = {
   // currentAddress: string;
@@ -37,15 +44,17 @@ type FormValues = {
   job: string;
   jobPosition: string | null;
   averageIncome: string;
-  permanentAddress: {
-    apartmentNumber: string;
-    city: string;
-    district: string;
-    ward: string;
+  permanentAddress?: {
+    apartmentNumber?: string | null;
+    city?: string | null;
+    district?: string | null;
+    ward?: string | null;
   };
-  tradingPoint: string;
-  district: string;
-  branch: string;
+  tradingPoint: {
+    city: string | null;
+    district: string | null;
+    branch: string | null;
+  };
 };
 
 interface Props {
@@ -85,13 +94,42 @@ function Step24AdditionalInfor(props: Props) {
 
   const watchCareer = watch('job');
   const watchAverageIncome = watch('averageIncome');
-  console.log('>>>> watchAverageIncome', watchAverageIncome); //TODO: to-remove
+  const watchState = watch('permanentAddress.city');
+  const watchDistrict = watch('permanentAddress.district');
+  const watchTradingPointState = watch('tradingPoint.city');
+  const watchTradingPointDistrict = watch('tradingPoint.district');
 
   useEffect(() => {
     if (watchCareer) {
       setValue('jobPosition', null);
     }
   }, [watchCareer]);
+
+  useEffect(() => {
+    if (watchState) {
+      setValue('permanentAddress.district', null);
+      setValue('permanentAddress.ward', null);
+    }
+  }, [watchState]);
+
+  useEffect(() => {
+    if (watchDistrict) {
+      setValue('permanentAddress.ward', null);
+    }
+  }, [watchDistrict]);
+
+  useEffect(() => {
+    if (watchTradingPointState) {
+      setValue('tradingPoint.district', null);
+      setValue('tradingPoint.branch', null);
+    }
+  }, [watchTradingPointState]);
+
+  useEffect(() => {
+    if (watchTradingPointDistrict) {
+      setValue('tradingPoint.branch', null);
+    }
+  }, [watchTradingPointDistrict]);
 
   function togglePersonalInfor() {
     setOpenPersonalInfor(!isOpenPersonalInfor);
@@ -108,11 +146,13 @@ function Step24AdditionalInfor(props: Props) {
   function renderJobPositionOptions() {
     let xhtml = null;
     if (watchCareer) {
-      const career = (CAREER_DATA || []).find((x) => x.value === watchCareer);
-      if (career && !_isEmpty(career.positions)) {
-        xhtml = (career.positions || []).map((pos) => (
+      const positions = (CAREER_LIST.listPosition || []).filter(
+        (x) => x.careerId === watchCareer
+      );
+      if (!_isEmpty(positions)) {
+        xhtml = positions.map((pos) => (
           <Option key={pos.value} value={pos.value}>
-            {pos.name}
+            {pos.label}
           </Option>
         ));
       }
@@ -120,7 +160,7 @@ function Step24AdditionalInfor(props: Props) {
     return xhtml;
   }
 
-  function handleToggleAcceptPolicy(e) {
+  function handleToggleAcceptPolicy(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setIsAcceptPolicy(!isAcceptPolicy);
   }
@@ -140,6 +180,72 @@ function Step24AdditionalInfor(props: Props) {
     });
   }
 
+  function renderDistrictOptions() {
+    let xhtml = null;
+    if (!watchState) return null;
+    const districts = ALL_DISTRICT.filter((x) => x.state === watchState);
+    if (!_isEmpty(districts)) {
+      xhtml = districts.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
+  function renderWardOptions() {
+    let xhtml = null;
+    if (!watchState) return null;
+    if (!watchDistrict) return null;
+    const wards = ALL_WARD.filter(
+      (x) => x.state === watchState && x.district === watchDistrict
+    );
+    if (!_isEmpty(wards)) {
+      xhtml = wards.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
+  function renderTradingPointDistrictOptions() {
+    let xhtml = null;
+    if (!watchTradingPointState) return null;
+    const districts = ALL_DISTRICT.filter(
+      (x) => x.state === watchTradingPointState
+    );
+    if (!_isEmpty(districts)) {
+      xhtml = districts.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
+  function renderTradingPointBranchOptions() {
+    let xhtml = null;
+    if (!watchTradingPointState) return null;
+    if (!watchTradingPointDistrict) return null;
+    const branchs = ALL_BRANCHES.filter(
+      (x) =>
+        x.state === watchTradingPointState &&
+        x.district === watchTradingPointDistrict
+    );
+    if (!_isEmpty(branchs)) {
+      xhtml = branchs.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
   function handleSubmitForm(values: FormValues) {
     console.log('>>>> Step24: ', values); //TODO: to-remove
     if (isAcceptPolicy) {
@@ -147,7 +253,7 @@ function Step24AdditionalInfor(props: Props) {
       setAdditionInfor(values);
       onNext();
     } else {
-      toggleNotify(globalT.alert.acceptPolicy)
+      toggleNotify(globalT.alert.acceptPolicy);
     }
   }
 
@@ -245,9 +351,9 @@ function Step24AdditionalInfor(props: Props) {
                                 value={value}
                                 ref={ref}
                               >
-                                {ACADEMIC_LEVEL.map((x) => (
+                                {LITERACYANDMARITAL.literacy.map((x) => (
                                   <Option key={x.value} value={x.value}>
-                                    {t.academic[x.name]}
+                                    {x.label}
                                   </Option>
                                 ))}
                               </Select>
@@ -271,9 +377,9 @@ function Step24AdditionalInfor(props: Props) {
                                 value={value}
                                 ref={ref}
                               >
-                                {MARIAL_STATUS.map((x) => (
+                                {LITERACYANDMARITAL.marital.map((x) => (
                                   <Option key={x.value} value={x.value}>
-                                    {t.marialStatus[x.name]}
+                                    {x.label}
                                   </Option>
                                 ))}
                               </Select>
@@ -336,9 +442,9 @@ function Step24AdditionalInfor(props: Props) {
                                 ref={ref}
                                 menuClassName={styles['career-select']}
                               >
-                                {CAREER_DATA.map((x) => (
+                                {CAREER_LIST.listCareer.map((x) => (
                                   <Option key={x.value} value={x.value}>
-                                    {x.name}
+                                    {x.label}
                                   </Option>
                                 ))}
                               </Select>
@@ -504,8 +610,13 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {ALL_STATES.map((x) => (
+                                  <Option value={x.value} key={x.value}>
+                                    {x.label}
+                                  </Option>
+                                ))}
                               </Select>
                             )}
                           />
@@ -526,8 +637,9 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {renderDistrictOptions()}
                               </Select>
                             )}
                           />
@@ -548,8 +660,9 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {renderWardOptions()}
                               </Select>
                             )}
                           />
@@ -559,7 +672,7 @@ function Step24AdditionalInfor(props: Props) {
                         <Grid item>
                           <Controller
                             control={control}
-                            name="tradingPoint"
+                            name="tradingPoint.city"
                             render={({
                               field: { onChange, onBlur, value, ref },
                             }) => (
@@ -570,8 +683,13 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {ALL_STATES.map((x) => (
+                                  <Option value={x.value} key={x.value}>
+                                    {x.label}
+                                  </Option>
+                                ))}
                               </Select>
                             )}
                           />
@@ -581,7 +699,7 @@ function Step24AdditionalInfor(props: Props) {
                         <Grid item>
                           <Controller
                             control={control}
-                            name="district"
+                            name="tradingPoint.district"
                             render={({
                               field: { onChange, onBlur, value, ref },
                             }) => (
@@ -591,8 +709,9 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {renderTradingPointDistrictOptions()}
                               </Select>
                             )}
                           />
@@ -602,7 +721,7 @@ function Step24AdditionalInfor(props: Props) {
                         <Grid item>
                           <Controller
                             control={control}
-                            name="branch"
+                            name="tradingPoint.branch"
                             render={({
                               field: { onChange, onBlur, value, ref },
                             }) => (
@@ -612,8 +731,9 @@ function Step24AdditionalInfor(props: Props) {
                                 onBlur={onBlur}
                                 value={value}
                                 ref={ref}
+                                menuClassName={styles['menu']}
                               >
-                                {/* TODO: render options */}
+                                {renderTradingPointBranchOptions()}
                               </Select>
                             )}
                           />

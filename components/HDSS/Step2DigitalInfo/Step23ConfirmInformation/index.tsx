@@ -1,35 +1,45 @@
-import React, { useContext } from 'react';
+import { getLanguage } from 'commons/helpers';
 import Box from 'components/core/Box';
 import Button, { ButtonVariants } from 'components/core/Button';
+import Calendar from 'components/core/Calendar';
 import Grid from 'components/core/Grid';
+import { InputStatuses } from 'components/core/Input';
+import Option from 'components/core/Option';
+import { Select } from 'components/core/Select';
 import TextField from 'components/core/TextField';
 import Typography, {
   TypoTypes,
   TypoVariants,
-  TypoWeights,
+  TypoWeights
 } from 'components/core/Typography';
-import styles from './styles.module.scss';
-import { EKYCData } from 'commons/helpers/ekyc';
-import { useRouter } from 'next/router';
-import { getLanguage } from 'commons/helpers';
-import resources from 'pages/assets/translate.json';
-import _get from 'lodash/get';
-import { Controller, useForm } from 'react-hook-form';
-import { EXAMPLE_OCR_DATA, GENDER_OPTIONS } from './const';
-import { Select } from 'components/core/Select';
-import Option from 'components/core/Option';
-import Context from 'pages/hdss/Context';
 import _parse from 'date-fns/parse';
-import Calendar from 'components/core/Calendar';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
+import { useRouter } from 'next/router';
+import resources from 'pages/assets/translate.json';
+import {
+  ALL_DISTRICT,
+  ALL_STATES,
+  ALL_WARD,
+  GENDER_LIST,
+  GENERAL_WARNING,
+  TAMPERING
+} from 'components/HDSS/const';
+import Context from 'components/HDSS/Context';
+import React, { useContext, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { EXAMPLE_OCR_DATA } from './const';
+import { parseEKYCErrorMessage } from './helper';
+import styles from './styles.module.scss';
 
 type FormValues = {
-  fullName: string;
-  dateOfBirth: string;
+  fullName?: string;
+  dateOfBirth?: string;
   gender?: string | null;
   idNumber: string;
   idNumberType: string;
-  dateOfIssue: string;
-  expireOfIssue: string;
+  dateOfIssue: Date;
+  expireOfIssue: Date;
   placeOfIssue: string;
   oldIdNumber: string;
   permanentAddress: {
@@ -43,21 +53,22 @@ type FormValues = {
 interface Props {
   onNext: () => void;
   onReset: () => void;
-  ekycData: EKYCData;
 }
 
 function Step23ConfirmInformation(props: Props) {
-  const { onNext, ekycData, onReset } = { ...props };
+  const { onNext, onReset } = { ...props };
   const router = useRouter();
   const lang = getLanguage(router);
   const t = _get(resources, [lang, 'step23ConfirmInformation']);
   const globalT = _get(resources, [lang]);
   const context = useContext(Context);
+  const { ekycData } = context;
+  console.log('>>>>>> ekycData context: ', ekycData); //TODO: to-remove
 
   // TODO: get data from eKYC
   const defaultValues = {
     fullName: EXAMPLE_OCR_DATA.fullNameOcr,
-    dateOfBirth: EXAMPLE_OCR_DATA.birthDateOcr,
+    dateOfBirth: null,
     gender: EXAMPLE_OCR_DATA.gender || null,
     idNumber: EXAMPLE_OCR_DATA.idNumber,
     idNumberType: EXAMPLE_OCR_DATA.idNumberType,
@@ -112,6 +123,21 @@ function Step23ConfirmInformation(props: Props) {
   const watchIdNumberType = watch('idNumberType');
   const watchIdNumber = watch('idNumber');
   const watchDateOfIssue = watch('dateOfIssue');
+  const watchState = watch('permanentAddress.city');
+  const watchDistrict = watch('permanentAddress.district');
+
+  useEffect(() => {
+    if (watchState) {
+      setValue('permanentAddress.district', null);
+      setValue('permanentAddress.ward', null);
+    }
+  }, [watchState]);
+
+  useEffect(() => {
+    if (watchDistrict) {
+      setValue('permanentAddress.ward', null);
+    }
+  }, [watchDistrict]);
 
   function calculateAge(birthday: Date) {
     const ageDifMs = Date.now() - birthday.getTime();
@@ -188,6 +214,78 @@ function Step23ConfirmInformation(props: Props) {
     return null;
   }
 
+  function renderDistrictOptions() {
+    let xhtml = null;
+    if (!watchState) return null;
+    const districts = ALL_DISTRICT.filter((x) => x.state === watchState);
+    if (!_isEmpty(districts)) {
+      xhtml = districts.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
+  function renderWardOptions() {
+    let xhtml = null;
+    if (!watchState) return null;
+    if (!watchDistrict) return null;
+    const wards = ALL_WARD.filter(
+      (x) => x.state === watchState && x.district === watchDistrict
+    );
+    if (!_isEmpty(wards)) {
+      xhtml = wards.map((x) => (
+        <Option value={x.value} key={x.value}>
+          {x.label}
+        </Option>
+      ));
+    }
+    return xhtml;
+  }
+
+  function getEKYCErrorMessage() {
+    let result = null;
+    if (ekycData) {
+      let errMsg = null;
+      const generalWarning = _get(ekycData, 'ocr.object.general_warning');
+      const tamperingWarning = _get(ekycData, 'ocr.object.tampering.warning');
+      if (ekycData?.compare?.object?.msg === 'NOMATCH') {
+        errMsg = ekycData?.compare?.object?.result;
+      } else if (ekycData?.liveness_card_back?.object?.liveness !== 'success') {
+        errMsg = ekycData?.liveness_card_back?.object?.liveness_msg;
+      } else if (
+        ekycData?.liveness_card_front?.object?.liveness !== 'success'
+      ) {
+        errMsg = ekycData?.liveness_card_front?.object?.liveness_msg;
+      } else if (ekycData?.liveness_face?.object?.liveness !== 'success') {
+        errMsg = ekycData?.liveness_face?.object?.liveness_msg;
+      } else if (!_isEmpty(generalWarning)) {
+        errMsg = parseEKYCErrorMessage(generalWarning, GENERAL_WARNING as any);
+      } else if (!_isEmpty(tamperingWarning)) {
+        errMsg = parseEKYCErrorMessage(generalWarning, TAMPERING as any);
+      }
+    }
+    return result;
+  }
+
+  function getEKYCResult() {
+    let errMsg = getEKYCErrorMessage();
+    if (errMsg) {
+      return {
+        status: InputStatuses.error,
+        value: errMsg,
+        hasError: true,
+      };
+    }
+    return {
+      status: InputStatuses.primary,
+      value: globalT.form.ekyc.success,
+      hasError: false,
+    };
+  }
+
   function handleSubmitForm(value: FormValues) {
     const { setConfirmInfor } = context;
     setConfirmInfor(value);
@@ -197,6 +295,7 @@ function Step23ConfirmInformation(props: Props) {
   // TODO: need validate
   // if (!ekycData) return null;
 
+  const ekycResult = getEKYCResult();
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)}>
       <Grid container className={styles['root']}>
@@ -242,6 +341,16 @@ function Step23ConfirmInformation(props: Props) {
               {/* @ts-ignore */}
               <Box mt={6}>
                 <Grid container direction="column" spacing={4}>
+                  {/* row */}
+                  <Grid item>
+                    <TextField
+                      label={globalT.form.ekyc.title}
+                      readOnly
+                      name="ekycResult"
+                      {...getEKYCResult()}
+                    />
+                  </Grid>
+                  {/* row */}
                   {/* row */}
                   <Grid item>
                     <TextField
@@ -335,7 +444,7 @@ function Step23ConfirmInformation(props: Props) {
                           value={value}
                           ref={ref}
                         >
-                          {GENDER_OPTIONS.map((x) => (
+                          {GENDER_LIST.map((x) => (
                             <Option value={x.value} key={x.value}>
                               {t.genderValue[x.value]}
                             </Option>
@@ -491,8 +600,13 @@ function Step23ConfirmInformation(props: Props) {
                           onBlur={onBlur}
                           value={value}
                           ref={ref}
+                          menuClassName={styles['menu']}
                         >
-                          {/* TODO: render options */}
+                          {ALL_STATES.map((x) => (
+                            <Option value={x.value} key={x.value}>
+                              {x.label}
+                            </Option>
+                          ))}
                         </Select>
                       )}
                     />
@@ -511,8 +625,9 @@ function Step23ConfirmInformation(props: Props) {
                           onBlur={onBlur}
                           value={value}
                           ref={ref}
+                          menuClassName={styles['menu']}
                         >
-                          {/* TODO: render options */}
+                          {renderDistrictOptions()}
                         </Select>
                       )}
                     />
@@ -531,8 +646,9 @@ function Step23ConfirmInformation(props: Props) {
                           onBlur={onBlur}
                           value={value}
                           ref={ref}
+                          menuClassName={styles['menu']}
                         >
-                          {/* TODO: render options */}
+                          {renderWardOptions()}
                         </Select>
                       )}
                     />
@@ -566,11 +682,13 @@ function Step23ConfirmInformation(props: Props) {
               direction="column"
               spacing={4}
             >
-              <Grid item xs={5} md={4}>
-                <Button fullWidth type="submit">
-                  {t.continue}
-                </Button>
-              </Grid>
+              {!ekycResult?.hasError && (
+                <Grid item xs={5} md={4}>
+                  <Button fullWidth type="submit">
+                    {t.continue}
+                  </Button>
+                </Grid>
+              )}
               <Grid item xs={5} md={5}>
                 <Button
                   fullWidth

@@ -208,6 +208,7 @@ export const Collapse: BaseComponent<CollapseTypeMap> & {
   }
 
   return (
+    // @ts-ignore
     <Transition
       in={inProp}
       onEnter={handleEnter}

@@ -9,12 +9,12 @@ import _get from "lodash/get";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import React, { useEffect, useState } from "react";
-import { STEPS } from "./const";
-import Context, { IAdditionInfor, IConfirmInfor } from "./Context";
+import { STEPS } from "../../components/HDSS/const";
+import Context, { IAdditionInfor, IConfirmInfor } from "../../components/HDSS/Context";
 import styles from "./styles.module.scss";
 
 function HDSSPage() {
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(0);
   const [success, setSuccess] = useState(false);
   const [md5, setMd5] = useState(null);
   const [ekycData, setEkycData] = useState(null);
@@ -49,10 +49,6 @@ function HDSSPage() {
 
   function validateStep2() {}
 
-  function handleCallbackAfterReEKYC(ekycData: any) {
-    setEkycData(ekycData);
-  }
-
   const contextValue = {
     confirmInfor,
     setConfirmInfor: (value: IConfirmInfor) => {
@@ -61,6 +57,10 @@ function HDSSPage() {
     additionInfor,
     setAdditionInfor: (value: IAdditionInfor) => {
       setAdditionInfor(value);
+    },
+    ekycData,
+    setEkycData: (value: any) => {
+      setEkycData(value);
     },
   };
 
@@ -128,8 +128,6 @@ function HDSSPage() {
                           <Context.Provider value={contextValue}>
                             <Component
                               onNext={handleNext}
-                              onReEKYC={handleCallbackAfterReEKYC}
-                              ekycData={ekycData}
                             />
                           </Context.Provider>
                         </Grid>

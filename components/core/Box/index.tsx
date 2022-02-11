@@ -1,21 +1,21 @@
-import React from 'react'
-import camelCaseToKebabCase from '../../../utils/camelToKebabCase'
-import merge from '../../../utils/merge'
-import cx from '../../../utils/classnames'
+import React from 'react';
+import camelCaseToKebabCase from '../../../utils/camelToKebabCase';
+import merge from '../../../utils/merge';
+import cx from '../../../utils/classnames';
 
-import { BaseComponent, OverrideProps } from '../BaseComponent'
-import styles from './styles.module.scss'
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import styles from './styles.module.scss';
 
-function memoize (fn: (arg: any) => any): any {
-  const cache: any = {}
+function memoize(fn: (arg: any) => any): any {
+  const cache: any = {};
 
   return (arg: any) => {
     if (cache[arg] === undefined) {
-      cache[arg] = fn(arg)
+      cache[arg] = fn(arg);
     }
 
-    return cache[arg]
-  }
+    return cache[arg];
+  };
 }
 
 const spacingKeys = [
@@ -47,12 +47,12 @@ const spacingKeys = [
   'paddingLeft',
   'paddingX',
   'paddingY',
-]
+];
 
 const properties = {
   m: 'margin',
   p: 'padding',
-}
+};
 
 const directions = {
   t: 'Top',
@@ -61,14 +61,14 @@ const directions = {
   l: 'Left',
   x: ['Left', 'Right'],
   y: ['Top', 'Bottom'],
-}
+};
 
 const aliases = {
   marginX: 'mx',
   marginY: 'my',
   paddingX: 'px',
   paddingY: 'py',
-}
+};
 
 // memoize() impact:
 // From 300,000 ops/sec
@@ -77,213 +77,218 @@ const getCssProperties = memoize((prop) => {
   // It's not a shorthand notation.
   if (prop.length > 2) {
     if (aliases[prop]) {
-      prop = aliases[prop]
+      prop = aliases[prop];
     } else {
-      return [prop]
+      return [prop];
     }
   }
 
-  const [a, b] = prop.split('')
-  const property = properties[a]
-  const direction = directions[b] || ''
+  const [a, b] = prop.split('');
+  const property = properties[a];
+  const direction = directions[b] || '';
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return Array.isArray(direction) ? direction.map((dir) => property + dir) : [property + direction]
-})
+  return Array.isArray(direction)
+    ? direction.map((dir) => property + dir)
+    : [property + direction];
+});
 
-function getValue (propValue: string | number): string | number {
+function getValue(propValue: string | number): string | number {
   if (typeof propValue === 'string') {
-    return propValue
+    return propValue;
   }
 
-  const transformed = Math.abs(propValue)
+  const transformed = Math.abs(propValue);
 
   if (propValue >= 0) {
-    return transformed
+    return transformed;
   }
 
-  return -transformed
+  return -transformed;
 }
 
-function getStyleFromPropValue (cssProperties: any, breakpoint?: any): any {
+function getStyleFromPropValue(cssProperties: any, breakpoint?: any): any {
   return (propValue: any) =>
     cssProperties.reduce((acc: any, cssProperty: any) => {
-      const spacingKey = camelCaseToKebabCase(cssProperty)
-      const spacingValue = getValue(propValue)
-      const spacingClassName = breakpoint ? 
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        styles[`spacing-${breakpoint}-${spacingKey}-${spacingValue}`] :
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        styles[`spacing-${spacingKey}-${spacingValue}`]
+      const spacingKey = camelCaseToKebabCase(cssProperty);
+      const spacingValue = getValue(propValue);
+      const spacingClassName = breakpoint
+        ? // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          styles[`spacing-${breakpoint}-${spacingKey}-${spacingValue}`]
+        : // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          styles[`spacing-${spacingKey}-${spacingValue}`];
 
-      acc[spacingClassName] = !!spacingValue
-      return acc
-    }, {})
+      acc[spacingClassName] = !!spacingValue;
+      return acc;
+    }, {});
 }
 
-function spacing (props: any, breakpoint?: any): any {
-
+function spacing(props: any, breakpoint?: any): any {
   return Object.keys(props)
     .map((prop) => {
       // Using a hash computation over an array iteration could be faster, but with only 28 items,
       // it's doesn't worth the bundle size.
       if (!spacingKeys.includes(prop)) {
-        return null
+        return null;
       }
 
-      const cssProperties = getCssProperties(prop)
-      const styleFromPropValue = getStyleFromPropValue(cssProperties, breakpoint)
+      const cssProperties = getCssProperties(prop);
+      const styleFromPropValue = getStyleFromPropValue(
+        cssProperties,
+        breakpoint
+      );
 
-      const propValue = props[prop]
+      const propValue = props[prop];
 
-      return styleFromPropValue(propValue)
+      return styleFromPropValue(propValue);
     })
-    .reduce(merge, {})
+    .reduce(merge, {});
 }
 
 interface SpacingKey {
   /**
    * The short-key of margin
    */
-  m: number
+  m: number;
   /**
    * The short-key of marginTop
    */
-  mt: number
+  mt: number;
   /**
    * The short-key of marginRight
    */
-  mr: number
+  mr: number;
   /**
    * The short-key of marginBottom
    */
-  mb: number
+  mb: number;
   /**
    * The short-key of marginLeft
    */
-  ml: number
+  ml: number;
   /**
    * The short-key of marginX
    */
-  mx: number
+  mx: number;
   /**
    * The short-key of marginY
    */
-  my: number
+  my: number;
   /**
    * The short-key of padding
    */
-  p: number
+  p: number;
   /**
    * The short-key of paddingTop
    */
-  pt: number
+  pt: number;
   /**
    * The short-key of paddingRight
    */
-  pr: number
+  pr: number;
   /**
    * The short-key of paddingBottom
    */
-  pb: number
+  pb: number;
   /**
    * The short-key of paddingLeft
    */
-  pl: number
+  pl: number;
   /**
    * The short-key of paddingX
    */
-  px: number
+  px: number;
   /**
    * The short-key of paddingY
    */
-  py: number
+  py: number;
   /**
    * Property sets the margin area on all four sides of an element
    */
-  margin: number
+  margin: number;
   /**
    * Property sets the margin area on the top of an element
    */
-  marginTop: number
+  marginTop: number;
   /**
    * Property sets the margin area on the right of an element
    */
-  marginRight: number
+  marginRight: number;
   /**
    * Property sets the margin area on the bottom of an element
    */
-  marginBottom: number
+  marginBottom: number;
   /**
    * Property sets the margin area on the left of an element
    */
-  marginLeft: number
+  marginLeft: number;
   /**
    * Property sets the margin area on the left and the right of an element
    */
-  marginX: number
+  marginX: number;
   /**
    * Property sets the margin area on the top and the bottom of an element
    */
-  marginY: number
+  marginY: number;
   /**
    * Property sets the padding area on all four sides of an element
    */
-  padding: number
+  padding: number;
   /**
    * Property sets the height of the padding area on the top of an element
    */
-  paddingTop: number
+  paddingTop: number;
   /**
    * Property sets the height of the padding area on the right of an element
    */
-  paddingRight: number
+  paddingRight: number;
   /**
    * Property sets the height of the padding area on the bottom of an element
    */
-  paddingBottom: number
+  paddingBottom: number;
   /**
    * Property sets the height of the padding area on the left of an element
    */
-  paddingLeft: number
+  paddingLeft: number;
   /**
    * Property sets the height of the padding area on the left and the right of an element
    */
-  paddingX: number
+  paddingX: number;
   /**
    * Property sets the height of the padding area on the top and the bottom of an element
    */
-  paddingY: number
+  paddingY: number;
 }
 
 interface BoxTypeMap<P = {}, D extends React.ElementType = 'div'> {
-  props: P & SpacingKey & {
-    xs?: SpacingKey
-    sm?: SpacingKey
-    md?: SpacingKey
-    xl?: SpacingKey
-  }
-  defaultComponent: D
+  props: P &
+    SpacingKey & {
+      xs?: SpacingKey;
+      sm?: SpacingKey;
+      md?: SpacingKey;
+      xl?: SpacingKey;
+    };
+  defaultComponent: D;
 }
 
 export type BoxProps<
   D extends React.ElementType = BoxTypeMap['defaultComponent'],
   P = {}
-> = OverrideProps<BoxTypeMap<P, D>, D>
+> = OverrideProps<BoxTypeMap<P, D>, D>;
 
 interface BoxDefaultProps {
-  component: React.ElementType
+  component: React.ElementType;
 }
 
 const defaultProps: BoxDefaultProps = {
   component: 'div',
-}
+};
 
-const defaultBreakpoint = ['xs', 'sm', 'md', 'lg', 'xl']
+const defaultBreakpoint = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 export const Box: BaseComponent<BoxTypeMap> & {
-  displayName: string
+  displayName: string;
 } = (props: BoxProps) => {
-  const _props = { ...defaultProps, ...props }
+  const _props = { ...defaultProps, ...props };
 
   const {
     component: Component,
@@ -295,24 +300,26 @@ export const Box: BaseComponent<BoxTypeMap> & {
     style,
     children,
     ...rest
-  } = _props
+  } = _props;
 
-  const styledBreakPoint = defaultBreakpoint.map(key => spacing(Object.assign({}, _props[key]), key))
+  const styledBreakPoint = defaultBreakpoint.map((key) =>
+    spacing(Object.assign({}, _props[key]), key)
+  );
 
   const classOfComponent = cx(
     styles.Box,
     spacing(Object.assign({}, rest)),
     ...styledBreakPoint,
-    className,
-  )
+    className
+  );
 
   return (
     <Component className={classOfComponent} style={style}>
       {children}
     </Component>
-  )
-}
+  );
+};
 
-Box.displayName = 'Box'
+Box.displayName = 'Box';
 
-export default Box
+export default Box;

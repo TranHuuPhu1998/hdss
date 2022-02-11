@@ -1,15 +1,33 @@
-import React, { useState } from "react";
-import Grid from "components/core/Grid";
-import { STEP2_VERIFY_STEPS } from "./const";
-import styles from "./styles.module.scss";
+import React, { useState } from 'react';
+import Grid from 'components/core/Grid';
+import styles from './styles.module.scss';
+import Step21VerifyID from './Step21VerifyID';
+import Step23ConfirmInformation from './Step23ConfirmInformation';
+import Step24AdditionalInfor from './Step24AdditionalInfor';
+
+const STEP2_VERIFY_STEPS = [
+  {
+    component: Step21VerifyID,
+  },
+  {
+    component: Step23ConfirmInformation,
+  },
+  {
+    component: Step24AdditionalInfor,
+  },
+];
 
 interface Props {
   onNext: () => void;
 }
 
+/**
+ * Step 0: Verify CMND / CCCD
+ */
+const DEFAULT_CONFIRMATION_STEP = 0;
 function Step2DigitalInfo(props: Props) {
   const { onNext, ...rest } = { ...props };
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(DEFAULT_CONFIRMATION_STEP);
 
   function handleNext() {
     if (active + 1 <= 2) {
@@ -30,7 +48,7 @@ function Step2DigitalInfo(props: Props) {
 
   const Component = STEP2_VERIFY_STEPS[active].component;
   return (
-    <Grid container className={styles["root"]}>
+    <Grid container className={styles['root']}>
       {/* item */}
       <Grid item>
         {/* @ts-ignore */}

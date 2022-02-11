@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import cx from '../../../utils/classnames'
+import cx from '../../../../utils/classnames'
 import DateRange from '../DateRange'
 import DefinedRange from '../DefinedRange'
 import { findNextRangeIndex } from '../utils'
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 class DateRangePicker extends Component<any, any> {
   dateRange
