@@ -1,31 +1,32 @@
-import format from 'date-fns/format';
 import addYears from 'date-fns/addYears';
 import endOfDay from 'date-fns/endOfDay';
+import format from 'date-fns/format';
 import startOfDay from 'date-fns/startOfDay';
-
+import ChevronBottom from 'icons/ChevronBottom';
+import ChevronTop from 'icons/ChevronTop';
 import React, {
   forwardRef,
   MutableRefObject,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
-
-import CalendarPicker from '../DateTimeRangePickerBase/Calendar';
-
-import { DATE_FORMAT_DEFAULT, PLACEHOLDER_DEFAULT } from './const';
-
-import styles from './styles.module.scss';
-import Input, { InputComponent } from '../Input';
-import { BaseComponent, OverrideProps } from '../BaseComponent';
-import InputAdornment from '../InputAdornment';
-import Icon from '../Icon';
-import ChevronTop from 'icons/ChevronTop';
-import ChevronBottom from 'icons/ChevronBottom';
-import Popover from '../Popover';
 import { BackdropVariant } from '../Backdrop';
+import { BaseComponent, OverrideProps } from '../BaseComponent';
+import CalendarPicker from '../DateTimeRangePickerBase/Calendar';
+import Icon from '../Icon';
+import Input, { InputComponent } from '../Input';
+import InputAdornment from '../InputAdornment';
+import Popover from '../Popover';
 import Typography, { TypoVariants } from '../Typography';
+import { DATE_FORMAT_DEFAULT, PLACEHOLDER_DEFAULT } from './const';
+import styles from './styles.module.scss';
+
+
+
+
 
 interface CalendarTypeMap<
   P = {},
@@ -76,7 +77,9 @@ interface CalendarTypeMap<
 
 type CalendarProps<
   D extends React.ElementType = CalendarTypeMap['defaultComponent'],
-  P = {}
+  P = {
+    label?: string;
+  }
 > = OverrideProps<CalendarTypeMap<P, D>, D>;
 
 interface CalendarDefaultProps extends Partial<CalendarProps> {
@@ -169,9 +172,9 @@ export const Calendar: CalendarComponent = forwardRef(
       }
     };
 
-    const handleShowCalendar = () => {
+    const handleShowCalendar = useCallback(() => {
       setIsShowCalendar(!isShowCalendar && !rest.readOnly && !rest.disabled);
-    };
+    }, [isShowCalendar, rest.disabled, rest.readOnly]);
 
     const handleChange = (selectedDate: Date) => {
       setSelectionDate(selectedDate);
@@ -218,7 +221,7 @@ export const Calendar: CalendarComponent = forwardRef(
           />
         </InputAdornment>
       ),
-      [isShowCalendar]
+      [handleShowCalendar, isShowCalendar, rest.size]
     );
 
     return (

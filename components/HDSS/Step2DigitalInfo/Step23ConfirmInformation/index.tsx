@@ -34,7 +34,7 @@ import styles from './styles.module.scss';
 
 type FormValues = {
   fullName?: string;
-  dateOfBirth?: string;
+  dateOfBirth?: Date;
   gender?: string | null;
   idNumber: string;
   idNumberType: string;
