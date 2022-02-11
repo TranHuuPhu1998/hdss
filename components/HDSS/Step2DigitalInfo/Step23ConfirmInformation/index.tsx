@@ -203,12 +203,7 @@ function Step23ConfirmInformation(props: Props) {
 
   function renderOldCMNDByCondition() {
     if (watchIdNumberType === 'CCCD') {
-      return (
-        <TextField
-          label={t.oldCMND}
-          {...register('oldIdNumber')}
-        />
-      );
+      return <TextField label={t.oldCMND} {...register('oldIdNumber')} />;
     }
     return null;
   }
@@ -580,6 +575,31 @@ function Step23ConfirmInformation(props: Props) {
                         maxLength: 30,
                       })}
                     />
+                    {errors?.placeOfIssue?.type === 'required' && (
+                      // @ts-ignore
+                      <Box pt={1}>
+                        <Typography
+                          type={TypoTypes.error}
+                          variant={TypoVariants.caption}
+                        >
+                          {globalT.form.validation.required}
+                        </Typography>
+                      </Box>
+                    )}
+                    {errors?.placeOfIssue?.type === 'maxLength' && (
+                      // @ts-ignore
+                      <Box pt={1}>
+                        <Typography
+                          type={TypoTypes.error}
+                          variant={TypoVariants.caption}
+                        >
+                          {globalT.form.validation.maxLength.replace(
+                            '{{length}}',
+                            30
+                          )}
+                        </Typography>
+                      </Box>
+                    )}
                   </Grid>
                   {/* row */}
                   {/* row */}
@@ -671,6 +691,18 @@ function Step23ConfirmInformation(props: Props) {
                         required: true,
                       })}
                     />
+                    {errors?.permanentAddress?.apartmentNumber?.type ===
+                      'required' && (
+                      // @ts-ignore
+                      <Box pt={1}>
+                        <Typography
+                          type={TypoTypes.error}
+                          variant={TypoVariants.caption}
+                        >
+                          {globalT.form.validation.required}
+                        </Typography>
+                      </Box>
+                    )}
                   </Grid>
                   {/* row */}
                 </Grid>

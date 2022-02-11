@@ -587,12 +587,23 @@ function Step24AdditionalInfor(props: Props) {
                         {/* row */}
                         <Grid item>
                           <TextField
-                            autoComplete="off"
                             label={t.residentialAddress}
-                            name="address.apartmentNumber"
-                            placeholder=""
-                            value=""
+                            {...register('permanentAddress.apartmentNumber', {
+                              required: true,
+                            })}
                           />
+                          {errors?.permanentAddress?.apartmentNumber?.type ===
+                            'required' && (
+                            // @ts-ignore
+                            <Box pt={1}>
+                              <Typography
+                                type={TypoTypes.error}
+                                variant={TypoVariants.caption}
+                              >
+                                {globalT.form.validation.required}
+                              </Typography>
+                            </Box>
+                          )}
                         </Grid>
                         {/* row */}
                         {/* row */}
