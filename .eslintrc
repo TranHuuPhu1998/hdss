@@ -1,4 +1,5 @@
 {
+  "extends": "react-app",
   "plugins": ["react", "import"],
   "rules": {
     "jsx-a11y/href-no-hash": "off",
