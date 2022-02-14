@@ -60,11 +60,11 @@ function Step1PersonalInfor(props: Props) {
     hdssServices
       .verifyAllowRegisterOnlinePayment()
       .then((res) => {
-        // const code = _get(res, 'resultCode');
-        // const status = getStatusResponse(code, lang);
-        // if (status.success) {
-        //   onNext();
-        // }
+        const code = _get(res, 'resultCode');
+        const status = getStatusResponse(code, lang);
+        if (status.success) {
+          onNext();
+        }
         console.log('>>>>> res', res); //TODO: to-remove
       })
       .catch((e) => {

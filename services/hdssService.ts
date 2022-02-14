@@ -333,27 +333,32 @@ export const verifyOTPApi = async (otp: string) => {
 
 // TODO:(nghieppp) update api req/resp
 export const verifyAllowRegisterOnlinePayment = async () => {
-  const body: CheckEligibleRequest = {
-    partnerId: 'string',
-    requesID: 'string',
-    requestTime: new Date(),
-    data: {
-      campaignId: 'string',
-      email: 'string',
-      mobilephone1: 'string',
-      nationalId: 'string',
-      fullName: 'string',
-      deviceType: 'string',
-      appVersion: 'string',
-      captchaCode: 'string',
-      jwtToken: 'string',
-    },
+  // const body: CheckEligibleRequest = {
+  //   partnerId: 'string',
+  //   requesID: 'string',
+  //   requestTime: new Date(),
+  //   data: {
+  //     campaignId: 'string',
+  //     email: 'string',
+  //     mobilephone1: 'string',
+  //     nationalId: 'string',
+  //     fullName: 'string',
+  //     deviceType: 'string',
+  //     appVersion: 'string',
+  //     captchaCode: 'string',
+  //     jwtToken: 'string',
+  //   },
+  // };
+  // const resp: AxiosResponse<CheckEligibleResponse> = await axios.post(
+  //   '/api/checkEligible',
+  //   body
+  // );
+  // return resp;
+
+  await sleep(500);
+  return {
+    resultCode: '00',
   };
-  const resp: AxiosResponse<CheckEligibleResponse> = await axios.post(
-    '/api/checkEligible',
-    body
-  );
-  return resp;
 };
 
-// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
