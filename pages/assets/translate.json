@@ -61,6 +61,7 @@
       "form": {
         "title": "Thông tin cá nhân",
         "label": {
+          "idNumber": "CMND/CCCD",
           "phone": "Số điện thoại",
           "email": "Email",
           "ref": "Mã giới thiệu"
@@ -317,6 +318,7 @@
       "form": {
         "title": "Personal Information",
         "label": {
+          "idNumber": "CMND/CCCD",
           "phone": "Phone number",
           "email": "Email",
           "ref": "Referral Code"

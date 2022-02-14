@@ -22,6 +22,7 @@ interface Props {
 }
 
 type FormValues = {
+  idNumber: string;
   phoneNumber: string;
   email: string;
   ref: string;
@@ -38,12 +39,10 @@ function Step1PersonalInfor(props: Props) {
   const {
     handleSubmit,
     formState: { errors },
-    // control,
-    // setValue,
-    // watch,
     register,
   } = useForm<FormValues>({
     defaultValues: {
+      idNumber: jwtInfo?.idNumber,
       phoneNumber: jwtInfo?.phoneNumber,
       email: jwtInfo?.email,
       ref: jwtInfo?.refCode,
@@ -72,6 +71,8 @@ function Step1PersonalInfor(props: Props) {
       })
       .finally(() => {
         setLoading(false);
+        // TODO: bypass this step
+        onNext();
       });
   }
 
@@ -112,6 +113,25 @@ function Step1PersonalInfor(props: Props) {
           {/* @ts-ignore */}
           <Box pt={4}>
             <Grid container direction="column" spacing={4}>
+              <Grid item>
+                <TextField
+                  label={`${t.form.label.idNumber} *`}
+                  placeholder="XXXXXXXXX"
+                  {...register('idNumber', { required: true })}
+                  readOnly
+                />
+                {errors?.idNumber?.type === 'required' && (
+                  // @ts-ignore
+                  <Box pt={1}>
+                    <Typography
+                      type={TypoTypes.error}
+                      variant={TypoVariants.caption}
+                    >
+                      {t.form.errors.required}
+                    </Typography>
+                  </Box>
+                )}
+              </Grid>
               <Grid item>
                 <TextField
                   label={`${t.form.label.phone} *`}
