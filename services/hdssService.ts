@@ -50,6 +50,10 @@ import axiosWrapper from 'commons/helpers/axios/axios-instance';
 
 import _omit from 'lodash/omit';
 import _get from 'lodash/get';
+import {
+  CheckEligibleRequest,
+  CheckEligibleResponse,
+} from 'interfaces/ICheckEligible';
 
 let userId: string;
 let clientNo: string;
@@ -329,16 +333,27 @@ export const verifyOTPApi = async (otp: string) => {
 
 // TODO:(nghieppp) update api req/resp
 export const verifyAllowRegisterOnlinePayment = async () => {
-  await sleep(500);
-  // const body: IVerifyAllowRegisterOnlinePaymentRequest = {
-  //   requestId: uuidv4() as string,
-  // };
-  // const resp: AxiosResponse<IVerifyAllowRegisterOnlinePaymentResponse> =
-  //   await axios.post("/api/verifyAllowRegisterOnlinePayment", body);
-  // return resp;
-  return {
-    resultCode: '00',
+  const body: CheckEligibleRequest = {
+    partnerId: 'string',
+    requesID: 'string',
+    requestTime: new Date(),
+    data: {
+      campaignId: 'string',
+      email: 'string',
+      mobilephone1: 'string',
+      nationalId: 'string',
+      fullName: 'string',
+      deviceType: 'string',
+      appVersion: 'string',
+      captchaCode: 'string',
+      jwtToken: 'string',
+    },
   };
+  const resp: AxiosResponse<CheckEligibleResponse> = await axios.post(
+    '/api/checkEligible',
+    body
+  );
+  return resp;
 };
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

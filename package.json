@@ -39,6 +39,7 @@
     "react-query": "^3.34.2",
     "react-toastify": "^8.1.0",
     "sass": "^1.49.7",
+    "uniqid": "^5.4.0",
     "uuid": "^8.3.2",
     "warning": "^4.0.3"
   },

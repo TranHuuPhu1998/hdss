@@ -11,9 +11,10 @@ import Typography, {
 import _get from 'lodash/get';
 import { useRouter } from 'next/router';
 import resources from 'pages/assets/translate.json';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as hdssServices from 'services/hdssService';
+import Context from '../Context';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -32,19 +33,20 @@ function Step1PersonalInfor(props: Props) {
   const lang = getLanguage(router);
   const [loading, setLoading] = useState(false);
   const t = _get(resources, [lang, 'step1RegisterOnlinePayment']);
+  const { jwtInfo } = useContext(Context);
 
   const {
     handleSubmit,
     formState: { errors },
-    control,
-    setValue,
-    watch,
+    // control,
+    // setValue,
+    // watch,
     register,
   } = useForm<FormValues>({
     defaultValues: {
-      phoneNumber: '123456789',
-      email: 'nghiepuit@gmail.com',
-      ref: '123123',
+      phoneNumber: jwtInfo?.phoneNumber,
+      email: jwtInfo?.email,
+      ref: jwtInfo?.refCode,
     },
   });
 
@@ -58,11 +60,12 @@ function Step1PersonalInfor(props: Props) {
     hdssServices
       .verifyAllowRegisterOnlinePayment()
       .then((res) => {
-        const code = _get(res, 'resultCode');
-        const status = getStatusResponse(code, lang);
-        if (status.success) {
-          onNext();
-        }
+        // const code = _get(res, 'resultCode');
+        // const status = getStatusResponse(code, lang);
+        // if (status.success) {
+        //   onNext();
+        // }
+        console.log('>>>>> res', res); //TODO: to-remove
       })
       .catch((e) => {
         console.log(e);
@@ -114,6 +117,7 @@ function Step1PersonalInfor(props: Props) {
                   label={`${t.form.label.phone} *`}
                   placeholder="XXX - XXXX - XXXX"
                   {...register('phoneNumber', { required: true })}
+                  readOnly
                 />
                 {errors?.phoneNumber?.type === 'required' && (
                   // @ts-ignore
@@ -132,6 +136,7 @@ function Step1PersonalInfor(props: Props) {
                   label={`${t.form.label.email} *`}
                   placeholder="XXXXXXXXXX"
                   {...register('email', { required: true })}
+                  readOnly
                 />
                 {errors?.email?.type === 'required' && (
                   // @ts-ignore
@@ -146,7 +151,11 @@ function Step1PersonalInfor(props: Props) {
                 )}
               </Grid>
               <Grid item>
-                <TextField label={`${t.form.label.ref}`} {...register('ref')} />
+                <TextField
+                  label={`${t.form.label.ref}`}
+                  {...register('ref')}
+                  readOnly
+                />
               </Grid>
             </Grid>
           </Box>

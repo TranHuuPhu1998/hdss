@@ -1,9 +1,16 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 
+export interface IJWTInfoHDSS {
+  email: string;
+  idNumber: string;
+  phoneNumber: string;
+  refCode: string;
+}
 export interface IConfirmInfor {}
 export interface IAdditionInfor {}
 
 export interface ContextValue {
+  jwtInfo: IJWTInfoHDSS;
   confirmInfor: IConfirmInfor;
   setConfirmInfor: (value: IConfirmInfor) => void;
   additionInfor: IAdditionInfor;

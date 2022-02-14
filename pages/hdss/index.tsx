@@ -18,7 +18,7 @@ import Context, {
 import styles from './styles.module.scss';
 
 function HDSSPage() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const [success, setSuccess] = useState(false);
   const [md5, setMd5] = useState(null);
   const [ekycData, setEkycData] = useState(null);
@@ -27,11 +27,13 @@ function HDSSPage() {
   const [confirmInfor, setConfirmInfor] = useState<IConfirmInfor>(null);
   const [additionInfor, setAdditionInfor] = useState<IAdditionInfor>(null);
   const previousActive = usePrevious(active);
+  const [jwtInfo, setJwtInfo] = useState(null);
 
   useEffect(() => {
     if (!query?.jwt) return;
     const jwtInfo = parseJwt(query.jwt as string);
-    console.log('>>>>> jwtInfo', jwtInfo); //TODO: to-remove
+    console.log('>>>>>HDSSPage jwtInfo', jwtInfo); //TODO: to-remove
+    setJwtInfo(jwtInfo);
   }, [query.jwt]);
 
   useEffect(() => {
@@ -61,6 +63,7 @@ function HDSSPage() {
   function validateStep2() {}
 
   const contextValue = {
+    jwtInfo,
     confirmInfor,
     setConfirmInfor: (value: IConfirmInfor) => {
       setConfirmInfor(value);
@@ -135,11 +138,13 @@ function HDSSPage() {
                           </Grid>
                         </Grid>
                         {/* tabs */}
-                        <Grid item>
-                          <Context.Provider value={contextValue}>
-                            <Component onNext={handleNext} />
-                          </Context.Provider>
-                        </Grid>
+                        {jwtInfo && (
+                          <Grid item>
+                            <Context.Provider value={contextValue}>
+                              <Component onNext={handleNext} />
+                            </Context.Provider>
+                          </Grid>
+                        )}
                       </Grid>
                     )}
                   </Box>
